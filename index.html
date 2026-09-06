@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Parked business and project ideas for O'keito S. with AI jumpstart prompts">
+    <title>Project Ideas | O'keito S.</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8f9fa;
+            --bg-card: #ffffff;
+            --text-primary: #1a1a1a;
+            --text-secondary: #666666;
+            --border: #e0e0e0;
+            --accent: #0066cc;
+            --accent-hover: #0052a3;
+            --success: #28a745;
+            --tag-bg: #e9ecef;
+            --tag-text: #495057;
+            --status-parked: #6c757d;
+            --status-active: #0066cc;
+            --status-done: #28a745;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--bg-secondary);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background-color: var(--bg-primary);
+            border-bottom: 1px solid var(--border);
+            padding: 30px 0;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .controls {
+            background-color: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 12px 16px;
+            font-size: 1rem;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            margin-bottom: 16px;
+            background-color: var(--bg-primary);
+        }
+
+        .search-box:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .filters {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .filter-group {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .filter-label {
+            font-weight: 500;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            align-self: center;
+        }
+
+        .filter-btn {
+            padding: 6px 14px;
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .filter-btn:hover {
+            border-color: var(--accent);
+            background-color: var(--bg-secondary);
+        }
+
+        .filter-btn.active {
+            background-color: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+
+        .results-count {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+
+        .ideas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        .idea-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 24px;
+            transition: box-shadow 0.2s;
+        }
+
+        .idea-card:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+
+        .idea-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+            flex: 1;
+        }
+
+        .status-badge {
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+            margin-left: 12px;
+        }
+
+        .status-parked {
+            background-color: #e9ecef;
+            color: var(--status-parked);
+        }
+
+        .status-active {
+            background-color: #cce5ff;
+            color: var(--status-active);
+        }
+
+        .status-done {
+            background-color: #d4edda;
+            color: var(--status-done);
+        }
+
+        .idea-summary {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 16px;
+            line-height: 1.5;
+        }
+
+        .idea-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 16px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .meta-row {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .meta-label {
+            font-weight: 500;
+        }
+
+        .source-link {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .source-link:hover {
+            text-decoration: underline;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 16px;
+        }
+
+        .tag {
+            padding: 4px 10px;
+            background-color: var(--tag-bg);
+            color: var(--tag-text);
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .prompt-section {
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid var(--border);
+        }
+
+        .prompt-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .prompt-label {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--text-primary);
+        }
+
+        .copy-btn {
+            padding: 6px 14px;
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .copy-btn:hover {
+            background-color: var(--accent-hover);
+        }
+
+        .copy-btn.copied {
+            background-color: var(--success);
+        }
+
+        .prompt-code {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 12px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.85rem;
+            line-height: 1.5;
+            max-height: 200px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            color: var(--text-primary);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-secondary);
+        }
+
+        .empty-state h2 {
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .ideas-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .filters {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .filter-group {
+                width: 100%;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Project Ideas</h1>
+            <p class="subtitle">Parked business and project ideas for O'keito S. (Melbourne UX/product designer)</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="controls">
+            <input 
+                type="text" 
+                id="searchInput" 
+                class="search-box" 
+                placeholder="Search ideas by title, summary, or tags..."
+                autocomplete="off"
+            >
+            
+            <div class="filters">
+                <span class="filter-label">Status:</span>
+                <div class="filter-group" id="statusFilters">
+                    <button class="filter-btn active" data-status="all">All</button>
+                    <button class="filter-btn" data-status="parked">Parked</button>
+                    <button class="filter-btn" data-status="active">Active</button>
+                    <button class="filter-btn" data-status="done">Done</button>
+                </div>
+            </div>
+            
+            <div class="filters">
+                <span class="filter-label">Tags:</span>
+                <div class="filter-group" id="tagFilters">
+                    <button class="filter-btn active" data-tag="all">All</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="results-count" id="resultsCount"></div>
+        
+        <div class="ideas-grid" id="ideasGrid"></div>
+    </div>
+
+    <footer>
+        <p>Stack: Marvelus AI voice, Nolostsales, AI agents, App Store products, land, sandwich boards</p>
+        <p>Site: <a href="https://marvelus-tech.github.io/project-ideas/" class="source-link">marvelus-tech.github.io/project-ideas</a></p>
+    </footer>
+
+    <script>
+        let allIdeas = [];
+        let currentFilters = {
+            search: '',
+            status: 'all',
+            tag: 'all'
+        };
+
+        // Load ideas from JSON
+        async function loadIdeas() {
+            try {
+                const response = await fetch('data/ideas.json');
+                const data = await response.json();
+                allIdeas = data.ideas;
+                
+                // Extract all unique tags
+                const allTags = new Set();
+                allIdeas.forEach(idea => {
+                    idea.tags.forEach(tag => allTags.add(tag));
+                });
+                
+                // Build tag filters
+                const tagFiltersContainer = document.getElementById('tagFilters');
+                const sortedTags = Array.from(allTags).sort();
+                sortedTags.forEach(tag => {
+                    const btn = document.createElement('button');
+                    btn.className = 'filter-btn';
+                    btn.dataset.tag = tag;
+                    btn.textContent = tag;
+                    tagFiltersContainer.appendChild(btn);
+                });
+                
+                renderIdeas();
+            } catch (error) {
+                console.error('Error loading ideas:', error);
+                document.getElementById('ideasGrid').innerHTML = 
+                    '<div class="empty-state"><h2>Error loading ideas</h2><p>Please check the console for details.</p></div>';
+            }
+        }
+
+        // Filter ideas based on current filters
+        function filterIdeas() {
+            return allIdeas.filter(idea => {
+                // Search filter
+                if (currentFilters.search) {
+                    const searchLower = currentFilters.search.toLowerCase();
+                    const matchesSearch = 
+                        idea.title.toLowerCase().includes(searchLower) ||
+                        idea.summary.toLowerCase().includes(searchLower) ||
+                        idea.tags.some(tag => tag.toLowerCase().includes(searchLower));
+                    if (!matchesSearch) return false;
+                }
+                
+                // Status filter
+                if (currentFilters.status !== 'all' && idea.status !== currentFilters.status) {
+                    return false;
+                }
+                
+                // Tag filter
+                if (currentFilters.tag !== 'all' && !idea.tags.includes(currentFilters.tag)) {
+                    return false;
+                }
+                
+                return true;
+            });
+        }
+
+        // Render ideas to the grid
+        function renderIdeas() {
+            const filteredIdeas = filterIdeas();
+            const grid = document.getElementById('ideasGrid');
+            const resultsCount = document.getElementById('resultsCount');
+            
+            resultsCount.textContent = `${filteredIdeas.length} ${filteredIdeas.length === 1 ? 'idea' : 'ideas'}`;
+            
+            if (filteredIdeas.length === 0) {
+                grid.innerHTML = `
+                    <div class="empty-state">
+                        <h2>No ideas found</h2>
+                        <p>Try adjusting your search or filters.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            grid.innerHTML = filteredIdeas.map(idea => `
+                <div class="idea-card">
+                    <div class="card-header">
+                        <h2 class="idea-title">${escapeHtml(idea.title)}</h2>
+                        <span class="status-badge status-${idea.status}">${idea.status}</span>
+                    </div>
+                    
+                    <p class="idea-summary">${escapeHtml(idea.summary)}</p>
+                    
+                    <div class="idea-meta">
+                        <div class="meta-row">
+                            <span class="meta-label">Source:</span>
+                            <a href="${escapeHtml(idea.source)}" class="source-link" target="_blank" rel="noopener">${escapeHtml(idea.sourceLabel)}</a>
+                        </div>
+                        <div class="meta-row">
+                            <span class="meta-label">Saved:</span>
+                            <span>${idea.savedAt}</span>
+                        </div>
+                    </div>
+                    
+                    <div class="tags">
+                        ${idea.tags.map(tag => `<span class="tag">${escapeHtml(tag)}</span>`).join('')}
+                    </div>
+                    
+                    <div class="prompt-section">
+                        <div class="prompt-header">
+                            <span class="prompt-label">AI Jumpstart Prompt</span>
+                            <button class="copy-btn" onclick="copyPrompt(this, '${escapeHtml(idea.id)}')">Copy prompt</button>
+                        </div>
+                        <div class="prompt-code">${escapeHtml(idea.jumpstartPrompt)}</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Copy prompt to clipboard
+        async function copyPrompt(button, ideaId) {
+            const idea = allIdeas.find(i => i.id === ideaId);
+            if (!idea) return;
+            
+            try {
+                await navigator.clipboard.writeText(idea.jumpstartPrompt);
+                const originalText = button.textContent;
+                button.textContent = 'Copied!';
+                button.classList.add('copied');
+                
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.classList.remove('copied');
+                }, 2000);
+            } catch (error) {
+                console.error('Failed to copy:', error);
+                alert('Failed to copy to clipboard. Please copy manually.');
+            }
+        }
+
+        // Escape HTML to prevent XSS
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Event listeners
+        document.getElementById('searchInput').addEventListener('input', (e) => {
+            currentFilters.search = e.target.value;
+            renderIdeas();
+        });
+
+        document.getElementById('statusFilters').addEventListener('click', (e) => {
+            if (e.target.classList.contains('filter-btn')) {
+                document.querySelectorAll('#statusFilters .filter-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                e.target.classList.add('active');
+                currentFilters.status = e.target.dataset.status;
+                renderIdeas();
+            }
+        });
+
+        document.getElementById('tagFilters').addEventListener('click', (e) => {
+            if (e.target.classList.contains('filter-btn')) {
+                document.querySelectorAll('#tagFilters .filter-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                e.target.classList.add('active');
+                currentFilters.tag = e.target.dataset.tag;
+                renderIdeas();
+            }
+        });
+
+        // Initialize
+        loadIdeas();
+    </script>
+</body>
+</html>
