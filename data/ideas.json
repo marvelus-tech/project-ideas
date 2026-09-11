@@ -1,26 +1,6 @@
 {
   "ideas": [
     {
-      "id": "local-job-board-qr",
-      "title": "Job Board (QR local help requests)",
-      "status": "parked",
-      "savedAt": "2026-09-11",
-      "source": "https://marvelus-tech.github.io/project-ideas/",
-      "sourceLabel": "O notes (Job Board)",
-      "summary": "Physical big QR poster asking Do you need help with any local job? Scan opens a mobile form to submit the job need: what it entails, date, time, duration, and money offered. Capture local demand for odd jobs / help; later match to helpers or operators. Melbourne-first poster + form MVP.",
-      "tags": [
-        "job-board",
-        "qr",
-        "local",
-        "forms",
-        "marketplace",
-        "melbourne",
-        "lead-gen",
-        "odd-jobs"
-      ],
-      "jumpstartPrompt": "You are helping O'keito S. (Melbourne) ship a tiny Job Board MVP.\n\n## Product\nPut up a big QR code poster that asks: Do you need help with any local job? When someone scans, they get a simple mobile form to submit a local job request with: what the job entails, date, time, duration, money offered, and contact details. Phase 0 is demand capture only (poster + form + inbox). Matching helpers comes later.\n\n## Non-goals (phase 0)\n- No full two-sided marketplace app yet.\n- No payments processing yet.\n- No worker app yet.\n- Do not overbuild auth.\n\n## Phase plan\n### Phase 0: Poster + form\n1. One landing page with clear headline and short trust line (Melbourne local help requests).\n2. Form fields: job title/summary, details/entail, preferred date, time window, duration estimate, budget/offer amount, suburb, name, phone or email, optional photos later.\n3. Submit to email and/or Formspree/sheet/HighLevel; confirmation message on success.\n4. Print-ready A3/A2 poster with huge QR, short copy, no clutter.\n5. Privacy one-liner on the form.\n\nExit: live URL + printable PDF/PNG poster + one test submission received.\n\n### Phase 1: Triage inbox\nSimple list of submissions (sheet or tiny admin). Tag: new / contacted / filled / spam. Optional auto-SMS or email to O on new lead.\n\n### Phase 2: Soft match\nForward vetted jobs to known helpers or a small helper waitlist. Still manual matching.\n\n### Phase 3: Light marketplace (only if demand is real)\nHelper signup, job browse, accept flow. Still Melbourne suburbs first.\n\n## Deliverables for this jumpstart\n1. One-sentence thesis.\n2. Exact form field list and validation rules.\n3. Poster copy (dash-free) and layout notes.\n4. Tech pick for phase 0 (e.g. GitHub Pages + Formspree, or Cloudflare + form).\n5. Spam/abuse risks and mitigations.\n6. Week-1 ship checklist.\n7. Open questions for O (where posters go, paid vs free posts, categories).\n\nWrite dash-free copy. Keep it practical and Melbourne-first."
-    },
-    {
       "id": "elderly-companion-pet-gpt-live",
       "title": "Elderly companion pet (GPT Live hardware kit)",
       "status": "parked",
@@ -41,6 +21,47 @@
         "prototype"
       ],
       "jumpstartPrompt": "You are helping O'keito S. (Melbourne) validate and prototype an elderly companion / pet-style device powered by OpenAI Realtime or GPT Live voice.\n\n## Product thesis\nBuild a small physical companion that can hold continuous natural conversation for older adults. Hardware must already expose mic array, speaker, Wi-Fi, and an open firmware or Python layer you can point at OpenAI Realtime / Live. Closed cute toys (standard Eilik, basic EMO) are out of scope for v1 because they are hard or impossible to rewire for custom voice streaming.\n\n## Buy path (priority order)\n1. M5Stack StackChan (~$99 to $125): dual mics, 1 W speaker, pan/tilt head, camera, community firmware (AI_StackChan_Ex) with OpenAI Realtime low-latency two-way audio. Desk-sized. Fastest first working voice prototype. Official M5Stack shop or Amazon.\n2. Reachy Mini Lite (~$399) or Wireless (~$499) from Pollen Robotics / Hugging Face: 4-mic array, 5 W speaker, expressive 6-DoF head + antennas, camera. Lite over USB to laptop; Wireless with onboard Pi. Python SDK. More presence for elderly users; assemble in a few hours.\n3. SunFounder PiCar-X (~$90) or PiDog (~$180) + Raspberry Pi 5 (~$60 to $80 if needed): wheeled or quadruped kits with mic, speaker, camera and existing ChatGPT-style hooks. Swap endpoint to GPT Live / Realtime. PiCar-X cheapest mobile; PiDog more pet-like.\n4. DIY Raspberry Pi 5 + ReSpeaker mic array + small speaker/amp + simple or 3D-printed chassis (~$200 to $250): full control; pattern used by elderly-companion research prototypes (e.g. Bloom-style). Run official OpenAI Realtime Python examples.\n\n## Non-goals\n- Do not start with closed expression-only robots that lack usable mics for custom APIs.\n- Do not build a custom PCB or from-scratch robot body for phase 0.\n- Do not promise medical/clinical claims; this is companionship and conversation, not a medical device.\n\n## Phase plan\n### Phase 0: StackChan voice loop\nOrder StackChan. Flash community Realtime-capable firmware or wire official Realtime API. Prove: wake or always-listen, low-latency talk, interruptible speech, simple elderly-friendly system prompt (patient, clear, short sentences, optional reminder hooks).\nExit: 5 minute live conversation demo recorded.\n\n### Phase 1: Companion persona + safety\nPersona pack for elderly user (name, family context placeholders, daily check-in prompts). Local mute button. Clear LED states. Privacy notes (what audio leaves the device). No cloud history by default unless opted in.\n\n### Phase 2: Presence upgrade decision\nIf StackChan voice works, trial Reachy Mini for physical personality OR PiDog/PiCar-X for mobile pet feel. Keep same Realtime backend.\n\n### Phase 3: Soft validation\n1 to 3 friendly elderly users or carers in Melbourne. Measure: time talking, confusion moments, would they keep it. Capture feature requests (med reminders = optional later, not core).\n\n## Deliverables for this jumpstart run\n1. One-sentence thesis and non-goals.\n2. Shopping list with links placeholders and rough AUD/USD.\n3. Week-1 build checklist for StackChan + Realtime.\n4. Risks: latency, Wi-Fi, hearing accessibility, privacy, API cost per hour.\n5. Open questions for O before buying (budget, desk vs pet-mobile, who the first user is).\n\nWrite dash-free copy. Prefer practical hardware steps over hype."
+    },
+    {
+      "id": "local-job-board-qr",
+      "title": "Job Board (QR local help requests)",
+      "status": "parked",
+      "savedAt": "2026-09-11",
+      "source": "https://marvelus-tech.github.io/project-ideas/",
+      "sourceLabel": "O notes (Job Board)",
+      "summary": "Physical big QR poster asking Do you need help with any local job? Scan opens a mobile form to submit the job need: what it entails, date, time, duration, and money offered. Capture local demand for odd jobs / help; later match to helpers or operators. Melbourne-first poster + form MVP.",
+      "tags": [
+        "job-board",
+        "qr",
+        "local",
+        "forms",
+        "marketplace",
+        "melbourne",
+        "lead-gen",
+        "odd-jobs"
+      ],
+      "jumpstartPrompt": "You are helping O'keito S. (Melbourne) ship a tiny Job Board MVP.\n\n## Product\nPut up a big QR code poster that asks: Do you need help with any local job? When someone scans, they get a simple mobile form to submit a local job request with: what the job entails, date, time, duration, money offered, and contact details. Phase 0 is demand capture only (poster + form + inbox). Matching helpers comes later.\n\n## Non-goals (phase 0)\n- No full two-sided marketplace app yet.\n- No payments processing yet.\n- No worker app yet.\n- Do not overbuild auth.\n\n## Phase plan\n### Phase 0: Poster + form\n1. One landing page with clear headline and short trust line (Melbourne local help requests).\n2. Form fields: job title/summary, details/entail, preferred date, time window, duration estimate, budget/offer amount, suburb, name, phone or email, optional photos later.\n3. Submit to email and/or Formspree/sheet/HighLevel; confirmation message on success.\n4. Print-ready A3/A2 poster with huge QR, short copy, no clutter.\n5. Privacy one-liner on the form.\n\nExit: live URL + printable PDF/PNG poster + one test submission received.\n\n### Phase 1: Triage inbox\nSimple list of submissions (sheet or tiny admin). Tag: new / contacted / filled / spam. Optional auto-SMS or email to O on new lead.\n\n### Phase 2: Soft match\nForward vetted jobs to known helpers or a small helper waitlist. Still manual matching.\n\n### Phase 3: Light marketplace (only if demand is real)\nHelper signup, job browse, accept flow. Still Melbourne suburbs first.\n\n## Deliverables for this jumpstart\n1. One-sentence thesis.\n2. Exact form field list and validation rules.\n3. Poster copy (dash-free) and layout notes.\n4. Tech pick for phase 0 (e.g. GitHub Pages + Formspree, or Cloudflare + form).\n5. Spam/abuse risks and mitigations.\n6. Week-1 ship checklist.\n7. Open questions for O (where posters go, paid vs free posts, categories).\n\nWrite dash-free copy. Keep it practical and Melbourne-first."
+    },
+    {
+      "id": "karens-hotline",
+      "title": "Karen's Hotline (AI complaint vent + brand remedy)",
+      "status": "parked",
+      "savedAt": "2026-09-11",
+      "source": "https://marvelus-tech.github.io/project-ideas/",
+      "sourceLabel": "O notes (Karen's Hotline)",
+      "summary": "Webpage with an animated AI-voiced Karen that people can talk to about complaints with any company or service. The AI documents the complaint on the backend and sends a discreet brief to the brand, introducing the service and offering a chance to remedy before (or instead of) a public bad review. Consumers get a place to vent and possibly a voucher or special from that brand or another in the industry. Brands get fewer public 1-stars, less stress on support hotlines, and an innovative sponsored-offer / advertising channel when they opt in with specials for complainants.",
+      "tags": [
+        "ai-voice",
+        "complaints",
+        "reviews",
+        "brands",
+        "vouchers",
+        "customer-experience",
+        "saas",
+        "advertising",
+        "melbourne"
+      ],
+      "jumpstartPrompt": "You are helping O'keito S. (Melbourne) scope Karen's Hotline.\n\n## Product thesis\nA web experience where an animated character named Karen (AI voice) listens to consumer complaints about any company or service. The AI structures the complaint, stores it, and can notify the brand with a discreet remedy opportunity. Consumers vent safely and may receive a voucher or special (from that brand or another industry brand that opted in). Brands reduce public bad reviews, offload stressful call scenarios from support staff, and can advertise by funding specials for relevant complainants.\n\n## Actors\n1. Consumer (venter): talks to Karen, feels heard, optional offer at the end.\n2. Brand (client): receives structured complaint briefs, can remedy privately, can sponsor offers.\n3. Operator (O / MarvelUs-style): runs the page, AI pipeline, brand outreach, offer marketplace.\n\n## Core loops\n1. Consumer opens page, talks or types to animated Karen, AI extracts company, issue, desired outcome, contact opt-in, then confirmation.\n2. Backend stores complaint; if brand is a client (or outreach list), send discreet brief + remedy CTA.\n3. Brand remedies or issues voucher; consumer gets follow-up.\n4. Non-client brands get a sales outreach: join to intercept complaints and offer specials (ad model).\n\n## Non-goals (phase 0)\n- Not a fake review farm. Never post or suppress reviews on Google/Yelp on behalf of brands without clear lawful process.\n- Not a substitute for emergency services or legal advice.\n- Do not harass brands with spam; consent and opt-in for ongoing leads.\n- Do not deepfake a real person named Karen without rights; use an original animated character.\n\n## Phase plan\n### Phase 0: Vent MVP (consumer only)\nLanding page + animated Karen avatar (simple) + voice and/or text chat (Realtime or STT+LLM). Structured complaint form fields filled by AI. Store to DB/sheet. Email O on each complaint. No brand sends yet.\nExit: 10 test vents recorded with structured JSON.\n\n### Phase 1: Brand brief + remedy\nPDF/email brief template to brands. Manual send first. Track remedy / ignore / voucher. Legal/privacy copy for consumers and brands.\n\n### Phase 2: Offer marketplace\nBrand portal: opt in, set offer rules (category, geography, max redemptions). When a matching complaint arrives, Karen can present the offer after venting.\n\n### Phase 3: Scale and compliance\nAuto brand matching, billing for leads or subscriptions, abuse detection, AU spam/privacy compliance.\n\n## Monetization (hypotheses)\n- SaaS / per-complaint lead fee to brands\n- Sponsored offers (ad inventory after vent)\n- Premium brand dashboard\n\n## Deliverables for this jumpstart\n1. One-sentence thesis and ethics boundaries.\n2. Complaint schema (fields the AI must capture).\n3. Consumer page UX outline (calm vent, not rage-bait).\n4. Brand outreach email draft (dash-free).\n5. Phase 0 tech sketch (web avatar + voice + store).\n6. Risks: defamation, consent, impersonation, review-platform ToS, support-desk politics.\n7. Open questions for O (AU-only first?, categories, free vent vs gated).\n\nWrite dash-free copy. Practical over hype."
     },
     {
       "id": "parent-school-lock-mac",
