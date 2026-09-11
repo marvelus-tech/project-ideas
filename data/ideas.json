@@ -1,6 +1,28 @@
 {
   "ideas": [
     {
+      "id": "elderly-companion-pet-gpt-live",
+      "title": "Elderly companion pet (GPT Live hardware kit)",
+      "status": "parked",
+      "savedAt": "2026-09-11",
+      "source": "https://marvelus-tech.github.io/project-ideas/",
+      "sourceLabel": "O notes (tech elderly companion pet)",
+      "summary": "Practical path for a GPT-Live / OpenAI Realtime companion prototype aimed at elderly users: buy a small desktop or mildly mobile kit that already has mic array, speaker, Wi-Fi, and open Python or ESP32 firmware. Prefer open kits over closed toys (Eilik/EMO) that cannot be rewired for custom voice streaming. First prototype: M5Stack StackChan; then Reachy Mini for more presence; PiCar-X / PiDog or DIY Pi 5 + ReSpeaker as cheaper mobile/DIY paths.",
+      "tags": [
+        "hardware",
+        "elderly",
+        "companion",
+        "pet",
+        "openai-realtime",
+        "gpt-live",
+        "stackchan",
+        "reachy",
+        "raspberry-pi",
+        "prototype"
+      ],
+      "jumpstartPrompt": "You are helping O'keito S. (Melbourne) validate and prototype an elderly companion / pet-style device powered by OpenAI Realtime or GPT Live voice.\n\n## Product thesis\nBuild a small physical companion that can hold continuous natural conversation for older adults. Hardware must already expose mic array, speaker, Wi-Fi, and an open firmware or Python layer you can point at OpenAI Realtime / Live. Closed cute toys (standard Eilik, basic EMO) are out of scope for v1 because they are hard or impossible to rewire for custom voice streaming.\n\n## Buy path (priority order)\n1. M5Stack StackChan (~$99 to $125): dual mics, 1 W speaker, pan/tilt head, camera, community firmware (AI_StackChan_Ex) with OpenAI Realtime low-latency two-way audio. Desk-sized. Fastest first working voice prototype. Official M5Stack shop or Amazon.\n2. Reachy Mini Lite (~$399) or Wireless (~$499) from Pollen Robotics / Hugging Face: 4-mic array, 5 W speaker, expressive 6-DoF head + antennas, camera. Lite over USB to laptop; Wireless with onboard Pi. Python SDK. More presence for elderly users; assemble in a few hours.\n3. SunFounder PiCar-X (~$90) or PiDog (~$180) + Raspberry Pi 5 (~$60 to $80 if needed): wheeled or quadruped kits with mic, speaker, camera and existing ChatGPT-style hooks. Swap endpoint to GPT Live / Realtime. PiCar-X cheapest mobile; PiDog more pet-like.\n4. DIY Raspberry Pi 5 + ReSpeaker mic array + small speaker/amp + simple or 3D-printed chassis (~$200 to $250): full control; pattern used by elderly-companion research prototypes (e.g. Bloom-style). Run official OpenAI Realtime Python examples.\n\n## Non-goals\n- Do not start with closed expression-only robots that lack usable mics for custom APIs.\n- Do not build a custom PCB or from-scratch robot body for phase 0.\n- Do not promise medical/clinical claims; this is companionship and conversation, not a medical device.\n\n## Phase plan\n### Phase 0: StackChan voice loop\nOrder StackChan. Flash community Realtime-capable firmware or wire official Realtime API. Prove: wake or always-listen, low-latency talk, interruptible speech, simple elderly-friendly system prompt (patient, clear, short sentences, optional reminder hooks).\nExit: 5 minute live conversation demo recorded.\n\n### Phase 1: Companion persona + safety\nPersona pack for elderly user (name, family context placeholders, daily check-in prompts). Local mute button. Clear LED states. Privacy notes (what audio leaves the device). No cloud history by default unless opted in.\n\n### Phase 2: Presence upgrade decision\nIf StackChan voice works, trial Reachy Mini for physical personality OR PiDog/PiCar-X for mobile pet feel. Keep same Realtime backend.\n\n### Phase 3: Soft validation\n1 to 3 friendly elderly users or carers in Melbourne. Measure: time talking, confusion moments, would they keep it. Capture feature requests (med reminders = optional later, not core).\n\n## Deliverables for this jumpstart run\n1. One-sentence thesis and non-goals.\n2. Shopping list with links placeholders and rough AUD/USD.\n3. Week-1 build checklist for StackChan + Realtime.\n4. Risks: latency, Wi-Fi, hearing accessibility, privacy, API cost per hour.\n5. Open questions for O before buying (budget, desk vs pet-mobile, who the first user is).\n\nWrite dash-free copy. Prefer practical hardware steps over hype."
+    },
+    {
       "id": "parent-school-lock-mac",
       "title": "Parent School Lock (Mac app + lessons)",
       "status": "parked",
