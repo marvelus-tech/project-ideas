@@ -1,26 +1,6 @@
 {
   "ideas": [
     {
-      "id": "local-job-board-qr",
-      "title": "Job Board (QR local help requests)",
-      "status": "parked",
-      "savedAt": "2026-09-11",
-      "source": "https://marvelus-tech.github.io/project-ideas/",
-      "sourceLabel": "O notes (Job Board)",
-      "summary": "Physical big QR poster asking Do you need help with any local job? Scan opens a mobile form to submit the job need: what it entails, date, time, duration, and money offered. Capture local demand for odd jobs / help; later match to helpers or operators. Melbourne-first poster + form MVP.",
-      "tags": [
-        "job-board",
-        "qr",
-        "local",
-        "forms",
-        "marketplace",
-        "melbourne",
-        "lead-gen",
-        "odd-jobs"
-      ],
-      "jumpstartPrompt": "You are helping O'keito S. (Melbourne) ship a tiny Job Board MVP.\n\n## Product\nPut up a big QR code poster that asks: Do you need help with any local job? When someone scans, they get a simple mobile form to submit a local job request with: what the job entails, date, time, duration, money offered, and contact details. Phase 0 is demand capture only (poster + form + inbox). Matching helpers comes later.\n\n## Non-goals (phase 0)\n- No full two-sided marketplace app yet.\n- No payments processing yet.\n- No worker app yet.\n- Do not overbuild auth.\n\n## Phase plan\n### Phase 0: Poster + form\n1. One landing page with clear headline and short trust line (Melbourne local help requests).\n2. Form fields: job title/summary, details/entail, preferred date, time window, duration estimate, budget/offer amount, suburb, name, phone or email, optional photos later.\n3. Submit to email and/or Formspree/sheet/HighLevel; confirmation message on success.\n4. Print-ready A3/A2 poster with huge QR, short copy, no clutter.\n5. Privacy one-liner on the form.\n\nExit: live URL + printable PDF/PNG poster + one test submission received.\n\n### Phase 1: Triage inbox\nSimple list of submissions (sheet or tiny admin). Tag: new / contacted / filled / spam. Optional auto-SMS or email to O on new lead.\n\n### Phase 2: Soft match\nForward vetted jobs to known helpers or a small helper waitlist. Still manual matching.\n\n### Phase 3: Light marketplace (only if demand is real)\nHelper signup, job browse, accept flow. Still Melbourne suburbs first.\n\n## Deliverables for this jumpstart\n1. One-sentence thesis.\n2. Exact form field list and validation rules.\n3. Poster copy (dash-free) and layout notes.\n4. Tech pick for phase 0 (e.g. GitHub Pages + Formspree, or Cloudflare + form).\n5. Spam/abuse risks and mitigations.\n6. Week-1 ship checklist.\n7. Open questions for O (where posters go, paid vs free posts, categories).\n\nWrite dash-free copy. Keep it practical and Melbourne-first."
-    },
-    {
       "id": "elderly-companion-pet-gpt-live",
       "title": "Elderly companion pet (GPT Live hardware kit)",
       "status": "parked",
@@ -41,6 +21,26 @@
         "prototype"
       ],
       "jumpstartPrompt": "You are helping O'keito S. (Melbourne) validate and prototype an elderly companion / pet-style device powered by OpenAI Realtime or GPT Live voice.\n\n## Product thesis\nBuild a small physical companion that can hold continuous natural conversation for older adults. Hardware must already expose mic array, speaker, Wi-Fi, and an open firmware or Python layer you can point at OpenAI Realtime / Live. Closed cute toys (standard Eilik, basic EMO) are out of scope for v1 because they are hard or impossible to rewire for custom voice streaming.\n\n## Buy path (priority order)\n1. M5Stack StackChan (~$99 to $125): dual mics, 1 W speaker, pan/tilt head, camera, community firmware (AI_StackChan_Ex) with OpenAI Realtime low-latency two-way audio. Desk-sized. Fastest first working voice prototype. Official M5Stack shop or Amazon.\n2. Reachy Mini Lite (~$399) or Wireless (~$499) from Pollen Robotics / Hugging Face: 4-mic array, 5 W speaker, expressive 6-DoF head + antennas, camera. Lite over USB to laptop; Wireless with onboard Pi. Python SDK. More presence for elderly users; assemble in a few hours.\n3. SunFounder PiCar-X (~$90) or PiDog (~$180) + Raspberry Pi 5 (~$60 to $80 if needed): wheeled or quadruped kits with mic, speaker, camera and existing ChatGPT-style hooks. Swap endpoint to GPT Live / Realtime. PiCar-X cheapest mobile; PiDog more pet-like.\n4. DIY Raspberry Pi 5 + ReSpeaker mic array + small speaker/amp + simple or 3D-printed chassis (~$200 to $250): full control; pattern used by elderly-companion research prototypes (e.g. Bloom-style). Run official OpenAI Realtime Python examples.\n\n## Non-goals\n- Do not start with closed expression-only robots that lack usable mics for custom APIs.\n- Do not build a custom PCB or from-scratch robot body for phase 0.\n- Do not promise medical/clinical claims; this is companionship and conversation, not a medical device.\n\n## Phase plan\n### Phase 0: StackChan voice loop\nOrder StackChan. Flash community Realtime-capable firmware or wire official Realtime API. Prove: wake or always-listen, low-latency talk, interruptible speech, simple elderly-friendly system prompt (patient, clear, short sentences, optional reminder hooks).\nExit: 5 minute live conversation demo recorded.\n\n### Phase 1: Companion persona + safety\nPersona pack for elderly user (name, family context placeholders, daily check-in prompts). Local mute button. Clear LED states. Privacy notes (what audio leaves the device). No cloud history by default unless opted in.\n\n### Phase 2: Presence upgrade decision\nIf StackChan voice works, trial Reachy Mini for physical personality OR PiDog/PiCar-X for mobile pet feel. Keep same Realtime backend.\n\n### Phase 3: Soft validation\n1 to 3 friendly elderly users or carers in Melbourne. Measure: time talking, confusion moments, would they keep it. Capture feature requests (med reminders = optional later, not core).\n\n## Deliverables for this jumpstart run\n1. One-sentence thesis and non-goals.\n2. Shopping list with links placeholders and rough AUD/USD.\n3. Week-1 build checklist for StackChan + Realtime.\n4. Risks: latency, Wi-Fi, hearing accessibility, privacy, API cost per hour.\n5. Open questions for O before buying (budget, desk vs pet-mobile, who the first user is).\n\nWrite dash-free copy. Prefer practical hardware steps over hype."
+    },
+    {
+      "id": "local-job-board-qr",
+      "title": "Job Board (QR local help requests)",
+      "status": "parked",
+      "savedAt": "2026-09-11",
+      "source": "https://marvelus-tech.github.io/project-ideas/",
+      "sourceLabel": "O notes (Job Board)",
+      "summary": "Physical big QR poster asking Do you need help with any local job? Scan opens a mobile form to submit the job need: what it entails, date, time, duration, and money offered. Capture local demand for odd jobs / help; later match to helpers or operators. Melbourne-first poster + form MVP.",
+      "tags": [
+        "job-board",
+        "qr",
+        "local",
+        "forms",
+        "marketplace",
+        "melbourne",
+        "lead-gen",
+        "odd-jobs"
+      ],
+      "jumpstartPrompt": "You are helping O'keito S. (Melbourne) ship a tiny Job Board MVP.\n\n## Product\nPut up a big QR code poster that asks: Do you need help with any local job? When someone scans, they get a simple mobile form to submit a local job request with: what the job entails, date, time, duration, money offered, and contact details. Phase 0 is demand capture only (poster + form + inbox). Matching helpers comes later.\n\n## Non-goals (phase 0)\n- No full two-sided marketplace app yet.\n- No payments processing yet.\n- No worker app yet.\n- Do not overbuild auth.\n\n## Phase plan\n### Phase 0: Poster + form\n1. One landing page with clear headline and short trust line (Melbourne local help requests).\n2. Form fields: job title/summary, details/entail, preferred date, time window, duration estimate, budget/offer amount, suburb, name, phone or email, optional photos later.\n3. Submit to email and/or Formspree/sheet/HighLevel; confirmation message on success.\n4. Print-ready A3/A2 poster with huge QR, short copy, no clutter.\n5. Privacy one-liner on the form.\n\nExit: live URL + printable PDF/PNG poster + one test submission received.\n\n### Phase 1: Triage inbox\nSimple list of submissions (sheet or tiny admin). Tag: new / contacted / filled / spam. Optional auto-SMS or email to O on new lead.\n\n### Phase 2: Soft match\nForward vetted jobs to known helpers or a small helper waitlist. Still manual matching.\n\n### Phase 3: Light marketplace (only if demand is real)\nHelper signup, job browse, accept flow. Still Melbourne suburbs first.\n\n## Deliverables for this jumpstart\n1. One-sentence thesis.\n2. Exact form field list and validation rules.\n3. Poster copy (dash-free) and layout notes.\n4. Tech pick for phase 0 (e.g. GitHub Pages + Formspree, or Cloudflare + form).\n5. Spam/abuse risks and mitigations.\n6. Week-1 ship checklist.\n7. Open questions for O (where posters go, paid vs free posts, categories).\n\nWrite dash-free copy. Keep it practical and Melbourne-first."
     },
     {
       "id": "parent-school-lock-mac",
