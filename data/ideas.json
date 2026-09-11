@@ -1,6 +1,26 @@
 {
   "ideas": [
     {
+      "id": "local-job-board-qr",
+      "title": "Job Board (QR local help requests)",
+      "status": "parked",
+      "savedAt": "2026-09-11",
+      "source": "https://marvelus-tech.github.io/project-ideas/",
+      "sourceLabel": "O notes (Job Board)",
+      "summary": "Physical big QR poster asking Do you need help with any local job? Scan opens a mobile form to submit the job need: what it entails, date, time, duration, and money offered. Capture local demand for odd jobs / help; later match to helpers or operators. Melbourne-first poster + form MVP.",
+      "tags": [
+        "job-board",
+        "qr",
+        "local",
+        "forms",
+        "marketplace",
+        "melbourne",
+        "lead-gen",
+        "odd-jobs"
+      ],
+      "jumpstartPrompt": "You are helping O'keito S. (Melbourne) ship a tiny Job Board MVP.\n\n## Product\nPut up a big QR code poster that asks: Do you need help with any local job? When someone scans, they get a simple mobile form to submit a local job request with: what the job entails, date, time, duration, money offered, and contact details. Phase 0 is demand capture only (poster + form + inbox). Matching helpers comes later.\n\n## Non-goals (phase 0)\n- No full two-sided marketplace app yet.\n- No payments processing yet.\n- No worker app yet.\n- Do not overbuild auth.\n\n## Phase plan\n### Phase 0: Poster + form\n1. One landing page with clear headline and short trust line (Melbourne local help requests).\n2. Form fields: job title/summary, details/entail, preferred date, time window, duration estimate, budget/offer amount, suburb, name, phone or email, optional photos later.\n3. Submit to email and/or Formspree/sheet/HighLevel; confirmation message on success.\n4. Print-ready A3/A2 poster with huge QR, short copy, no clutter.\n5. Privacy one-liner on the form.\n\nExit: live URL + printable PDF/PNG poster + one test submission received.\n\n### Phase 1: Triage inbox\nSimple list of submissions (sheet or tiny admin). Tag: new / contacted / filled / spam. Optional auto-SMS or email to O on new lead.\n\n### Phase 2: Soft match\nForward vetted jobs to known helpers or a small helper waitlist. Still manual matching.\n\n### Phase 3: Light marketplace (only if demand is real)\nHelper signup, job browse, accept flow. Still Melbourne suburbs first.\n\n## Deliverables for this jumpstart\n1. One-sentence thesis.\n2. Exact form field list and validation rules.\n3. Poster copy (dash-free) and layout notes.\n4. Tech pick for phase 0 (e.g. GitHub Pages + Formspree, or Cloudflare + form).\n5. Spam/abuse risks and mitigations.\n6. Week-1 ship checklist.\n7. Open questions for O (where posters go, paid vs free posts, categories).\n\nWrite dash-free copy. Keep it practical and Melbourne-first."
+    },
+    {
       "id": "elderly-companion-pet-gpt-live",
       "title": "Elderly companion pet (GPT Live hardware kit)",
       "status": "parked",
