@@ -1,6 +1,26 @@
 {
   "ideas": [
     {
+      "id": "contxt-live-context-pages",
+      "title": "CONTXT",
+      "status": "parked",
+      "savedAt": "2026-10-18",
+      "source": "https://marvelus-tech.github.io/project-ideas/",
+      "sourceLabel": "O notes (CONTXT)",
+      "summary": "A listening companion that turns anything spoken into live context pages.",
+      "tags": [
+        "audio-capture",
+        "streaming-transcription",
+        "llm-salience",
+        "live-search",
+        "presentation-pages",
+        "meetings",
+        "events",
+        "political-debates"
+      ],
+      "jumpstartPrompt": "You are helping O'keito S. scope CONTXT.\n\n## Product thesis\nA listening companion that turns anything spoken into live context pages.\n\nIt listens to speech from a television, a live event, a browser or a meeting, transcribes what is said, works out which topics are worth noting, researches them instantly, and builds a presentation page per topic with summarised key information, sources, and a fitting background image. Every page joins a chronological timeline, so a session can be scrolled back through afterwards. First showcase is political debates, where viewers can see how far a claim sits from verified information, but it is a general tool for meetings, events, and conversation.\n\n## Research stage\nTranscription, claim detection, and search pieces are all borrowed from existing services. The build is the salience judgement, the page presentation, and the timeline.\n\n## Core flow\n1. Capture audio from a selected source with clear user consent.\n2. Stream speech into a transcription service.\n3. Identify claims and topics worth expanding without creating a page for every sentence.\n4. Search live sources and separate verified facts, context, and uncertainty.\n5. Generate a concise HTML presentation page with citations and a fitting licensed image.\n6. Add each page to a chronological session timeline that remains easy to review later.\n\n## First showcase\nUse a political debate to demonstrate claim distance from verified information. Make confidence and source quality visible. Keep corrections possible as stronger evidence appears.\n\n## Deliverables\n1. Define salience rules and examples for what should and should not become a page.\n2. Compare practical audio capture and streaming transcription options.\n3. Design the research and citation pipeline, including source ranking and correction handling.\n4. Sketch the live page template and chronological timeline for desktop and mobile.\n5. Define a small debate demo with measurable latency, citation quality, and page usefulness targets.\n6. List privacy, copyright, misinformation, and image licensing risks with concrete controls.\n7. Identify which existing services can be borrowed and which CONTXT components must be built.\n\nKeep the first prototype practical. Prefer clear source attribution over confident unsupported summaries. Write all user facing copy without em dashes or en dashes."
+    },
+    {
       "id": "karens-hotline",
       "title": "Karen's Hotline (AI complaint vent + brand remedy)",
       "status": "parked",
