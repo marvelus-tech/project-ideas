@@ -260,9 +260,11 @@
         }
 
         .card-toggle {
-            display: block;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
             width: 100%;
-            padding: 20px 24px;
+            padding: 20px 24px 12px;
             border: 0;
             background: transparent;
             color: inherit;
@@ -276,18 +278,14 @@
             outline-offset: -3px;
         }
 
-        .card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 12px;
+        .card-heading {
+            margin: 0;
         }
 
         .idea-title {
             font-size: 1.2rem;
             font-weight: 600;
             color: var(--text-primary);
-            margin-bottom: 4px;
             flex: 1;
         }
 
@@ -325,6 +323,7 @@
             overflow: hidden;
             -webkit-box-orient: vertical;
             -webkit-line-clamp: 2;
+            padding: 0 24px 20px;
         }
 
         .idea-card.is-expanded .idea-summary {
@@ -654,24 +653,25 @@
             
             grid.innerHTML = filteredIdeas.map(idea => `
                 <article class="idea-card">
-                    <button
-                        class="card-toggle"
-                        type="button"
-                        aria-expanded="false"
-                        aria-controls="card-body-${escapeHtml(idea.id)}"
-                        aria-label="Expand ${escapeHtml(idea.title)}"
-                    >
-                        <span class="card-header">
-                            <span class="idea-title">${escapeHtml(idea.title)}</span>
+                    <h2 class="card-heading">
+                        <button
+                            class="card-toggle"
+                            type="button"
+                            aria-expanded="false"
+                            aria-controls="card-body-${escapeHtml(idea.id)}"
+                            aria-labelledby="card-title-${escapeHtml(idea.id)} card-status-${escapeHtml(idea.id)}"
+                            aria-describedby="card-summary-${escapeHtml(idea.id)}"
+                        >
+                            <span class="idea-title" id="card-title-${escapeHtml(idea.id)}">${escapeHtml(idea.title)}</span>
                             <span class="card-heading-actions">
-                                <span class="status-badge status-${idea.status}">${idea.status}</span>
+                                <span class="status-badge status-${idea.status}" id="card-status-${escapeHtml(idea.id)}">${idea.status}</span>
                                 <svg class="card-chevron" viewBox="0 0 24 24" aria-hidden="true">
                                     <path d="m6 9 6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
                                 </svg>
                             </span>
-                        </span>
-                        <span class="idea-summary">${escapeHtml(idea.summary)}</span>
-                    </button>
+                        </button>
+                    </h2>
+                    <p class="idea-summary" id="card-summary-${escapeHtml(idea.id)}">${escapeHtml(idea.summary)}</p>
 
                     <div class="card-body" id="card-body-${escapeHtml(idea.id)}" hidden>
                         <div class="idea-meta">
@@ -707,7 +707,6 @@
             const toggle = card.querySelector('.card-toggle');
             const body = card.querySelector('.card-body');
             toggle.setAttribute('aria-expanded', String(expanded));
-            toggle.setAttribute('aria-label', `${expanded ? 'Collapse' : 'Expand'} ${card.querySelector('.idea-title').textContent}`);
             body.hidden = !expanded;
             card.classList.toggle('is-expanded', expanded);
         }
