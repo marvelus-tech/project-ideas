@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Parked business and project ideas for O'keito S. with AI jumpstart prompts">
+    <link rel="icon" href="data:,">
     <title>Project Ideas | O'keito S.</title>
     <style>
         * {
@@ -64,54 +65,132 @@
             background-color: var(--bg-primary);
             border: 1px solid var(--border);
             border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 30px;
+            padding: 10px 12px;
+            margin-bottom: 20px;
+        }
+
+        .controls-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            min-width: 0;
+        }
+
+        .search-wrap {
+            position: relative;
+            flex: 0 0 280px;
+        }
+
+        .search-icon {
+            position: absolute;
+            top: 50%;
+            left: 11px;
+            width: 16px;
+            height: 16px;
+            color: var(--text-secondary);
+            pointer-events: none;
+            transform: translateY(-50%);
         }
 
         .search-box {
             width: 100%;
-            padding: 12px 16px;
-            font-size: 1rem;
+            height: 36px;
+            padding: 7px 36px 7px 34px;
+            font-size: 0.9rem;
             border: 1px solid var(--border);
             border-radius: 6px;
-            margin-bottom: 16px;
             background-color: var(--bg-primary);
         }
 
-        .search-box:focus {
-            outline: none;
+        .search-box:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 1px;
             border-color: var(--accent);
+        }
+
+        .clear-search {
+            position: absolute;
+            top: 50%;
+            right: 4px;
+            width: 32px;
+            height: 32px;
+            border: 0;
+            border-radius: 4px;
+            background: transparent;
+            color: var(--text-secondary);
+            font-size: 1.15rem;
+            line-height: 1;
+            cursor: pointer;
+            transform: translateY(-50%);
+        }
+
+        .clear-search:hover {
+            color: var(--text-primary);
+            background-color: var(--bg-secondary);
+        }
+
+        .clear-search:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 0;
+        }
+
+        .filter-scroll-wrap {
+            position: relative;
+            flex: 1;
+            min-width: 0;
+        }
+
+        .filter-scroll-wrap::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 28px;
+            height: 100%;
+            background: linear-gradient(to right, rgba(255, 255, 255, 0), var(--bg-primary));
+            pointer-events: none;
+        }
+
+        .filter-scroll {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            overflow-x: auto;
+            padding-right: 24px;
+            scrollbar-width: thin;
         }
 
         .filters {
             display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
+            gap: 7px;
+            flex: 0 0 auto;
             align-items: center;
         }
 
         .filter-group {
             display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
+            gap: 6px;
+            flex-wrap: nowrap;
         }
 
         .filter-label {
             font-weight: 500;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             color: var(--text-secondary);
             align-self: center;
         }
 
         .filter-btn {
-            padding: 6px 14px;
+            min-height: 32px;
+            padding: 3px 10px;
             border: 1px solid var(--border);
             border-radius: 20px;
             background-color: var(--bg-primary);
             color: var(--text-primary);
-            font-size: 0.875rem;
+            font-size: 0.78rem;
             cursor: pointer;
             transition: all 0.2s;
+            white-space: nowrap;
         }
 
         .filter-btn:hover {
@@ -125,10 +204,40 @@
             border-color: var(--accent);
         }
 
+        .filter-btn:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
+        }
+
+        .results-toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
         .results-count {
             color: var(--text-secondary);
             font-size: 0.9rem;
-            margin-bottom: 20px;
+        }
+
+        .expand-all-btn {
+            border: 0;
+            background: transparent;
+            color: var(--accent);
+            font: inherit;
+            font-size: 0.85rem;
+            cursor: pointer;
+        }
+
+        .expand-all-btn:hover {
+            text-decoration: underline;
+        }
+
+        .expand-all-btn:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 3px;
+            border-radius: 2px;
         }
 
         .ideas-grid {
@@ -142,7 +251,7 @@
             background-color: var(--bg-card);
             border: 1px solid var(--border);
             border-radius: 8px;
-            padding: 24px;
+            overflow: hidden;
             transition: box-shadow 0.2s;
         }
 
@@ -150,18 +259,33 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
         }
 
-        .card-header {
+        .card-toggle {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            margin-bottom: 12px;
+            width: 100%;
+            padding: 20px 24px 12px;
+            border: 0;
+            background: transparent;
+            color: inherit;
+            font: inherit;
+            text-align: left;
+            cursor: pointer;
+        }
+
+        .card-toggle:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: -3px;
+        }
+
+        .card-heading {
+            margin: 0;
         }
 
         .idea-title {
             font-size: 1.2rem;
             font-weight: 600;
             color: var(--text-primary);
-            margin-bottom: 4px;
             flex: 1;
         }
 
@@ -194,8 +318,39 @@
         .idea-summary {
             color: var(--text-secondary);
             font-size: 0.95rem;
-            margin-bottom: 16px;
             line-height: 1.5;
+            display: -webkit-box;
+            overflow: hidden;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+            padding: 0 24px 20px;
+        }
+
+        .idea-card.is-expanded .idea-summary {
+            display: block;
+            overflow: visible;
+        }
+
+        .card-heading-actions {
+            display: flex;
+            align-items: center;
+            flex: 0 0 auto;
+        }
+
+        .card-chevron {
+            width: 18px;
+            height: 18px;
+            margin-left: 10px;
+            color: var(--text-secondary);
+            transition: transform 0.2s ease;
+        }
+
+        .idea-card.is-expanded .card-chevron {
+            transform: rotate(180deg);
+        }
+
+        .card-body {
+            padding: 0 24px 24px;
         }
 
         .idea-meta {
@@ -316,21 +471,31 @@
         }
 
         @media (max-width: 768px) {
+            .controls-row {
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+
+            .search-wrap,
+            .filter-scroll-wrap {
+                flex: 1 0 100%;
+                width: 100%;
+            }
+
             .ideas-grid {
                 grid-template-columns: 1fr;
             }
 
-            .filters {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .filter-group {
-                width: 100%;
-            }
-
             h1 {
                 font-size: 1.5rem;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .card-chevron,
+            .filter-btn,
+            .idea-card {
+                transition: none;
             }
         }
     </style>
@@ -345,33 +510,49 @@
 
     <div class="container">
         <div class="controls">
-            <input 
-                type="text" 
-                id="searchInput" 
-                class="search-box" 
-                placeholder="Search ideas by title, summary, or tags..."
-                autocomplete="off"
-            >
-            
-            <div class="filters">
-                <span class="filter-label">Status:</span>
-                <div class="filter-group" id="statusFilters">
-                    <button class="filter-btn active" data-status="all">All</button>
-                    <button class="filter-btn" data-status="parked">Parked</button>
-                    <button class="filter-btn" data-status="active">Active</button>
-                    <button class="filter-btn" data-status="done">Done</button>
+            <div class="controls-row">
+                <div class="search-wrap">
+                    <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="m21 21-4.35-4.35m2.35-5.65a8 8 0 1 1-16 0 8 8 0 0 1 16 0Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+                    </svg>
+                    <input
+                        type="search"
+                        id="searchInput"
+                        class="search-box"
+                        placeholder="Search ideas..."
+                        aria-label="Search ideas by title, summary, or tags"
+                        autocomplete="off"
+                    >
+                    <button class="clear-search" id="clearSearch" type="button" aria-label="Clear search" hidden>&times;</button>
                 </div>
-            </div>
-            
-            <div class="filters">
-                <span class="filter-label">Tags:</span>
-                <div class="filter-group" id="tagFilters">
-                    <button class="filter-btn active" data-tag="all">All</button>
+
+                <div class="filter-scroll-wrap">
+                    <div class="filter-scroll" aria-label="Idea filters">
+                        <div class="filters">
+                            <span class="filter-label">Status:</span>
+                            <div class="filter-group" id="statusFilters">
+                                <button class="filter-btn active" data-status="all" aria-pressed="true">All</button>
+                                <button class="filter-btn" data-status="parked" aria-pressed="false">Parked</button>
+                                <button class="filter-btn" data-status="active" aria-pressed="false">Active</button>
+                                <button class="filter-btn" data-status="done" aria-pressed="false">Done</button>
+                            </div>
+                        </div>
+
+                        <div class="filters">
+                            <span class="filter-label">Tags:</span>
+                            <div class="filter-group" id="tagFilters">
+                                <button class="filter-btn active" data-tag="all" aria-pressed="true">All</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="results-count" id="resultsCount"></div>
+        <div class="results-toolbar">
+            <div class="results-count" id="resultsCount"></div>
+            <button class="expand-all-btn" id="expandAll" type="button">Expand all</button>
+        </div>
         
         <div class="ideas-grid" id="ideasGrid"></div>
     </div>
@@ -410,6 +591,7 @@
                     btn.className = 'filter-btn';
                     btn.dataset.tag = tag;
                     btn.textContent = tag;
+                    btn.setAttribute('aria-pressed', 'false');
                     tagFiltersContainer.appendChild(btn);
                 });
                 
@@ -457,6 +639,7 @@
             resultsCount.textContent = `${filteredIdeas.length} ${filteredIdeas.length === 1 ? 'idea' : 'ideas'}`;
             
             if (filteredIdeas.length === 0) {
+                document.getElementById('expandAll').hidden = true;
                 grid.innerHTML = `
                     <div class="empty-state">
                         <h2>No ideas found</h2>
@@ -465,40 +648,75 @@
                 `;
                 return;
             }
+
+            document.getElementById('expandAll').hidden = false;
             
             grid.innerHTML = filteredIdeas.map(idea => `
-                <div class="idea-card">
-                    <div class="card-header">
-                        <h2 class="idea-title">${escapeHtml(idea.title)}</h2>
-                        <span class="status-badge status-${idea.status}">${idea.status}</span>
-                    </div>
-                    
-                    <p class="idea-summary">${escapeHtml(idea.summary)}</p>
-                    
-                    <div class="idea-meta">
-                        <div class="meta-row">
-                            <span class="meta-label">Source:</span>
-                            <a href="${escapeHtml(idea.source)}" class="source-link" target="_blank" rel="noopener">${escapeHtml(idea.sourceLabel)}</a>
+                <article class="idea-card">
+                    <h2 class="card-heading">
+                        <button
+                            class="card-toggle"
+                            type="button"
+                            aria-expanded="false"
+                            aria-controls="card-body-${escapeHtml(idea.id)}"
+                            aria-labelledby="card-title-${escapeHtml(idea.id)} card-status-${escapeHtml(idea.id)}"
+                            aria-describedby="card-summary-${escapeHtml(idea.id)}"
+                        >
+                            <span class="idea-title" id="card-title-${escapeHtml(idea.id)}">${escapeHtml(idea.title)}</span>
+                            <span class="card-heading-actions">
+                                <span class="status-badge status-${idea.status}" id="card-status-${escapeHtml(idea.id)}">${idea.status}</span>
+                                <svg class="card-chevron" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="m6 9 6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                </svg>
+                            </span>
+                        </button>
+                    </h2>
+                    <p class="idea-summary" id="card-summary-${escapeHtml(idea.id)}">${escapeHtml(idea.summary)}</p>
+
+                    <div class="card-body" id="card-body-${escapeHtml(idea.id)}" hidden>
+                        <div class="idea-meta">
+                            <div class="meta-row">
+                                <span class="meta-label">Source:</span>
+                                <a href="${escapeHtml(idea.source)}" class="source-link" target="_blank" rel="noopener">${escapeHtml(idea.sourceLabel)}</a>
+                            </div>
+                            <div class="meta-row">
+                                <span class="meta-label">Saved:</span>
+                                <span>${idea.savedAt}</span>
+                            </div>
                         </div>
-                        <div class="meta-row">
-                            <span class="meta-label">Saved:</span>
-                            <span>${idea.savedAt}</span>
+
+                        <div class="tags">
+                            ${idea.tags.map(tag => `<span class="tag">${escapeHtml(tag)}</span>`).join('')}
+                        </div>
+
+                        <div class="prompt-section">
+                            <div class="prompt-header">
+                                <span class="prompt-label">AI Jumpstart Prompt</span>
+                                <button class="copy-btn" onclick="copyPrompt(this, '${escapeHtml(idea.id)}')">Copy prompt</button>
+                            </div>
+                            <div class="prompt-code">${escapeHtml(idea.jumpstartPrompt)}</div>
                         </div>
                     </div>
-                    
-                    <div class="tags">
-                        ${idea.tags.map(tag => `<span class="tag">${escapeHtml(tag)}</span>`).join('')}
-                    </div>
-                    
-                    <div class="prompt-section">
-                        <div class="prompt-header">
-                            <span class="prompt-label">AI Jumpstart Prompt</span>
-                            <button class="copy-btn" onclick="copyPrompt(this, '${escapeHtml(idea.id)}')">Copy prompt</button>
-                        </div>
-                        <div class="prompt-code">${escapeHtml(idea.jumpstartPrompt)}</div>
-                    </div>
-                </div>
+                </article>
             `).join('');
+
+            updateExpandAllButton();
+        }
+
+        function setCardExpanded(card, expanded) {
+            const toggle = card.querySelector('.card-toggle');
+            const body = card.querySelector('.card-body');
+            toggle.setAttribute('aria-expanded', String(expanded));
+            body.hidden = !expanded;
+            card.classList.toggle('is-expanded', expanded);
+        }
+
+        function updateExpandAllButton() {
+            const cards = Array.from(document.querySelectorAll('.idea-card'));
+            const allExpanded = cards.length > 0 && cards.every(card =>
+                card.querySelector('.card-toggle').getAttribute('aria-expanded') === 'true'
+            );
+            document.getElementById('expandAll').textContent = allExpanded ? 'Collapse all' : 'Expand all';
         }
 
         // Copy prompt to clipboard
@@ -532,15 +750,27 @@
         // Event listeners
         document.getElementById('searchInput').addEventListener('input', (e) => {
             currentFilters.search = e.target.value;
+            document.getElementById('clearSearch').hidden = !e.target.value;
             renderIdeas();
+        });
+
+        document.getElementById('clearSearch').addEventListener('click', () => {
+            const searchInput = document.getElementById('searchInput');
+            searchInput.value = '';
+            currentFilters.search = '';
+            document.getElementById('clearSearch').hidden = true;
+            renderIdeas();
+            searchInput.focus();
         });
 
         document.getElementById('statusFilters').addEventListener('click', (e) => {
             if (e.target.classList.contains('filter-btn')) {
                 document.querySelectorAll('#statusFilters .filter-btn').forEach(btn => {
                     btn.classList.remove('active');
+                    btn.setAttribute('aria-pressed', 'false');
                 });
                 e.target.classList.add('active');
+                e.target.setAttribute('aria-pressed', 'true');
                 currentFilters.status = e.target.dataset.status;
                 renderIdeas();
             }
@@ -550,11 +780,32 @@
             if (e.target.classList.contains('filter-btn')) {
                 document.querySelectorAll('#tagFilters .filter-btn').forEach(btn => {
                     btn.classList.remove('active');
+                    btn.setAttribute('aria-pressed', 'false');
                 });
                 e.target.classList.add('active');
+                e.target.setAttribute('aria-pressed', 'true');
                 currentFilters.tag = e.target.dataset.tag;
                 renderIdeas();
             }
+        });
+
+        document.getElementById('ideasGrid').addEventListener('click', (e) => {
+            const toggle = e.target.closest('.card-toggle');
+            if (!toggle) return;
+
+            const card = toggle.closest('.idea-card');
+            const expanded = toggle.getAttribute('aria-expanded') === 'true';
+            setCardExpanded(card, !expanded);
+            updateExpandAllButton();
+        });
+
+        document.getElementById('expandAll').addEventListener('click', () => {
+            const cards = Array.from(document.querySelectorAll('.idea-card'));
+            const shouldExpand = cards.some(card =>
+                card.querySelector('.card-toggle').getAttribute('aria-expanded') === 'false'
+            );
+            cards.forEach(card => setCardExpanded(card, shouldExpand));
+            updateExpandAllButton();
         });
 
         // Initialize
