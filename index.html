@@ -25,6 +25,7 @@
             --success: #28a745;
             --tag-bg: #e9ecef;
             --tag-text: #495057;
+            --status-new: #7a4b00;
             --status-parked: #6c757d;
             --status-active: #0066cc;
             --status-done: #28a745;
@@ -305,6 +306,11 @@
             color: var(--status-parked);
         }
 
+        .status-new {
+            background-color: #fff3cd;
+            color: var(--status-new);
+        }
+
         .status-active {
             background-color: #cce5ff;
             color: var(--status-active);
@@ -532,6 +538,7 @@
                             <span class="filter-label">Status:</span>
                             <div class="filter-group" id="statusFilters">
                                 <button class="filter-btn active" data-status="all" aria-pressed="true">All</button>
+                                <button class="filter-btn" data-status="new" aria-pressed="false">New / to start</button>
                                 <button class="filter-btn" data-status="parked" aria-pressed="false">Parked</button>
                                 <button class="filter-btn" data-status="active" aria-pressed="false">Active</button>
                                 <button class="filter-btn" data-status="done" aria-pressed="false">Done</button>
@@ -664,7 +671,7 @@
                         >
                             <span class="idea-title" id="card-title-${escapeHtml(idea.id)}">${escapeHtml(idea.title)}</span>
                             <span class="card-heading-actions">
-                                <span class="status-badge status-${idea.status}" id="card-status-${escapeHtml(idea.id)}">${idea.status}</span>
+                                <span class="status-badge status-${idea.status}" id="card-status-${escapeHtml(idea.id)}">${getStatusLabel(idea.status)}</span>
                                 <svg class="card-chevron" viewBox="0 0 24 24" aria-hidden="true">
                                     <path d="m6 9 6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
                                 </svg>
@@ -701,6 +708,10 @@
             `).join('');
 
             updateExpandAllButton();
+        }
+
+        function getStatusLabel(status) {
+            return status === 'new' ? 'new / to start' : status;
         }
 
         function setCardExpanded(card, expanded) {
