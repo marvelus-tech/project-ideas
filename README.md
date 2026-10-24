@@ -6,11 +6,13 @@ Parked business and project ideas for O'keito S. (Melbourne UX/product designer)
 
 ## Features
 
-- Light-theme decision board for tracking parked, active, and completed projects
-- Each idea includes title, status, summary, source link, tags, saved date, and AI jumpstart prompt
-- Search functionality across titles, summaries, and tags
-- Filter by status (parked/active/done) and tags
-- Copy prompt button for each idea (works on HTTPS)
+- Dark sci-fi command-deck UI with glass cards, neon accents, and a subtle grid atmosphere
+- Fixed-height idea cards with a two-line summary and **Read more** to open full details
+- Right-side slide-out detail panel (source, saved date, tags, AI jumpstart prompt with copy)
+- Search across titles, summaries, and tags
+- Filter by status (new, parked, active, done) and tags
+- Copy prompt button in the detail panel (works on HTTPS)
+- Accessible panel: backdrop close, Escape, focus return, and keyboard focus trap
 - Mobile-friendly responsive design
 
 ## How to Add a New Idea
