@@ -17,27 +17,28 @@
         }
 
         :root {
-            --bg-deep: #06080f;
-            --bg-panel: rgba(12, 18, 32, 0.72);
-            --bg-card: rgba(14, 22, 40, 0.55);
-            --bg-card-hover: rgba(18, 28, 50, 0.75);
-            --text-primary: #e8edf7;
-            --text-secondary: #8b9bb8;
-            --text-muted: #5c6b85;
-            --border: rgba(0, 240, 255, 0.12);
-            --border-bright: rgba(0, 240, 255, 0.35);
-            --accent: #00f0ff;
-            --accent-dim: rgba(0, 240, 255, 0.15);
-            --accent-hover: #33f5ff;
-            --accent-glow: rgba(0, 240, 255, 0.25);
-            --magenta: #c850ff;
-            --success: #3dffa8;
-            --tag-bg: rgba(0, 240, 255, 0.08);
-            --tag-text: #a8d4e8;
-            --status-new: #ffd166;
-            --status-parked: #8b9bb8;
-            --status-active: #00f0ff;
-            --status-done: #3dffa8;
+            --bg-deep: #eef3fb;
+            --bg-surface: #ffffff;
+            --bg-panel: rgba(255, 255, 255, 0.82);
+            --bg-card: rgba(255, 255, 255, 0.78);
+            --bg-card-hover: rgba(255, 255, 255, 0.95);
+            --text-primary: #0c1526;
+            --text-secondary: #334155;
+            --text-muted: #5b6b82;
+            --border: rgba(12, 100, 180, 0.14);
+            --border-bright: rgba(0, 140, 210, 0.42);
+            --accent: #006daa;
+            --accent-dim: rgba(0, 140, 210, 0.1);
+            --accent-hover: #0088cc;
+            --accent-glow: rgba(0, 140, 210, 0.22);
+            --holo-violet: #7c3aed;
+            --success: #0a7d52;
+            --tag-bg: rgba(0, 140, 210, 0.08);
+            --tag-text: #1a4d6b;
+            --status-new: #9a6700;
+            --status-parked: #475569;
+            --status-active: #006daa;
+            --status-done: #0a7d52;
             --card-height: 220px;
             --panel-width: min(480px, 100vw);
             --font-sans: 'Outfit', system-ui, sans-serif;
@@ -48,7 +49,7 @@
             font-family: var(--font-sans);
             line-height: 1.6;
             color: var(--text-primary);
-            background-color: var(--bg-deep);
+            background: linear-gradient(165deg, #f8fbff 0%, var(--bg-deep) 45%, #e8f0fc 100%);
             min-height: 100vh;
         }
 
@@ -57,8 +58,8 @@
             position: fixed;
             inset: 0;
             background-image:
-                linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+                linear-gradient(rgba(0, 120, 200, 0.06) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 120, 200, 0.06) 1px, transparent 1px);
             background-size: 48px 48px;
             pointer-events: none;
             z-index: 0;
@@ -72,12 +73,12 @@
                 0deg,
                 transparent,
                 transparent 2px,
-                rgba(0, 0, 0, 0.03) 2px,
-                rgba(0, 0, 0, 0.03) 4px
+                rgba(12, 40, 80, 0.015) 2px,
+                rgba(12, 40, 80, 0.015) 4px
             );
             pointer-events: none;
             z-index: 0;
-            opacity: 0.4;
+            opacity: 0.5;
         }
 
         body.panel-open {
@@ -96,7 +97,8 @@
             border-bottom: 1px solid var(--border);
             padding: 36px 0 28px;
             margin-bottom: 28px;
-            background: linear-gradient(180deg, rgba(0, 240, 255, 0.04) 0%, transparent 100%);
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.4) 100%);
+            box-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
         }
 
         h1 {
@@ -105,7 +107,7 @@
             margin-bottom: 8px;
             letter-spacing: 0.04em;
             text-transform: uppercase;
-            background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent) 100%);
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent) 55%, var(--holo-violet) 100%);
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -125,7 +127,7 @@
             border-radius: 12px;
             padding: 12px 14px;
             margin-bottom: 20px;
-            box-shadow: 0 0 24px rgba(0, 240, 255, 0.04);
+            box-shadow: 0 4px 24px rgba(15, 60, 120, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.9);
         }
 
         .controls-row {
@@ -160,7 +162,7 @@
             font-family: inherit;
             border: 1px solid var(--border);
             border-radius: 8px;
-            background: rgba(6, 8, 15, 0.6);
+            background: var(--bg-surface);
             color: var(--text-primary);
         }
 
@@ -255,7 +257,7 @@
             padding: 4px 12px;
             border: 1px solid var(--border);
             border-radius: 20px;
-            background: rgba(6, 8, 15, 0.5);
+            background: rgba(255, 255, 255, 0.7);
             color: var(--text-secondary);
             font-size: 0.78rem;
             font-family: inherit;
@@ -319,7 +321,7 @@
         .idea-card:hover {
             border-color: var(--border-bright);
             background: var(--bg-card-hover);
-            box-shadow: 0 0 20px var(--accent-glow), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+            box-shadow: 0 8px 28px rgba(15, 60, 120, 0.1), 0 0 0 1px rgba(0, 140, 210, 0.08), inset 0 1px 0 rgba(255, 255, 255, 1);
         }
 
         .idea-card.is-selected {
@@ -364,27 +366,27 @@
         }
 
         .status-parked {
-            background: rgba(139, 155, 184, 0.15);
+            background: rgba(71, 85, 105, 0.1);
             color: var(--status-parked);
-            border-color: rgba(139, 155, 184, 0.3);
+            border-color: rgba(71, 85, 105, 0.25);
         }
 
         .status-new {
-            background: rgba(255, 209, 102, 0.12);
+            background: rgba(154, 103, 0, 0.12);
             color: var(--status-new);
-            border-color: rgba(255, 209, 102, 0.35);
+            border-color: rgba(154, 103, 0, 0.3);
         }
 
         .status-active {
-            background: rgba(0, 240, 255, 0.12);
+            background: rgba(0, 109, 170, 0.12);
             color: var(--status-active);
-            border-color: rgba(0, 240, 255, 0.35);
+            border-color: rgba(0, 109, 170, 0.3);
         }
 
         .status-done {
-            background: rgba(61, 255, 168, 0.12);
+            background: rgba(10, 125, 82, 0.12);
             color: var(--status-done);
-            border-color: rgba(61, 255, 168, 0.35);
+            border-color: rgba(10, 125, 82, 0.3);
         }
 
         .idea-summary {
@@ -405,7 +407,7 @@
             padding: 8px 16px;
             border: 1px solid var(--border-bright);
             border-radius: 6px;
-            background: transparent;
+            background: rgba(255, 255, 255, 0.85);
             color: var(--accent);
             font-size: 0.82rem;
             font-weight: 600;
@@ -462,9 +464,9 @@
         .panel-backdrop {
             position: fixed;
             inset: 0;
-            background: rgba(2, 4, 10, 0.75);
-            backdrop-filter: blur(4px);
-            -webkit-backdrop-filter: blur(4px);
+            background: rgba(12, 28, 52, 0.35);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
             z-index: 100;
             opacity: 0;
             visibility: hidden;
@@ -483,11 +485,11 @@
             width: var(--panel-width);
             height: 100%;
             max-height: 100dvh;
-            background: rgba(8, 12, 22, 0.95);
+            background: rgba(255, 255, 255, 0.96);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border-left: 1px solid var(--border-bright);
-            box-shadow: -8px 0 40px rgba(0, 0, 0, 0.5), -4px 0 24px var(--accent-glow);
+            box-shadow: -12px 0 48px rgba(15, 60, 120, 0.15), -4px 0 32px var(--accent-glow);
             z-index: 101;
             transform: translateX(100%);
             transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -524,12 +526,12 @@
             height: 40px;
             border: 1px solid var(--border);
             border-radius: 8px;
-            background: rgba(6, 8, 15, 0.6);
+            background: var(--bg-surface);
             color: var(--text-secondary);
             font-size: 1.5rem;
             line-height: 1;
             cursor: pointer;
-            transition: color 0.2s, border-color 0.2s;
+            transition: color 0.2s, border-color 0.2s, background 0.2s;
         }
 
         .panel-close:hover {
@@ -624,7 +626,7 @@
 
         .copy-btn {
             padding: 8px 16px;
-            background: linear-gradient(135deg, rgba(0, 240, 255, 0.2) 0%, rgba(200, 80, 255, 0.15) 100%);
+            background: linear-gradient(135deg, rgba(0, 140, 210, 0.12) 0%, rgba(124, 58, 237, 0.1) 100%);
             color: var(--accent);
             border: 1px solid var(--border-bright);
             border-radius: 6px;
@@ -640,9 +642,9 @@
         }
 
         .copy-btn.copied {
-            background: rgba(61, 255, 168, 0.2);
+            background: rgba(10, 125, 82, 0.12);
             color: var(--success);
-            border-color: rgba(61, 255, 168, 0.5);
+            border-color: rgba(10, 125, 82, 0.4);
         }
 
         .copy-btn:focus-visible {
@@ -651,7 +653,7 @@
         }
 
         .prompt-code {
-            background: rgba(4, 6, 12, 0.8);
+            background: #f1f6fc;
             border: 1px solid var(--border);
             border-radius: 8px;
             padding: 16px;
@@ -662,7 +664,7 @@
             overflow-y: auto;
             white-space: pre-wrap;
             word-wrap: break-word;
-            color: var(--text-secondary);
+            color: var(--text-primary);
         }
 
         @media (max-width: 768px) {

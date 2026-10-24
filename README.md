@@ -6,7 +6,7 @@ Parked business and project ideas for O'keito S. (Melbourne UX/product designer)
 
 ## Features
 
-- Dark sci-fi command-deck UI with glass cards, neon accents, and a subtle grid atmosphere
+- Bright futuristic lab UI with glass cards, holographic accents on white, and a subtle grid atmosphere
 - Fixed-height idea cards with a two-line summary and **Read more** to open full details
 - Right-side slide-out detail panel (source, saved date, tags, AI jumpstart prompt with copy)
 - Search across titles, summaries, and tags
