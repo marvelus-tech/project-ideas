@@ -1,0 +1,72 @@
+export const QUESTIONS = [
+  {
+    id: "interests",
+    prompt: "What are you into these days?",
+    hint: "Hobbies, topics, anything you could talk about for an hour.",
+    kind: "text" as const,
+    placeholder: "Fixing things, cooking, local history",
+  },
+  {
+    id: "skills",
+    prompt: "What are you already good at?",
+    hint: "Skills you would not have to learn from zero.",
+    kind: "text" as const,
+    placeholder: "Talking to people, organizing, light repairs",
+  },
+  {
+    id: "hasIdea",
+    prompt: "Do you already have a product or an idea?",
+    hint: "Either answer is useful. If yes, name it in a few words.",
+    kind: "idea" as const,
+  },
+  {
+    id: "space",
+    prompt: "Do you have space at home to make or store something?",
+    hint: "A garage, a spare room, or even a corner counts.",
+    kind: "choice" as const,
+    options: [
+      { value: "none", label: "No extra space" },
+      { value: "corner", label: "A corner" },
+      { value: "spare-room", label: "A spare room" },
+      { value: "garage", label: "A garage or shed" },
+    ],
+  },
+  {
+    id: "capital",
+    prompt: "How much can you put toward startup costs?",
+    hint: "This desk is built for a small number. Be honest.",
+    kind: "choice" as const,
+    options: [
+      { value: "none", label: "Basically none" },
+      { value: "under-100", label: "Under $100" },
+      { value: "100-500", label: "$100 to $500" },
+      { value: "more", label: "More than $500" },
+    ],
+  },
+  {
+    id: "trades",
+    prompt: "Would you work with tradespeople and home services?",
+    hint: "Plumbers, electricians, painters. You would match them, not do the job.",
+    kind: "choice" as const,
+    options: [
+      { value: "yes", label: "Yes" },
+      { value: "maybe", label: "Maybe" },
+      { value: "no", label: "No" },
+    ],
+  },
+  {
+    id: "location",
+    prompt: "Where are you?",
+    hint: "City or region. The desk and the tradie list use this.",
+    kind: "text" as const,
+    placeholder: "Austin, TX",
+  },
+  {
+    id: "constraints",
+    prompt: "Anything else we should respect?",
+    hint: "Hours, transport, a job you already have. You can skip this.",
+    kind: "text" as const,
+    optional: true,
+    placeholder: "Weeknights only, no driving",
+  },
+];
