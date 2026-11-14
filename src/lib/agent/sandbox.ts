@@ -8,7 +8,7 @@ import { getComputer, upsertComputer } from "../store";
 
 /**
  * Computer backend.
- * grokbot-clone used Orgo only (server/src/computer.ts). Kindling keeps that
+ * grokbot-clone used Orgo only (server/src/computer.ts). CNSTRCT keeps that
  * client, and falls through to Docker or a local folder so the demo runs
  * with no keys. Docker is used only when the daemon already answers.
  * The local folder is the default on this machine.
@@ -47,7 +47,7 @@ function dockerAvailable() {
 export function providerNote(provider: SandboxProvider) {
   if (provider === "orgo") return "Orgo cloud computer. Sends still wait for approval.";
   if (provider === "docker") return "Docker sandbox with the network off. Sends still wait for approval.";
-  return "Local sandbox folder on the Kindling server. Commands cannot open the network.";
+  return "Local sandbox folder on the CNSTRCT server. Commands cannot open the network.";
 }
 
 function safePath(root: string, rel: string) {
@@ -126,7 +126,7 @@ function runLocal(root: string, command: string): Promise<{ exitCode: number; ou
       const tokens = tokenize(part);
       const bin = tokens[0];
       if (!bin || !ALLOW.has(bin)) {
-        return { exitCode: 126, output: `Command not allowed: ${bin || part}. Try kindling-search, ls, cat, or mkdir.` };
+        return { exitCode: 126, output: `Command not allowed: ${bin || part}. Try cnstrct-search, ls, cat, or mkdir.` };
       }
       if (bin === "rm" && tokens.some((token) => token === "/" || token.includes(".."))) {
         return { exitCode: 126, output: "Refusing to delete outside this folder." };
@@ -179,7 +179,7 @@ export async function execInSandbox(agentId: string, command: string, city = "th
   const root = ensureWorkspace(agentId);
   const trimmed = command.trim();
   appendTerminal(agentId, `$ ${trimmed}`);
-  if (trimmed.startsWith("kindling-search")) {
+  if (trimmed.startsWith("cnstrct-search")) {
     const output = searchTradies(city);
     appendTerminal(agentId, output);
     const provider = configuredProvider() === "orgo" ? "local" : configuredProvider();
@@ -198,7 +198,7 @@ export async function execInSandbox(agentId: string, command: string, city = "th
     try {
       let id = orgoIds.get(agentId);
       if (!id) {
-        const created = await orgo.createComputer(`kindling-${agentId.slice(-6)}`);
+        const created = await orgo.createComputer(`cnstrct-${agentId.slice(-6)}`);
         id = created.id;
         orgoIds.set(agentId, id);
       }

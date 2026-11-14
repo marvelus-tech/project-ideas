@@ -5,14 +5,14 @@ import { DatabaseSync } from "node:sqlite";
 let database: DatabaseSync | null = null;
 
 export function dataDir() {
-  return process.env.KINDLING_DATA_DIR || path.join(process.cwd(), "data");
+  return process.env.CNSTRCT_DATA_DIR || path.join(process.cwd(), "data");
 }
 
 export function getDb() {
   if (database) return database;
   const dir = dataDir();
   fs.mkdirSync(dir, { recursive: true });
-  const next = new DatabaseSync(path.join(dir, "kindling.db"));
+  const next = new DatabaseSync(path.join(dir, "cnstrct.db"));
   next.exec(`
     PRAGMA journal_mode = WAL;
     PRAGMA foreign_keys = ON;
@@ -134,7 +134,7 @@ function seedSample() {
   const now = Date.now();
   db.prepare("INSERT INTO users (id, email, name, created_at) VALUES (?, ?, ?, ?)").run(
     "user_sample",
-    "sample@kindling.local",
+    "sample@cnstrct.local",
     "Sample owner",
     now,
   );

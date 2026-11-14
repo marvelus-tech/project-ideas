@@ -17,7 +17,7 @@ export default function HomePage() {
     "@graph": [
       {
         "@type": "SoftwareApplication",
-        name: "Kindling",
+        name: "CNSTRCT",
         applicationCategory: "BusinessApplication",
         operatingSystem: "Web",
         description: HOME_DESCRIPTION,
@@ -49,7 +49,7 @@ export default function HomePage() {
             <p className="text-sm font-medium text-accent">For people starting with almost nothing</p>
             <h1 className="mt-4 max-w-4xl font-serif text-5xl leading-[1.05] tracking-tight md:text-7xl">Spin up a real business from almost nothing.</h1>
             <p className="mt-6 max-w-xl text-lg text-muted">
-              Kindling turns what you already have into a small business you can run this week. The first desk connects homeowners with local tradies. You keep a margin. You do not buy a van.
+              CNSTRCT turns what you already have into a small business you can run this week. The first desk connects homeowners with local tradies. You keep a margin. You do not buy a van.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Link href="/triage" className="inline-flex h-12 items-center justify-center rounded-full bg-accent px-6 text-white">

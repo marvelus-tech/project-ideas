@@ -1,8 +1,8 @@
 export const FAQS = [
   {
-    question: "What is Kindling?",
+    question: "What is CNSTRCT?",
     answer:
-      "Kindling turns a few facts about you into a small business: a public site, and agents that draft the work. The first live path is a home-services desk that introduces homeowners to local tradies.",
+      "CNSTRCT turns a few facts about you into a small business: a public site, and agents that draft the work. The first live path is a home-services desk that introduces homeowners to local tradies.",
   },
   {
     question: "Do I need startup cash?",

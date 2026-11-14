@@ -1,34 +1,34 @@
-export const SITE_NAME = "Kindling";
+export const SITE_NAME = "CNSTRCT";
 
-export const HOME_TITLE = "Kindling | Start a real business with almost nothing";
+export const HOME_TITLE = "CNSTRCT | Start a real business with almost nothing";
 
 export const HOME_DESCRIPTION =
-  "Kindling helps people with little cash start a real micro-business. Answer a short triage, open a home-services desk, and approve every message agents draft.";
+  "CNSTRCT helps people with little cash start a real micro-business. Answer a short triage, open a home-services desk, and approve every message agents draft.";
 
-export const TRIAGE_TITLE = "Kindling onboarding | Skills, cash, space, and city";
+export const TRIAGE_TITLE = "CNSTRCT onboarding | Skills, cash, space, and city";
 
 export const TRIAGE_DESCRIPTION =
-  "Answer eight short Kindling questions, one at a time. Share skills, cash, space, and city so the desk you open matches what you already have right now.";
+  "Answer eight short CNSTRCT questions, one at a time. Share skills, cash, space, and city so the desk you open matches what you already have right now.";
 
-export const OPPORTUNITIES_TITLE = "Kindling opportunity paths | One desk is live today";
+export const OPPORTUNITIES_TITLE = "CNSTRCT opportunity paths | One desk is live today";
 
 export const OPPORTUNITIES_DESCRIPTION =
-  "Review three Kindling business paths after triage. One home-services desk is open today. Mobile detailing and estate clearance stay marked coming soon.";
+  "Review three CNSTRCT business paths after triage. One home-services desk is open today. Mobile detailing and estate clearance stay marked coming soon.";
 
-export const DASHBOARD_TITLE = "Kindling dashboard | Chat, computer, and approvals";
+export const DASHBOARD_TITLE = "CNSTRCT dashboard | Agent chat, computer, approvals";
 
 export const DASHBOARD_DESCRIPTION =
-  "Run your Kindling desk from one screen. Read the agent chat, open the sandbox computer, and approve or reject a drafted note before it is marked sent.";
+  "Run your CNSTRCT desk from one screen. Read the agent chat, open the sandbox computer, and approve or reject each drafted note before it is marked sent.";
 
-export const CALLBACK_TITLE = "Kindling sign-in | Finish your email magic link now";
+export const CALLBACK_TITLE = "CNSTRCT sign-in | Finish your email magic link now";
 
 export const CALLBACK_DESCRIPTION =
-  "Finish a Kindling email magic link when Supabase keys are set. Without those keys, keep going with the demo session this browser already stored for you.";
+  "Finish a CNSTRCT email magic link when Supabase keys are set. Without those keys, keep going with the demo session this browser already stored for you.";
 
-export const NOT_FOUND_TITLE = "Kindling missing page | This desk was not found here";
+export const NOT_FOUND_TITLE = "CNSTRCT missing page | This desk was not found here";
 
 export const NOT_FOUND_DESCRIPTION =
-  "That Kindling page is not here. Head home, open the sample Harbor desk, or start triage and build a small business from the skills and cash on hand now.";
+  "That CNSTRCT page is not here. Head home, open the sample Harbor desk, or start triage and build a small business from the skills and cash on hand now.";
 
 export function siteUrl() {
   return (process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000").replace(/\/$/, "");

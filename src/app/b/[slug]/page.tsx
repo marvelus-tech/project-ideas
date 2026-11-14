@@ -11,7 +11,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const business = getBusinessBySlug(slug);
   if (!business) {
-    return { title: { absolute: "Kindling missing page | This desk was not found here" }, robots: { index: false, follow: false } };
+    return { title: { absolute: "CNSTRCT missing page | This desk was not found here" }, robots: { index: false, follow: false } };
   }
   const title = businessTitle(business.name, business.city);
   const description = businessDescription(business.name, business.city);

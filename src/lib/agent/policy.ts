@@ -3,7 +3,7 @@ import { getPolicy } from "../store";
 /**
  * Adapted from grokbot-clone server/src/agent/tools.ts policyFor (MIT).
  * There, the bot's own computer and shell run freely, and outbound
- * Composio writes pause for an approval card. Kindling keeps that split:
+ * Composio writes pause for an approval card. CNSTRCT keeps that split:
  * sandbox tools run, and sending or spending asks first.
  */
 

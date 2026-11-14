@@ -5,7 +5,7 @@ import { systemPrompt } from "./prompts";
 
 /**
  * Model provider. grokbot-clone called only the xAI Responses API.
- * Kindling calls that same vendor when XAI_API_KEY is set (OpenAI-compatible
+ * CNSTRCT calls that same vendor when XAI_API_KEY is set (OpenAI-compatible
  * chat completions), or OPENAI_API_KEY otherwise. With neither key, a scripted
  * model drives the same tool loop so the demo still finishes.
  */
@@ -24,7 +24,7 @@ function scoutPlan(input: ModelInput): ModelResult {
   if (!search) {
     return {
       text: "",
-      calls: [{ name: "shell", arguments: { command: `kindling-search tradies --city "${city}"` } }],
+      calls: [{ name: "shell", arguments: { command: `cnstrct-search tradies --city "${city}"` } }],
       tokens: TOKENS_PER_MOCK_TURN,
     };
   }
@@ -133,7 +133,7 @@ function matcherPlan(input: ModelInput): ModelResult {
             to: tradie.contact,
             leadName: lead.name,
             tradieName: tradie.name,
-            body: `${lead.name} in ${input.business.city} needs ${lead.service} at ${lead.address}. Phone ${lead.phone}. This is a Kindling demo lead. Do not contact them outside this desk.`,
+            body: `${lead.name} in ${input.business.city} needs ${lead.service} at ${lead.address}. Phone ${lead.phone}. This is a CNSTRCT demo lead. Do not contact them outside this desk.`,
           },
         },
       ],

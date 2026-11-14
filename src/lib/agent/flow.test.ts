@@ -4,7 +4,7 @@ import { tmpdir } from "node:os";
 import path from "node:path";
 import test from "node:test";
 
-process.env.KINDLING_DATA_DIR = mkdtempSync(path.join(tmpdir(), "kindling-"));
+process.env.CNSTRCT_DATA_DIR = mkdtempSync(path.join(tmpdir(), "cnstrct-"));
 delete process.env.ORGO_API_KEY;
 delete process.env.ORGO_WORKSPACE_ID;
 delete process.env.XAI_API_KEY;
@@ -30,7 +30,7 @@ test("desk sweep asks before send and can be refused", async () => {
   const { execInSandbox, readSandboxFile, sandboxRoot } = await import("./sandbox");
   const { liveCardCopy } = await import("../copy");
   const fs = await import("node:fs");
-  const user = createUser({ email: "owner@kindling.local", name: "Owner" });
+  const user = createUser({ email: "owner@cnstrct.local", name: "Owner" });
   profile.userId = user.id;
   saveProfile(profile);
   const card = liveCardCopy(getProfile(user.id)!);

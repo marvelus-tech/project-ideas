@@ -20,7 +20,7 @@ export interface ToolOutcome {
 }
 
 const SCHEMAS = [
-  { type: "function", function: { name: "shell", description: "Run a sandboxed command. kindling-search lists local tradies. Network commands are blocked.", parameters: { type: "object", properties: { command: { type: "string" } }, required: ["command"] } } },
+  { type: "function", function: { name: "shell", description: "Run a sandboxed command. cnstrct-search lists local tradies. Network commands are blocked.", parameters: { type: "object", properties: { command: { type: "string" } }, required: ["command"] } } },
   { type: "function", function: { name: "write_file", description: "Write a text file inside your computer.", parameters: { type: "object", properties: { path: { type: "string" }, content: { type: "string" } }, required: ["path", "content"] } } },
   { type: "function", function: { name: "read_file", description: "Read a file on your computer.", parameters: { type: "object", properties: { path: { type: "string" } }, required: ["path"] } } },
   { type: "function", function: { name: "list_files", description: "List files on your computer.", parameters: { type: "object", properties: {} } } },

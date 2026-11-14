@@ -18,7 +18,7 @@ export default function OpenGraphImage() {
           padding: 72,
         }}
       >
-        <div style={{ fontSize: 28, color: "#c2410c" }}>Kindling</div>
+        <div style={{ fontSize: 28, color: "#c2410c" }}>CNSTRCT</div>
         <div style={{ fontSize: 72, lineHeight: 1.05, maxWidth: 900 }}>Spin up a real business from almost nothing.</div>
       </div>
     ),

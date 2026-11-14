@@ -7,7 +7,7 @@ export function Wordmark({ href = "/" }: { href?: string }) {
       <span className="grid h-8 w-8 place-items-center rounded-full bg-accent text-white">
         <Flame className="h-4 w-4" aria-hidden />
       </span>
-      Kindling
+      CNSTRCT
     </Link>
   );
 }

@@ -93,7 +93,7 @@ export function DashboardApp() {
 
   if (!desk.profile) {
     return (
-      <Empty title="No answers yet" body="The triage is how Kindling picks a desk." href="/triage" label="Start the questions" />
+      <Empty title="No answers yet" body="The triage is how CNSTRCT picks a desk." href="/triage" label="Start the questions" />
     );
   }
 

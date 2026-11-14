@@ -6,7 +6,7 @@ Both repos were read before this app was written (14 Nov 2026).
 
 [Rakazo](https://github.com/elie222/rakazo) (Apache-2.0) is a full Grok Bot alternative: routines, approvals with spending limits, a per-bot computer, group chats, and a chat UI inside `packages/chat-ui`. Computers are pluggable. The README lists Docker, E2B, Novita, Daytona, CreateOS, Boat, Boxd, Instabox, and Railway. Orgo is not one of them. Local development wants Node.js 24.15 or newer, pnpm 12, Postgres, and Docker. The product is apps for web, API, worker, Electron, and Expo. We did not copy Rakazo source.
 
-[grokbot-clone](https://github.com/nickvasilescu/grokbot-clone) (MIT) is a smaller web app: a Hono server and a React chat. The parts that match Kindling are already isolated:
+[grokbot-clone](https://github.com/nickvasilescu/grokbot-clone) (MIT) is a smaller web app: a Hono server and a React chat. The parts that match CNSTRCT are already isolated:
 
 - `server/src/agent/loop.ts`: one queue per bot, tool calls in order, a pending batch that pauses on an approval card and resumes when the owner answers.
 - `server/src/agent/tools.ts`: the bot's own computer and shell run freely. Composio writes pause for approval.
@@ -16,10 +16,10 @@ Both repos were read before this app was written (14 Nov 2026).
 
 It does not boot without `XAI_API_KEY`, `ORGO_API_KEY`, and `COMPOSIO_API_KEY`, and it has no local sandbox. The server runtime is about 2,500 lines.
 
-Kindling adapts grokbot-clone.
+CNSTRCT adapts grokbot-clone.
 
 1. This demo has to run on Node 22 with no Docker and no API keys. Rakazo's own quick start does not.
-2. The computer Kindling asked for is Orgo first, then a local or Docker fallback. grokbot already speaks the Orgo API. Rakazo's provider list does not include Orgo.
+2. The computer CNSTRCT asked for is Orgo first, then a local or Docker fallback. grokbot already speaks the Orgo API. Rakazo's provider list does not include Orgo.
 3. The approval card, the routine fire, and the per-agent computer are small enough to sit inside a Next.js dashboard this week. Rakazo's versions sit behind Postgres, a worker, and desktop and mobile clients.
 4. Neither project is keyless out of the box. Wrapping grokbot's loop with a scripted model and a folder sandbox keeps the control flow and still demos. Forking Rakazo would mean standing up a platform we cannot boot here.
 
@@ -42,7 +42,7 @@ Nothing in those three gated tools opens a network socket. Approve writes `outbo
 
 `configuredProvider()` picks Orgo when both Orgo env vars are set, otherwise Docker if `docker version` succeeds, otherwise a folder under `data/sandboxes/<agentId>`.
 
-The local sandbox allows a short command list (`ls`, `cat`, `mkdir`, and similar) plus `kindling-search`, which reads a built-in tradie directory. Pipes, redirects, curl, and interpreters are rejected. The dashboard computer view is that folder: terminal log, files, and the note the agent wrote. It is not a fake screenshot of a desktop the process never had.
+The local sandbox allows a short command list (`ls`, `cat`, `mkdir`, and similar) plus `cnstrct-search`, which reads a built-in tradie directory. Pipes, redirects, curl, and interpreters are rejected. The dashboard computer view is that folder: terminal log, files, and the note the agent wrote. It is not a fake screenshot of a desktop the process never had.
 
 Orgo, when configured, uses the ported client for `bash`. If the call fails, the same command runs locally and the terminal says so.
 
@@ -53,15 +53,15 @@ Each agent is created with a routine:
 - Mara, tradie scout: "Weekday tradie sweep" (labeled weekdays at 8:00).
 - Jules, lead matcher: "New lead check" (labeled every morning).
 
-Opening the desk runs both immediately, so the dashboard already has approval cards. After that, `src/instrumentation.ts` starts a 30 second timer. A routine whose `next_run_at` has passed fires the same path. grokbot used croner. Kindling stores an interval so the demo has no extra dependency. "Run now" uses that same function.
+Opening the desk runs both immediately, so the dashboard already has approval cards. After that, `src/instrumentation.ts` starts a 30 second timer. A routine whose `next_run_at` has passed fires the same path. grokbot used croner. CNSTRCT stores an interval so the demo has no extra dependency. "Run now" uses that same function.
 
 ## Tenancy and auth
 
 A user owns a profile, one business, that business's public site at `/b/[slug]`, and that business's agents. The sample desk `harbor-tradie-desk` belongs to `user_sample` and is not the signed-in demo user.
 
-With no Supabase keys, `POST /api/session` sets an httpOnly `kindling_sid` cookie and a row in sqlite. With `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `POST /api/auth/magic` asks Supabase to email a link, and `POST /api/auth/verify` accepts `token_hash` from `/auth/callback`. The email template has to land on that page with `token_hash` and `type`. The demo cookie still works when those keys are absent.
+With no Supabase keys, `POST /api/session` sets an httpOnly `cnstrct_sid` cookie and a row in sqlite. With `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `POST /api/auth/magic` asks Supabase to email a link, and `POST /api/auth/verify` accepts `token_hash` from `/auth/callback`. The email template has to land on that page with `token_hash` and `type`. The demo cookie still works when those keys are absent.
 
-Sqlite lives in `data/kindling.db` (or `KINDLING_DATA_DIR`). There is no hosted database in the default demo.
+Sqlite lives in `data/cnstrct.db` (or `CNSTRCT_DATA_DIR`). There is no hosted database in the default demo.
 
 ## Product flow
 
