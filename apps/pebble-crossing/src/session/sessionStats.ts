@@ -4,33 +4,40 @@ import type { ParentReportData, SessionState } from './types'
 export function buildParentReport(
   state: SessionState,
   childName: string,
+  micOff = false,
 ): ParentReportData {
-  const shOnly = state.phonicsStats.filter((s) =>
-    PHONICS_PROMPTS.find((p) => p.id === s.promptId && !p.isReview),
+  const shOnly = state.phonicsStats.filter((item) =>
+    PHONICS_PROMPTS.find((prompt) => prompt.id === item.promptId && !prompt.isReview),
   )
-  const review = state.phonicsStats.filter((s) =>
-    PHONICS_PROMPTS.find((p) => p.id === s.promptId && p.isReview),
+  const review = state.phonicsStats.filter((item) =>
+    PHONICS_PROMPTS.find((prompt) => prompt.id === item.promptId && prompt.isReview),
   )
-  const mathFirstTry = state.mathStats.filter((s) => s.firstTry).length
-  const mathAttempts = state.mathStats.reduce((n, s) => n + s.attempts, 0)
-  const mathHelped = state.mathStats.filter((s) => s.helped).length
-
   return {
     childName,
     pattern: 'sh',
-    shFirstTry: shOnly.filter((s) => s.firstTry).length,
-    shAttempts: shOnly.reduce((n, s) => n + s.attempts, 0),
-    shHelped: shOnly.filter((s) => s.helped).length,
-    shReviewFirstTry: review.filter((s) => s.firstTry).length,
-    shReviewAttempts: review.reduce((n, s) => n + s.attempts, 0),
-    mathFirstTry,
-    mathAttempts,
-    mathHelped,
+    shFirstTry: shOnly.filter((item) => item.firstTry).length,
+    shAttempts: shOnly.reduce((sum, item) => sum + item.attempts, 0),
+    shHelped: shOnly.filter((item) => item.helped).length,
+    shReviewFirstTry: review.filter((item) => item.firstTry).length,
+    shReviewAttempts: review.reduce((sum, item) => sum + item.attempts, 0),
+    fishIndependent: shOnly.some((item) => item.promptId === 'fish' && item.firstTry),
+    retrievalIndependent: state.retrievalKind === 'bolted',
+    productionPrompts: state.productionPrompts,
+    voiceAttempts: state.voiceAttempts,
+    micOff,
+    mathFirstTry: state.mathStats.filter((item) => item.firstTry).length,
+    mathAttempts: state.mathStats.reduce((sum, item) => sum + item.attempts, 0),
+    mathHelped: state.mathStats.filter((item) => item.helped).length,
     sentenceOutcome: state.sentenceOutcome,
     exactSentence: SENTENCE,
-    practicePlankCount: state.planks.filter((p) => p.kind === 'practice').length,
+    practicePlankCount: state.planks.filter((plank) => plank.kind === 'practice').length,
     endedEarly: state.timeCapHit || state.consecutiveHelped >= 3,
+    pronunciationAssessed: false,
   }
+}
+
+export function confirmParentRead(report: ParentReportData): ParentReportData {
+  return { ...report, sentenceOutcome: 'parent_confirmed', pronunciationAssessed: false }
 }
 
 export function persistParentReport(report: ParentReportData) {
@@ -38,32 +45,23 @@ export function persistParentReport(report: ParentReportData) {
 }
 
 export function formatParentSentence(report: ParentReportData): string {
-  const nSh = 4
-  let patternResult: string
-  if (report.endedEarly && report.shHelped >= 3) {
-    patternResult =
-      'sh was hard today. We stopped early and will bring it back. Slot not filled.'
-  } else if (report.shHelped > 0 || report.shFirstTry < nSh) {
-    patternResult = `sh was shaky (${report.shFirstTry} of ${report.shAttempts} first try, ${report.shHelped} helped). Slot not filled.`
+  const pattern = report.endedEarly && report.shHelped >= 3
+    ? 'sh was hard today. We stopped early and will bring it back. Slot not filled.'
+    : report.shHelped > 0
+      ? `sh connected with ${report.shFirstTry} of 4 words independently; ${report.shHelped} supported. The sh slot stays open.`
+      : `sh connected with ${report.shFirstTry} of 4 words independently.`
+  const fish = report.fishIndependent ? ' The end sound in fish was independent.' : ''
+  const math = `Math within 10: ${report.mathFirstTry} of ${Math.max(report.mathAttempts, report.mathFirstTry)} first try.`
+  let speech: string
+  if (report.sentenceOutcome === 'parent_confirmed') {
+    speech = `Parent confirmed the read of "${report.exactSentence}." Pronunciation was practiced, not scored.`
+  } else if (report.micOff || report.sentenceOutcome === 'mic_off_not_assessed') {
+    speech = `Speaking turns and "${report.exactSentence}" were practiced with the microphone off; speech was not assessed.`
+  } else if (report.sentenceOutcome === 'not_yet_parent') {
+    speech = 'Sentence: not yet, parent was there. Pronunciation was not assessed.'
   } else {
-    patternResult = `sh was solid (${report.shFirstTry} of ${nSh} first try).`
+    const heard = report.voiceAttempts > 0 ? ' and voice attempts were detected' : ''
+    speech = `${report.productionPrompts} speaking turns were prompted${heard}; pronunciation was not assessed. Sentence attempt is not a fluency claim.`
   }
-
-  let sentencePart: string
-  switch (report.sentenceOutcome) {
-    case 'read':
-      sentencePart = `read "${report.exactSentence}"`
-      break
-    case 'parent_confirmed':
-      sentencePart = `parent confirmed the read of "${report.exactSentence}."`
-      break
-    case 'not_yet_parent':
-      sentencePart = 'not yet, parent was there.'
-      break
-    default:
-      sentencePart =
-        'we could not hear a clear read, so this is not a fluency claim.'
-  }
-
-  return `${report.childName}: ${patternResult} Math within 10: ${report.mathFirstTry} of ${report.mathAttempts} first try. Sentence: ${sentencePart}`
+  return `${report.childName}: ${pattern}${fish} ${math} ${speech}`
 }

@@ -2,16 +2,17 @@ import type { ScarfColor } from '../content/level6'
 
 export type SessionPhase =
   | 'scarf'
-  | 'intro'
-  | 'teach_sh'
+  | 'need'
+  | 'mouth'
   | 'phonics'
+  | 'retrieval'
+  | 'whole_words'
   | 'math'
-  | 'read_aloud'
+  | 'sentence'
   | 'level_complete'
   | 'hard_done'
 
-export type TeachShStep = 'sh_model' | 'tap_sh' | 'word_a' | 'word_the' | 'done'
-
+export type BeatStep = 'hear' | 'choose' | 'blend' | 'speak' | 'model'
 export type PlankKind = 'bolted' | 'practice'
 export type PostKind = 'bolted' | 'helped'
 
@@ -25,25 +26,30 @@ export interface PostRecord {
   kind: PostKind
 }
 
-export interface PhonicsAttemptStats {
+export interface AttemptStats {
   promptId: string
   attempts: number
   firstTry: boolean
   helped: boolean
 }
 
-export interface MathAttemptStats {
-  promptId: string
-  attempts: number
-  firstTry: boolean
-  helped: boolean
-}
-
+/** Machine signals only. None of these means pronunciation or fluency mastery. */
 export type SentenceOutcome =
-  | 'read'
+  | 'unconfirmed'
+  | 'attempt_not_fluency'
+  | 'mic_off_not_assessed'
   | 'parent_confirmed'
   | 'not_yet_parent'
-  | 'no_fluency_claim'
+
+export interface WorldState {
+  kit: 'hidden' | 'arrived' | 'sitting' | 'aboard'
+  map: 'folded' | 'open'
+  ship: 'away' | 'docked'
+  shop: 'closed' | 'open'
+  shell: 'hidden' | 'lifted'
+  rope: 'creek' | 'shore' | 'tight'
+  fish: 'hidden' | 'helped'
+}
 
 export interface ParentReportData {
   childName: string
@@ -53,6 +59,11 @@ export interface ParentReportData {
   shHelped: number
   shReviewFirstTry: number
   shReviewAttempts: number
+  fishIndependent: boolean
+  retrievalIndependent: boolean
+  productionPrompts: number
+  voiceAttempts: number
+  micOff: boolean
   mathFirstTry: number
   mathAttempts: number
   mathHelped: number
@@ -60,25 +71,35 @@ export interface ParentReportData {
   exactSentence: string
   practicePlankCount: number
   endedEarly: boolean
+  pronunciationAssessed: false
 }
 
 export interface SessionState {
   phase: SessionPhase
   scarf: ScarfColor | null
-  teachShStep: TeachShStep
+  beatStep: BeatStep
+  mouthStep: 0 | 1
+  wholeWordStep: 0 | 1
   phonicsIndex: number
-  /** 0 = first try, 1 = after one miss (reset tiles), 2+ triggers helped */
   promptMissCount: number
+  modeled: boolean
+  inputOpen: boolean
+  shuffleSeed: number
+  pendingKind: PlankKind | null
+  pendingFirstTry: boolean
   mathIndex: number
   mathMissCount: number
   planks: PlankRecord[]
   posts: PostRecord[]
-  phonicsStats: PhonicsAttemptStats[]
-  mathStats: MathAttemptStats[]
+  phonicsStats: AttemptStats[]
+  mathStats: AttemptStats[]
+  retrievalKind: PlankKind | null
+  world: WorldState
   signBolted: boolean
   signPractice: boolean
   sentenceOutcome: SentenceOutcome
-  readAloudRetries: number
+  productionPrompts: number
+  voiceAttempts: number
   wobble: boolean
   pipWalkKey: number
   consecutiveHelped: number
@@ -88,15 +109,21 @@ export interface SessionState {
 
 export type SessionAction =
   | { type: 'PICK_SCARF'; scarf: ScarfColor }
-  | { type: 'INTRO_PLANK_TAPPED' }
-  | { type: 'TEACH_SH_ADVANCE' }
+  | { type: 'START_SPAN' }
+  | { type: 'MOUTH_ADVANCE'; attemptDetected?: boolean }
+  | { type: 'HEAR_DONE' }
   | { type: 'PHONICS_TILE'; tile: string }
+  | { type: 'BLEND_DONE' }
+  | { type: 'PRODUCTION_DONE'; attemptDetected: boolean }
+  | { type: 'RETRIEVAL_PICK'; word: string }
+  | { type: 'RETRIEVAL_MODEL_DONE' }
+  | { type: 'WHOLE_WORD_ADVANCE' }
   | { type: 'MATH_TILE'; value: number }
-  | { type: 'READ_ALOUD_SUCCESS' }
-  | { type: 'READ_ALOUD_FAIL' }
-  | { type: 'READ_ALOUD_MIC_OFF' }
+  | { type: 'SENTENCE_RESULT'; quality: 'mic_off' | 'attempt' | 'unclear' }
+  | { type: 'PARENT_CONFIRMS_READ' }
+  | { type: 'PARENT_DECLINES_READ' }
   | { type: 'LEVEL_COMPLETE_ACK' }
-  | { type: 'HARD_DONE' }
   | { type: 'REPLAY_PIP' }
   | { type: 'TIME_CAP' }
   | { type: 'CLEAR_WOBBLE' }
+  | { type: 'RESUME_INPUT' }

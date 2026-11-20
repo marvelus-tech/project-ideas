@@ -4,8 +4,11 @@
     <meta charset="utf-8" />
     <title>Pebble Crossing</title>
     <script>
-      sessionStorage.setItem('redirect', location.pathname + location.search + location.hash)
-      location.replace('/pebble-crossing/')
+      var parent = /parent/i.test(location.pathname) || location.hash === '#parent'
+      var base = location.pathname.indexOf('/project-ideas/') !== -1
+        ? '/project-ideas/pebble-crossing/'
+        : '/pebble-crossing/'
+      location.replace(base + (parent ? '?parent=1#parent' : ''))
     </script>
   </head>
   <body></body>

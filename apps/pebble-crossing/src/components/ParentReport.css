@@ -1,44 +1,8 @@
-.parent-page {
-  max-width: 520px;
-  margin: 0 auto;
-  padding: 1.5rem;
-  font-family: system-ui, sans-serif;
-}
-
-.parent-note {
-  color: #555;
-}
-
-.parent-field {
-  display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
-  margin: 1rem 0;
-}
-
-.parent-field input {
-  font-size: 1.1rem;
-  padding: 0.5rem;
-}
-
-.parent-sentence {
-  padding: 1rem;
-  background: #f4f0e6;
-  border-left: 4px solid #5a7d52;
-  line-height: 1.5;
-  font-size: 1.05rem;
-}
-
-.parent-mic-toggle {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin: 1rem 0;
-  font-size: 0.95rem;
-}
-
-.parent-template-help {
-  font-size: 0.8rem;
-  color: #666;
-  margin-top: 2rem;
-}
+.parent-page { max-width: 680px; margin: 0 auto; padding: 32px 20px 64px; font-family: "Nunito Sans", sans-serif; color: #173b3a; }
+.eyebrow { text-transform: none; font-weight: 800; color: #245c57; }
+.report { font-size: 1.2rem; line-height: 1.55; background: #fff8e8; border-left: 6px solid #4e7653; padding: 16px; }
+.legend { line-height: 1.5; }
+.parent-page input { font: inherit; padding: 8px; width: min(100%, 280px); }
+.choices, .check { display: flex; gap: 10px; flex-wrap: wrap; margin: 16px 0; }
+.parent-page button, .back { min-height: 48px; border-radius: 12px; border: 2px solid #245c57; background: white; font: 700 1rem/1.2 "Nunito Sans", sans-serif; padding: 0 12px; }
+.parent-page button:focus-visible { outline: 4px solid #f2b84b; }

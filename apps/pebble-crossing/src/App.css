@@ -1,7 +1,6 @@
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
+* { box-sizing: border-box; }
+body { margin: 0; }
+button, a { touch-action: manipulation; }
+@media (prefers-contrast: more) {
+  button { border-width: 4px; }
 }

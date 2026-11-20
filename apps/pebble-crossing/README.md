@@ -4,6 +4,10 @@ Week-1 **Level 6** web prototype: `sh` planks with reset-on-miss, four within-10
 
 **Live site (monorepo Pages):** https://marvelus-tech.github.io/project-ideas/pebble-crossing/
 
+Grown-ups: https://marvelus-tech.github.io/project-ideas/pebble-crossing/?parent=1#parent
+
+The child screen also has a Grown-ups button. Learning actions change the creek. The microphone can record a try, but it never scores pronunciation or fluency.
+
 **Standalone repo (when created):** https://marvelus-tech.github.io/pebble-crossing/
 
 This is a RevEDU kitchen-table playtest, not the Edu Period parent-gate product.
@@ -34,9 +38,9 @@ Child screen: press and hold **Pebble Crossing** for ~1s, or visit [/parent](htt
 
 ## Scripts
 
-- `npm run build` — production build to `dist/`
-- `npm run test` — vitest (includes anti-cycling miss rule on `ship`)
-- `npm run preview` — serve `dist/`
+- `npm run build`: production build to `dist/`
+- `npm run test`: vitest (includes anti-cycling miss rule on `ship`)
+- `npm run preview`: serve `dist/`
 
 ## Spec alignment
 
