@@ -2,7 +2,9 @@
 
 Week-1 **Level 6** web prototype: `sh` planks with reset-on-miss, four within-10 math posts, decodable sentence read-aloud, child done state, and parent one-sentence report.
 
-**Live site:** https://marvelus-tech.github.io/pebble-crossing/
+**Live site (monorepo Pages):** https://marvelus-tech.github.io/project-ideas/pebble-crossing/
+
+**Standalone repo (when created):** https://marvelus-tech.github.io/pebble-crossing/
 
 This is a RevEDU kitchen-table playtest, not the Edu Period parent-gate product.
 
