@@ -1,0 +1,62 @@
+.tile-prompt {
+  margin: 1rem 0;
+}
+
+.tile-prompt--wobble .tile-row {
+  animation: wobble 0.55s ease;
+}
+
+@keyframes wobble {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-8px);
+  }
+  75% {
+    transform: translateX(8px);
+  }
+}
+
+.tile-prompt__label {
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin: 0 0 0.25rem;
+}
+
+.tile-prompt__hint {
+  margin: 0 0 0.75rem;
+  color: #3d4a3a;
+}
+
+.tile-row {
+  display: flex;
+  gap: 12px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex-wrap: wrap;
+}
+
+.tile-btn {
+  min-width: 88px;
+  min-height: 88px;
+  font-size: 1.5rem;
+  font-weight: 700;
+  border: 3px solid #4a6741;
+  border-radius: 16px;
+  background: #e8dcc8;
+  color: #2c3e2c;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.tile-btn:active {
+  transform: scale(0.97);
+}
+
+.tile-btn--model {
+  box-shadow: 0 0 0 4px #f0c674;
+  background: #fff8e7;
+}

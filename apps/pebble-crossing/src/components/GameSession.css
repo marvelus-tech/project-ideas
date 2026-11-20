@@ -1,0 +1,125 @@
+.game {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 1rem 1rem 2rem;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  color: #2a3328;
+  background: #e6efe2;
+  min-height: 100vh;
+}
+
+.game-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.logo-btn {
+  font-size: 1.1rem;
+  font-weight: 700;
+  border: none;
+  background: transparent;
+  padding: 0.25rem 0;
+  cursor: pointer;
+}
+
+.pieces-left {
+  margin: 0;
+  font-weight: 600;
+  color: #4a5c45;
+}
+
+.panel {
+  background: #f7f4ec;
+  border-radius: 16px;
+  padding: 1.25rem;
+  margin-top: 0.5rem;
+}
+
+.big-btn,
+.plank-btn {
+  min-height: 72px;
+  min-width: 100%;
+  font-size: 1.25rem;
+  font-weight: 700;
+  border: 3px solid #5a7d52;
+  border-radius: 16px;
+  background: #d4e4cc;
+  color: #2a3328;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.plank-btn {
+  min-height: 120px;
+  background: #c9a66b;
+  border-color: #6b4423;
+}
+
+.scarf-row {
+  display: flex;
+  gap: 12px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.scarf-row .big-btn {
+  min-width: 100px;
+  text-transform: capitalize;
+}
+
+.beat-title {
+  font-weight: 700;
+  margin: 0 0 0.5rem;
+}
+
+.math-expr {
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.pebbles {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #555;
+}
+
+.sign-preview {
+  font-size: 1.35rem;
+  font-weight: 700;
+  padding: 0.75rem;
+  background: #fff;
+  border: 3px solid #6b4423;
+  border-radius: 8px;
+}
+
+.read-wait {
+  color: #444;
+}
+
+.done-panel h2 {
+  margin-top: 0;
+}
+
+.practice-note {
+  font-size: 0.95rem;
+  color: #3d4a3a;
+}
+
+.child-safe {
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.teach-panel .word-mark {
+  font-size: 2rem;
+  font-weight: 800;
+}
+
+.word-mark .light {
+  color: #7a8a74;
+}
