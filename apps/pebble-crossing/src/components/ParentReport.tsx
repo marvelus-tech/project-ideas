@@ -1,82 +1,56 @@
-import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useState } from 'react'
 
-import { PARENT_REPORT_KEY, CHILD_NAME_KEY } from '../content/level6'
+import { CHILD_NAME_KEY, PARENT_REPORT_KEY } from '../content/level6'
 import { setMicCheckOff } from '../lib/params'
-import { formatParentSentence } from '../session/sessionStats'
+import { confirmParentRead, formatParentSentence } from '../session/sessionStats'
 import type { ParentReportData } from '../session/types'
-
 import './ParentReport.css'
 
 function loadReport(): ParentReportData | null {
   try {
-    const raw = sessionStorage.getItem(PARENT_REPORT_KEY)
-    if (!raw) return null
-    return JSON.parse(raw) as ParentReportData
+    const raw = window.sessionStorage.getItem(PARENT_REPORT_KEY)
+    return raw ? JSON.parse(raw) as ParentReportData : null
   } catch {
     return null
   }
 }
 
-export function ParentReportPage() {
-  const [report, setReport] = useState<ParentReportData | null>(() => loadReport())
-  const [childName, setChildName] = useState(
-    () => sessionStorage.getItem(CHILD_NAME_KEY) ?? 'Sam',
-  )
-  const [micOff, setMicOff] = useState(
-    () => sessionStorage.getItem('pebble-crossing-mic-off') === '1',
-  )
+export function ParentReportPage({ onBack }: { onBack: () => void }) {
+  const [report, setReport] = useState<ParentReportData | null>(loadReport)
+  const [name, setName] = useState(() => window.sessionStorage.getItem(CHILD_NAME_KEY) ?? 'Sam')
+  const [micOff, setMicOff] = useState(() => window.sessionStorage.getItem('pebble-crossing-mic-off') === '1')
+  const sentence = report ? formatParentSentence({ ...report, childName: name }) : `${name}: Finish a session on the child screen first. Pronunciation was not assessed.`
 
-  useEffect(() => {
-    const id = window.setInterval(() => setReport(loadReport()), 1500)
-    return () => window.clearInterval(id)
-  }, [])
-
-  const sentence = report
-    ? formatParentSentence({ ...report, childName })
-    : `${childName}: Complete a session on the child screen first.`
+  function save(next: ParentReportData) {
+    window.sessionStorage.setItem(PARENT_REPORT_KEY, JSON.stringify(next))
+    setReport(next)
+  }
 
   return (
     <main className="parent-page">
-      <h1>Parent report</h1>
-      <p className="parent-note">
-        RevEDU Pebble Crossing playtest. The child never sees this screen.
-      </p>
-
-      <label className="parent-field">
-        Child nickname (for the one sentence)
-        <input
-          value={childName}
-          onChange={(e) => {
-            setChildName(e.target.value)
-            sessionStorage.setItem(CHILD_NAME_KEY, e.target.value)
-          }}
-        />
+      <p className="eyebrow">Today at Pebble Crossing</p>
+      <h1>Grown-up note</h1>
+      <label>Child nickname
+        <input value={name} onChange={(event) => {
+          setName(event.target.value)
+          window.sessionStorage.setItem(CHILD_NAME_KEY, event.target.value)
+        }} />
       </label>
-
-      <p className="parent-sentence" role="status">
-        {sentence}
-      </p>
-
-      <label className="parent-mic-toggle">
-        <input
-          type="checkbox"
-          checked={micOff}
-          onChange={(e) => {
-            setMicOff(e.target.checked)
-            setMicCheckOff(e.target.checked)
-          }}
-        />
-        Mic check off (forces practice sign and abstaining fluency line)
-      </label>
-
-      <p className="parent-links">
-        <Link to="/">Back to child session</Link>
-      </p>
-
-      <p className="parent-template-help">
-        Template: {'{Name}: {pattern} {result}. Math within {range}: {first-try} of {attempts} first try. Sentence: {outcome}.'}
-      </p>
+      <p className="report">{sentence}</p>
+      <ul className="legend">
+        <li>Bolt: independent sound choice.</li>
+        <li>Rope wrap: you did that step together.</li>
+        <li>Practice sign: the sentence was not checked as fluent reading.</li>
+      </ul>
+      <div className="choices">
+        <button type="button" onClick={() => report && save(confirmParentRead({ ...report, childName: name }))}>I heard the full sentence</button>
+        <button type="button" onClick={() => report && save({ ...report, childName: name, sentenceOutcome: 'not_yet_parent' })}>Not yet</button>
+      </div>
+      <details>
+        <summary>Playtest controls</summary>
+        <label className="check"><input type="checkbox" checked={micOff} onChange={(event) => { setMicOff(event.target.checked); setMicCheckOff(event.target.checked) }} /> Mic check off. This never verifies speech.</label>
+      </details>
+      <button type="button" className="back" onClick={onBack}>Back to the child session</button>
     </main>
   )
 }
