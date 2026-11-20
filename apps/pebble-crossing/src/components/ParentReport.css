@@ -1,0 +1,44 @@
+.parent-page {
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  font-family: system-ui, sans-serif;
+}
+
+.parent-note {
+  color: #555;
+}
+
+.parent-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin: 1rem 0;
+}
+
+.parent-field input {
+  font-size: 1.1rem;
+  padding: 0.5rem;
+}
+
+.parent-sentence {
+  padding: 1rem;
+  background: #f4f0e6;
+  border-left: 4px solid #5a7d52;
+  line-height: 1.5;
+  font-size: 1.05rem;
+}
+
+.parent-mic-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 1rem 0;
+  font-size: 0.95rem;
+}
+
+.parent-template-help {
+  font-size: 0.8rem;
+  color: #666;
+  margin-top: 2rem;
+}
