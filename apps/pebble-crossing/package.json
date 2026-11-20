@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "build:project-ideas-pages": "VITE_PAGES_BASE=/project-ideas/pebble-crossing/ npm run build",
     "lint": "oxlint",
     "preview": "vite preview",
     "test": "vitest run --config vitest.config.ts"
