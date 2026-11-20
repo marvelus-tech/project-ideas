@@ -1,0 +1,125 @@
+{
+  "frame": {
+    "width": 960,
+    "height": 540
+  },
+  "compression": "webp quality 85, metadata stripped",
+  "license": "CC0-1.0",
+  "attribution": "Original cut-paper artwork made for Pebble Crossing.",
+  "assets": [
+    {
+      "id": "creek_base_morning",
+      "path": "world/creek_base_morning.webp",
+      "worldFlag": "base",
+      "role": "initial",
+      "width": 960,
+      "height": 540,
+      "bytes": 27222,
+      "maxBytes": 256000,
+      "alt": "Morning creek worksite. The cedar shop is on the left bank and the center span is still open."
+    },
+    {
+      "id": "shop_open",
+      "path": "world/shop_open.webp",
+      "worldFlag": "shop:open",
+      "role": "lazy",
+      "width": 960,
+      "height": 540,
+      "bytes": 2280,
+      "maxBytes": 256000,
+      "alt": "The creek shop is open and the bolt tray is out."
+    },
+    {
+      "id": "ship_docked",
+      "path": "world/ship_docked.webp",
+      "worldFlag": "ship:docked",
+      "role": "lazy",
+      "width": 960,
+      "height": 540,
+      "bytes": 4178,
+      "maxBytes": 256000,
+      "alt": "Kit's workboat is tied at the landing."
+    },
+    {
+      "id": "shell_lifted",
+      "path": "world/shell_lifted.webp",
+      "worldFlag": "shell:lifted",
+      "role": "lazy",
+      "width": 960,
+      "height": 540,
+      "bytes": 2684,
+      "maxBytes": 256000,
+      "alt": "A shell sits up on the bank."
+    },
+    {
+      "id": "fish_helped",
+      "path": "world/fish_helped.webp",
+      "worldFlag": "fish:helped",
+      "role": "lazy",
+      "width": 960,
+      "height": 540,
+      "bytes": 3196,
+      "maxBytes": 256000,
+      "alt": "A fish is in the creek by the span."
+    },
+    {
+      "id": "map_unfurled",
+      "path": "world/map_unfurled.webp",
+      "worldFlag": "map:open",
+      "role": "lazy",
+      "width": 960,
+      "height": 540,
+      "bytes": 2058,
+      "maxBytes": 256000,
+      "alt": "Kit's map is open on the bank."
+    },
+    {
+      "id": "rope_shore",
+      "path": "world/rope_shore.webp",
+      "worldFlag": "rope:shore",
+      "role": "lazy",
+      "width": 960,
+      "height": 540,
+      "bytes": 4398,
+      "maxBytes": 256000,
+      "alt": "The mooring rope has come back to shore."
+    },
+    {
+      "id": "rope_tight",
+      "path": "world/rope_tight.webp",
+      "worldFlag": "rope:tight",
+      "role": "lazy",
+      "width": 960,
+      "height": 540,
+      "bytes": 3818,
+      "maxBytes": 256000,
+      "alt": "The mooring rope is pulled tight."
+    },
+    {
+      "id": "pip_poses",
+      "path": "world/pip_poses.webp",
+      "worldFlag": "pip",
+      "role": "initial",
+      "width": 800,
+      "height": 690,
+      "columns": 4,
+      "rows": 3,
+      "bytes": 38084,
+      "maxBytes": 256000,
+      "alt": "Pip the fox in working poses, with red, leaf, and stone scarves."
+    },
+    {
+      "id": "kit_poses",
+      "path": "world/kit_poses.webp",
+      "worldFlag": "kit",
+      "role": "lazy",
+      "width": 600,
+      "height": 220,
+      "columns": 3,
+      "rows": 1,
+      "bytes": 8436,
+      "maxBytes": 256000,
+      "alt": "Kit the cat standing, sitting, and aboard the workboat."
+    }
+  ]
+}

@@ -3,6 +3,7 @@ import { describe, expect, it } from 'vitest'
 import { PHONICS_PROMPTS, missCoach } from '../content/level6'
 import { classifySentence, pronunciationClaim, sentenceClaim, sentenceRecovery } from '../lib/speech'
 import { isParentEntry, parentHref } from './parentEntry'
+import { overlayFlags } from '../assets/world/worldAssets'
 import { atPhonicsChoose, piecesRemaining, sessionReducer, shuffleWithSeed } from './level6Machine'
 import { buildParentReport, confirmParentRead, formatParentSentence } from './sessionStats'
 
@@ -132,6 +133,38 @@ describe('parent entry', () => {
     expect(isParentEntry('https://marvelus-tech.github.io/project-ideas/pebble-crossing/parent/')).toBe(true)
     expect(isParentEntry('https://marvelus-tech.github.io/project-ideas/pebble-crossing/')).toBe(false)
     expect(parentHref('https://marvelus-tech.github.io/project-ideas/pebble-crossing/?mic=off')).toBe('/project-ideas/pebble-crossing/?mic=off&parent=1#parent')
+  })
+})
+
+function placeWord(state: ReturnType<typeof atPhonicsChoose>, tile: string) {
+  const ready = state.beatStep === 'choose' && state.inputOpen ? state : sessionReducer(state, { type: 'HEAR_DONE' })
+  let next = sessionReducer(ready, { type: 'PHONICS_TILE', tile })
+  next = sessionReducer(next, { type: 'BLEND_DONE' })
+  return sessionReducer(next, { type: 'PRODUCTION_DONE', attemptDetected: false })
+}
+
+describe('creek overlay flags', () => {
+  it('sets data-world flags for each story beat and not for a repeated tap', () => {
+    let state = atPhonicsChoose(0)
+    expect(overlayFlags(state.world)).toEqual(['pip:idle:red'])
+    state = placeWord(state, 'c')
+    expect(overlayFlags(state.world)).toEqual(['kit:arrived', 'pip:idle:red'])
+    state = placeWord(state, 's')
+    expect(overlayFlags(state.world)).toEqual(['map:open', 'kit:sitting', 'pip:idle:red'])
+    state = placeWord(state, 'sh')
+    expect(overlayFlags(state.world)).toEqual(['map:open', 'ship:docked', 'kit:sitting', 'pip:idle:red'])
+    state = placeWord(state, 'sh')
+    expect(overlayFlags(state.world)).toEqual(['map:open', 'shop:open', 'ship:docked', 'kit:sitting', 'pip:idle:red'])
+    state = placeWord(state, 'sh')
+    expect(overlayFlags(state.world)).toEqual(['map:open', 'shop:open', 'shell:lifted', 'ship:docked', 'kit:sitting', 'pip:idle:red'])
+    state = placeWord(state, 'sh')
+    expect(overlayFlags(state.world)).toEqual(['map:open', 'shop:open', 'shell:lifted', 'ship:docked', 'rope:shore', 'fish:helped', 'kit:sitting', 'pip:idle:red'])
+    state = sessionReducer(state, { type: 'HEAR_DONE' })
+    state = sessionReducer(state, { type: 'RETRIEVAL_PICK', word: 'fish' })
+    expect(overlayFlags(state.world)).toEqual(['map:open', 'shop:open', 'shell:lifted', 'ship:docked', 'rope:tight', 'fish:helped', 'kit:sitting', 'pip:idle:red'])
+    state = sessionReducer({ ...state, phase: 'sentence' }, { type: 'SENTENCE_RESULT', quality: 'unclear' })
+    expect(overlayFlags(state.world)).toEqual(['map:open', 'shop:open', 'shell:lifted', 'ship:docked', 'rope:tight', 'fish:helped', 'kit:aboard', 'pip:idle:red'])
+    expect(overlayFlags(state.world, 'listen', 'leaf')).toContain('pip:listen:leaf')
   })
 })
 
