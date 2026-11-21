@@ -3,19 +3,20 @@ import type { PlankRecord, PostRecord } from '../session/types'
 export function BridgeLayer({ planks, posts, sign }: { planks: PlankRecord[]; posts: PostRecord[]; sign: 'none' | 'practice' | 'bolted' }) {
   return (
     <svg className="creek-bridge" viewBox="0 0 960 540" preserveAspectRatio="none" aria-hidden="true">
-      <rect x="300" y="292" width="420" height="28" rx="6" fill="#6b442c" />
+      <rect x="340" y="346" width="280" height="22" rx="5" fill="#8d4b32" stroke="#173b3a" strokeWidth="2" />
+      <rect x="346" y="354" width="268" height="5" rx="2" fill="#6b442c" />
       {planks.map((plank, index) => (
         <g key={`${plank.promptId}-${index}`} data-plank={plank.promptId} data-kind={plank.kind}>
-          <rect x={318 + index * 64} y="268" width="54" height="22" rx="4" fill={plank.kind === 'bolted' ? '#a7643e' : '#d9c59f'} stroke="#5c3a1a" strokeWidth="2" />
+          <rect x={350 + index * 44} y="332" width="36" height="16" rx="3" fill={plank.kind === 'bolted' ? '#a7643e' : '#d9c59f'} stroke="#5c3a1a" strokeWidth="2" />
           {plank.kind === 'bolted'
-            ? <circle cx={345 + index * 64} cy="279" r="5" fill="#f2b84b" stroke="#5c3a1a" />
-            : <path d={`M${326 + index * 64} 276 h38`} stroke="#6b5344" strokeWidth="3" strokeDasharray="5 3" />}
+            ? <circle cx={368 + index * 44} cy="340" r="3.5" fill="#f2b84b" stroke="#5c3a1a" />
+            : <path d={`M${356 + index * 44} 340 h24`} stroke="#6b5344" strokeWidth="2" strokeDasharray="4 3" />}
         </g>
       ))}
       {posts.map((post, index) => (
         <g key={post.promptId} data-post={post.promptId} data-kind={post.kind}>
-          <rect x={340 + index * 95} y="320" width="18" height="58" rx="4" fill={post.kind === 'bolted' ? '#6b5344' : '#b9a48a'} />
-          {post.kind === 'helped' && <path d={`M${334 + index * 95} 348 q14 20 30 0`} fill="none" stroke="#f5ecd8" strokeWidth="4" />}
+          <rect x={368 + index * 64} y="368" width="14" height="40" rx="3" fill={post.kind === 'bolted' ? '#6b5344' : '#b9a48a'} />
+          {post.kind === 'helped' && <path d={`M${362 + index * 64} 386 q12 16 26 0`} fill="none" stroke="#f5ecd8" strokeWidth="3" />}
         </g>
       ))}
       {(sign === 'practice' || sign === 'bolted') && (

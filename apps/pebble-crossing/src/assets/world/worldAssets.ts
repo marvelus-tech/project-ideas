@@ -69,7 +69,11 @@ function spriteFrame(asset: Asset, col: number, row: number): SpriteFrame {
 function pipLayer(pose: PipPose, scarf: ScarfColor | null, crossed: boolean): WorldLayer {
   const worn = scarf ?? 'red'
   const asset = byId('pip_poses')
-  const x = crossed ? 760 : pose === 'reach' ? 370 : 430
+  const box = crossed
+    ? percentBox(690, 248, 128, 158)
+    : pose === 'reach'
+      ? percentBox(188, 292, 150, 168)
+      : percentBox(64, 292, 136, 158)
   return {
     id: 'pip_poses',
     worldFlag: `pip:${pose}:${worn}`,
@@ -78,7 +82,7 @@ function pipLayer(pose: PipPose, scarf: ScarfColor | null, crossed: boolean): Wo
     width: asset.width,
     height: asset.height,
     frame: spriteFrame(asset, PIP_POSES.indexOf(pose), SCARVES.indexOf(worn)),
-    box: percentBox(x, 132, 150, 210),
+    box,
   }
 }
 
@@ -93,7 +97,7 @@ function kitLayer(kit: Exclude<WorldState['kit'], 'hidden'>): WorldLayer {
     width: asset.width,
     height: asset.height,
     frame: spriteFrame(asset, KIT_POSES.indexOf(kit), 0),
-    box: aboard ? percentBox(268, 248, 120, 150) : percentBox(292, 128, 130, 170),
+    box: aboard ? percentBox(452, 292, 86, 108) : percentBox(12, kit === 'sitting' ? 318 : 286, 112, kit === 'sitting' ? 140 : 160),
   }
 }
 
@@ -112,6 +116,10 @@ export function layersForWorld(world: WorldState, pose: PipPose, scarf: ScarfCol
   return layers
 }
 
+export function scarfPreviewStyle(scarf: ScarfColor): Record<string, string> {
+  return frameStyle(pipLayer('idle', scarf, false))
+}
+
 export function overlayFlags(world: WorldState, pose: PipPose = 'idle', scarf: ScarfColor | null = null): string[] {
   return layersForWorld(world, pose, scarf).map((layer) => layer.worldFlag)
 }
@@ -121,10 +129,9 @@ export function basePlate() {
   return { src: worldAssetUrl(asset.path), width: asset.width, height: asset.height, worldFlag: asset.worldFlag }
 }
 
-export function spriteStyle(layer: WorldLayer): Record<string, string> {
+export function frameStyle(layer: WorldLayer): Record<string, string> {
   const frame = layer.frame
-  const box = layer.box
-  if (!frame || !box) return {}
+  if (!frame) return {}
   const x = frame.cols <= 1 ? 0 : (frame.col / (frame.cols - 1)) * 100
   const y = frame.rows <= 1 ? 0 : (frame.row / (frame.rows - 1)) * 100
   return {
@@ -132,6 +139,14 @@ export function spriteStyle(layer: WorldLayer): Record<string, string> {
     backgroundSize: `${frame.cols * 100}% ${frame.rows * 100}%`,
     backgroundPosition: `${x}% ${y}%`,
     backgroundRepeat: 'no-repeat',
+  }
+}
+
+export function spriteStyle(layer: WorldLayer): Record<string, string> {
+  const box = layer.box
+  if (!box) return frameStyle(layer)
+  return {
+    ...frameStyle(layer),
     left: box.left,
     top: box.top,
     width: box.width,
