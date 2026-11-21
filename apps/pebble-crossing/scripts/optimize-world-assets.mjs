@@ -6,10 +6,12 @@ import sharp from 'sharp'
 
 import {
   compositeScarf,
+  keyMagenta,
   placeOnGround,
   sharedScale,
   trimPng,
 } from './raster-art.mjs'
+import { PRONUNCIATION_MASTERS } from './pronunciation-art.mjs'
 import {
   FRAME,
   KIT_CELL,
@@ -30,13 +32,18 @@ import {
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const outDir = resolve(root, 'public/world')
+const pronunciationDir = resolve(root, 'public/pronunciation')
 const manifestPath = resolve(root, 'src/assets/world/manifest.json')
 const sceneDir = resolve(root, 'src/assets/world/source/scene')
 const pipDir = resolve(root, 'src/assets/world/source/pip')
 const kitDir = resolve(root, 'src/assets/world/source/kit')
+const pronunciationSource = resolve(root, 'src/assets/world/source/pronunciation')
 const QUALITY = 85
 const INITIAL_LIMIT = 250 * 1024
 const SINGLE_LIMIT = 250 * 1024
+const TRAY_TILE_LIMIT = 80 * 1024
+const TRAY_BUNDLE_LIMIT = 200 * 1024
+const PRONUNCIATION_WIDTH = 280
 
 const catalog = [
   { id: 'creek_base_morning', file: 'creek_base_morning.webp', worldFlag: 'base', role: 'initial', alt: 'Morning creek worksite. The cedar shop is on the left bank and the center span is still open.', width: FRAME.width, height: FRAME.height, maxBytes: INITIAL_LIMIT, needsAlpha: false, svg: creekBaseSvg },
@@ -50,6 +57,7 @@ const catalog = [
 ]
 
 mkdirSync(outDir, { recursive: true })
+mkdirSync(pronunciationDir, { recursive: true })
 mkdirSync(dirname(manifestPath), { recursive: true })
 
 function scenePng(id) {
@@ -232,6 +240,63 @@ if (kitReady) {
     alt: 'Kit the cat standing, sitting, and aboard the workboat.',
   })
 }
+
+async function rasterPronunciationMaster(id) {
+  const pngPath = resolve(pronunciationSource, `${id}.png`)
+  if (existsSync(pngPath)) {
+    const keyed = await keyMagenta(await sharp(pngPath).png().toBuffer())
+    return trimPng(keyed)
+  }
+  const spec = PRONUNCIATION_MASTERS.find((item) => item.id === id)
+  if (!spec) throw new Error(`Missing pronunciation master ${id}`)
+  const keyed = await keyMagenta(await sharp(Buffer.from(spec.svg()), { density: 144 }).png().toBuffer())
+  return trimPng(keyed)
+}
+
+async function publishPronunciation(id, alt, lazy = false) {
+  const png = await rasterPronunciationMaster(id)
+  const meta = await sharp(png).metadata()
+  const height = Math.round(PRONUNCIATION_WIDTH * ((meta.height ?? 240) / (meta.width ?? 320)))
+  const buffer = await sharp(png)
+    .resize(PRONUNCIATION_WIDTH, height, { fit: 'inside' })
+    .webp({ quality: QUALITY, alphaQuality: 100, effort: 4 })
+    .toBuffer()
+  const fileName = `${id}.webp`
+  writeFileSync(resolve(pronunciationDir, fileName), buffer)
+  const bytes = statSync(resolve(pronunciationDir, fileName)).size
+  if (bytes > TRAY_TILE_LIMIT) failures.push(`${fileName} is ${bytes} bytes, tray cap ${TRAY_TILE_LIMIT}`)
+  assets.push({
+    id,
+    path: `pronunciation/${fileName}`,
+    worldFlag: `tray:${id}`,
+    role: 'tray',
+    width: PRONUNCIATION_WIDTH,
+    height,
+    bytes,
+    maxBytes: TRAY_TILE_LIMIT,
+    alt,
+    source: 'illustrated-png',
+    loading: lazy ? 'lazy' : 'eager',
+  })
+}
+
+const pronunciationAlts = {
+  sh_model: 'Mouth close-up showing quiet sh air between the teeth.',
+  sh_airflow: 'Mouth close-up with a stronger quiet airflow for sh.',
+  listen_first: 'Calm closed mouth for listen-first.',
+  mic_tap_ready: 'Tap the microphone when you are ready to speak.',
+  mic_listening: 'Microphone is listening for your voice.',
+  read_invite: 'Invite to read the sign aloud.',
+}
+
+let trayBytes = 0
+for (const { id } of PRONUNCIATION_MASTERS) {
+  const lazy = id !== 'sh_model'
+  await publishPronunciation(id, pronunciationAlts[id], lazy)
+  const asset = assets[assets.length - 1]
+  trayBytes += asset.bytes
+}
+if (trayBytes > TRAY_BUNDLE_LIMIT) failures.push(`pronunciation tray bundle is ${trayBytes} bytes, budget ${TRAY_BUNDLE_LIMIT}`)
 
 const initialBytes = assets.filter((asset) => asset.role === 'initial').reduce((sum, asset) => sum + asset.bytes, 0)
 if (initialBytes > 1.5 * 1024 * 1024) failures.push(`initial visual payload is ${initialBytes} bytes, budget 1.5MB`)

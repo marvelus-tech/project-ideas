@@ -3,6 +3,15 @@ import { atPhonicsChoose, createInitialSession, EMPTY_WORLD } from './level6Mach
 import type { SessionState } from './types'
 
 export function previewSession(scene: string | null): SessionState {
+  if (scene === 'mouth') {
+    return {
+      ...createInitialSession(0),
+      phase: 'mouth',
+      mouthStep: 0,
+      scarf: 'red',
+      beatStep: 'hear',
+    }
+  }
   if (scene === 'ship') {
     return {
       ...atPhonicsChoose(2),
