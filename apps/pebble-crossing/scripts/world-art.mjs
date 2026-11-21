@@ -1,4 +1,4 @@
-/** Original cut-paper sources for the morning creek. Rasterized by optimize-world-assets.mjs. */
+/** SVG fallbacks for the morning creek. Illustrated PNG masters replace Pip, Kit, and the three main plates when those files exist. */
 
 export const FRAME = { width: 960, height: 540 }
 export const PIP_CELL = { width: 200, height: 230 }
@@ -196,7 +196,7 @@ export function shipDockedSvg() {
 
 export function shellLiftedSvg() {
   return svg(`
-    <g transform="translate(590 214) scale(1.35)">
+    <g transform="translate(300 392) scale(1.15)">
       <ellipse cx="36" cy="40" rx="28" ry="8" fill="#173b3a" opacity="0.15"/>
       <path d="M8 36 Q36 4 66 36 Q36 48 8 36 Z" fill="#f2d7b6" stroke="#173b3a" stroke-width="2"/>
       <path d="M20 34 Q36 16 54 34" fill="none" stroke="#8d6b55" stroke-width="2"/>
@@ -207,7 +207,7 @@ export function shellLiftedSvg() {
 
 export function fishHelpedSvg() {
   return svg(`
-    <g transform="translate(500 400) scale(1.45)">
+    <g transform="translate(470 430) scale(1.2)">
       <path d="M8 18 L28 8 L28 28 Z" fill="#d86a32" stroke="#173b3a" stroke-width="1.6"/>
       <ellipse cx="48" cy="18" rx="28" ry="14" fill="#ef8b4c" stroke="#173b3a" stroke-width="2"/>
       <path d="M40 10 Q48 18 40 26" fill="none" stroke="#c45b28" stroke-width="1.5"/>
@@ -219,7 +219,7 @@ export function fishHelpedSvg() {
 
 export function mapUnfurledSvg() {
   return svg(`
-    <g transform="translate(228 158)">
+    <g transform="translate(24 388)">
       <rect x="8" y="10" width="16" height="62" rx="6" fill="#8d6b55"/>
       <rect x="92" y="8" width="16" height="66" rx="6" fill="#8d6b55"/>
       <rect x="16" y="6" width="84" height="70" fill="#f7f1df" stroke="#173b3a" stroke-width="2"/>
@@ -232,8 +232,8 @@ export function mapUnfurledSvg() {
 
 export function ropeSvg(tight) {
   const d = tight
-    ? 'M330 348 C 460 372 620 360 730 348'
-    : 'M320 360 C 470 430 640 340 760 390'
+    ? 'M390 392 C 470 410 540 400 610 388'
+    : 'M380 404 C 470 470 540 424 620 452'
   const width = tight ? 11 : 7
   return svg(`
     <path d="${d}" fill="none" stroke="#e7d3b0" stroke-width="${width + 4}" stroke-linecap="round"/>

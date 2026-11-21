@@ -5,7 +5,8 @@
   },
   "compression": "webp quality 85, metadata stripped",
   "license": "CC0-1.0",
-  "attribution": "Original cut-paper artwork made for Pebble Crossing.",
+  "attribution": "Original illustrated artwork made for Pebble Crossing.",
+  "generator": "Illustrated PNG masters. Pip bodies and scarf overlays are composed by scripts/optimize-world-assets.mjs. WebP quality 85, metadata stripped.",
   "assets": [
     {
       "id": "creek_base_morning",
@@ -14,7 +15,7 @@
       "role": "initial",
       "width": 960,
       "height": 540,
-      "bytes": 27222,
+      "bytes": 66994,
       "maxBytes": 256000,
       "alt": "Morning creek worksite. The cedar shop is on the left bank and the center span is still open."
     },
@@ -25,7 +26,7 @@
       "role": "lazy",
       "width": 960,
       "height": 540,
-      "bytes": 2280,
+      "bytes": 5764,
       "maxBytes": 256000,
       "alt": "The creek shop is open and the bolt tray is out."
     },
@@ -36,7 +37,7 @@
       "role": "lazy",
       "width": 960,
       "height": 540,
-      "bytes": 4178,
+      "bytes": 5334,
       "maxBytes": 256000,
       "alt": "Kit's workboat is tied at the landing."
     },
@@ -47,7 +48,7 @@
       "role": "lazy",
       "width": 960,
       "height": 540,
-      "bytes": 2684,
+      "bytes": 2424,
       "maxBytes": 256000,
       "alt": "A shell sits up on the bank."
     },
@@ -58,7 +59,7 @@
       "role": "lazy",
       "width": 960,
       "height": 540,
-      "bytes": 3196,
+      "bytes": 2910,
       "maxBytes": 256000,
       "alt": "A fish is in the creek by the span."
     },
@@ -69,7 +70,7 @@
       "role": "lazy",
       "width": 960,
       "height": 540,
-      "bytes": 2058,
+      "bytes": 2030,
       "maxBytes": 256000,
       "alt": "Kit's map is open on the bank."
     },
@@ -80,7 +81,7 @@
       "role": "lazy",
       "width": 960,
       "height": 540,
-      "bytes": 4398,
+      "bytes": 3140,
       "maxBytes": 256000,
       "alt": "The mooring rope has come back to shore."
     },
@@ -91,7 +92,7 @@
       "role": "lazy",
       "width": 960,
       "height": 540,
-      "bytes": 3818,
+      "bytes": 2984,
       "maxBytes": 256000,
       "alt": "The mooring rope is pulled tight."
     },
@@ -104,9 +105,10 @@
       "height": 690,
       "columns": 4,
       "rows": 3,
-      "bytes": 38084,
+      "bytes": 109586,
       "maxBytes": 256000,
-      "alt": "Pip the fox in working poses, with red, leaf, and stone scarves."
+      "alt": "Pip the fox in working poses, with red, leaf, and stone scarves.",
+      "source": "png-masters"
     },
     {
       "id": "kit_poses",
@@ -117,9 +119,10 @@
       "height": 220,
       "columns": 3,
       "rows": 1,
-      "bytes": 8436,
+      "bytes": 26200,
       "maxBytes": 256000,
-      "alt": "Kit the cat standing, sitting, and aboard the workboat."
+      "alt": "Kit the cat standing, sitting, and aboard the workboat.",
+      "source": "png-masters"
     }
   ]
 }

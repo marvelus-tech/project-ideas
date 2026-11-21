@@ -1,10 +1,7 @@
-import type { ScarfColor } from '../content/level6'
-import { basePlate, layersForWorld, spriteStyle, type PipPose } from '../assets/world/worldAssets'
-import type { WorldState } from '../session/types'
+import { basePlate, type WorldLayer } from '../assets/world/worldAssets'
 
-export function CreekLayerStack({ world, pose, scarf, crossed }: { world: WorldState; pose: PipPose; scarf: ScarfColor | null; crossed: boolean }) {
+export function CreekLayerStack({ layers }: { layers: WorldLayer[] }) {
   const base = basePlate()
-  const layers = layersForWorld(world, pose, scarf, crossed)
   return (
     <>
       <img
@@ -18,7 +15,7 @@ export function CreekLayerStack({ world, pose, scarf, crossed }: { world: WorldS
         decoding="async"
       />
       <div className="creek-current" aria-hidden="true" />
-      {layers.map((layer) => layer.kind === 'overlay' ? (
+      {layers.map((layer) => (
         <img
           key={layer.worldFlag}
           className="creek-overlay"
@@ -30,8 +27,6 @@ export function CreekLayerStack({ world, pose, scarf, crossed }: { world: WorldS
           loading="lazy"
           decoding="async"
         />
-      ) : (
-        <div key={layer.worldFlag} className="creek-sprite" data-world={layer.worldFlag} style={spriteStyle(layer)} aria-hidden="true" />
       ))}
     </>
   )

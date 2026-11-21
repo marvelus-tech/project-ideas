@@ -32,6 +32,8 @@
 .modeled { box-shadow: inset 0 0 0 5px #f2b84b; }
 .wobble { animation: wobble 0.45s ease; }
 .scarf-row { display: flex; gap: 12px; }
+.scarf { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; padding: 8px 10px; font-size: 1.15rem; }
+.scarf-pip { width: 76px; height: 88px; border-radius: 12px; background-color: #fff6df; }
 .scarf-red { background: #d4534b; color: white; }
 .scarf-leaf { background: #3f8f62; color: white; }
 .scarf-stone { background: #8d857b; color: white; }

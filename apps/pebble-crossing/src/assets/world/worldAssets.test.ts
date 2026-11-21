@@ -1,4 +1,4 @@
-import { readFileSync, statSync } from 'node:fs'
+import { existsSync, readFileSync, statSync } from 'node:fs'
 import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
@@ -23,5 +23,12 @@ describe('world asset budget', () => {
     expect(base?.worldFlag).toBe('base')
     expect(base?.bytes).toBeLessThanOrEqual(250 * 1024)
     expect(readFileSync(resolve(worldDir, 'creek_base_morning.webp')).byteLength).toBe(base?.bytes)
+    expect(manifest.generator).toContain('PNG masters')
+    const pip = manifest.assets.find((asset) => asset.id === 'pip_poses')
+    expect(pip && 'source' in pip ? pip.source : '').toBe('png-masters')
+    const source = resolve(dirname(fileURLToPath(import.meta.url)), 'source/pip')
+    for (const name of ['idle', 'listen', 'reach', 'sit', 'scarf-red', 'scarf-leaf', 'scarf-stone']) {
+      expect(existsSync(resolve(source, `${name}.png`))).toBe(true)
+    }
   })
 })

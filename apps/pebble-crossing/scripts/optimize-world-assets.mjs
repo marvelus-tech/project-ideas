@@ -1,9 +1,15 @@
-import { mkdirSync, readFileSync, statSync, writeFileSync } from 'node:fs'
+import { existsSync, mkdirSync, statSync, writeFileSync } from 'node:fs'
 import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 import sharp from 'sharp'
 
+import {
+  compositeScarf,
+  placeOnGround,
+  sharedScale,
+  trimPng,
+} from './raster-art.mjs'
 import {
   FRAME,
   KIT_CELL,
@@ -25,6 +31,9 @@ import {
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const outDir = resolve(root, 'public/world')
 const manifestPath = resolve(root, 'src/assets/world/manifest.json')
+const sceneDir = resolve(root, 'src/assets/world/source/scene')
+const pipDir = resolve(root, 'src/assets/world/source/pip')
+const kitDir = resolve(root, 'src/assets/world/source/kit')
 const QUALITY = 85
 const INITIAL_LIMIT = 250 * 1024
 const SINGLE_LIMIT = 250 * 1024
@@ -43,8 +52,25 @@ const catalog = [
 mkdirSync(outDir, { recursive: true })
 mkdirSync(dirname(manifestPath), { recursive: true })
 
-async function raster(svg, width, height) {
+function scenePng(id) {
+  const file = resolve(sceneDir, `${id}.png`)
+  return existsSync(file) ? file : null
+}
+
+function pipMastersReady() {
+  return PIP_POSES.every((pose) => existsSync(resolve(pipDir, `${pose}.png`)))
+    && SCARVES.every((scarf) => existsSync(resolve(pipDir, `scarf-${scarf}.png`)))
+}
+
+async function rasterSvg(svg, width, height) {
   return sharp(Buffer.from(svg), { density: 144 })
+    .resize(width, height, { fit: 'fill' })
+    .webp({ quality: QUALITY, alphaQuality: 100, effort: 4 })
+    .toBuffer()
+}
+
+async function rasterPng(file, width, height) {
+  return sharp(file)
     .resize(width, height, { fit: 'fill' })
     .webp({ quality: QUALITY, alphaQuality: 100, effort: 4 })
     .toBuffer()
@@ -61,9 +87,9 @@ async function clearRatio(buffer) {
 
 const failures = []
 const assets = []
+let usedPngMasters = false
 
-for (const item of catalog) {
-  const buffer = await raster(item.svg(), item.width, item.height)
+async function publish(buffer, item, extra = {}) {
   const file = resolve(outDir, item.file)
   writeFileSync(file, buffer)
   const bytes = statSync(file).size
@@ -71,7 +97,7 @@ for (const item of catalog) {
   if (bytes > item.maxBytes) failures.push(`${item.file} is ${bytes} bytes, budget ${item.maxBytes}`)
   if (bytes > SINGLE_LIMIT) failures.push(`${item.file} exceeds the 250KB raster cap`)
   if (item.needsAlpha && alpha < 0.45) failures.push(`${item.file} is not a mostly transparent overlay (${alpha.toFixed(2)} clear)`)
-  if (!item.needsAlpha && alpha > 0.05) failures.push(`${item.file} base plate is not opaque`)
+  if (item.needsAlpha === false && alpha > 0.05) failures.push(`${item.file} base plate is not opaque`)
   assets.push({
     id: item.id,
     path: `world/${item.file}`,
@@ -82,17 +108,25 @@ for (const item of catalog) {
     bytes,
     maxBytes: item.maxBytes,
     alt: item.alt,
+    ...extra,
   })
 }
 
-async function sheet(cells, columns, cell, fileName, spec) {
+for (const item of catalog) {
+  const png = scenePng(item.id)
+  const buffer = png ? await rasterPng(png, item.width, item.height) : await rasterSvg(item.svg(), item.width, item.height)
+  if (png) usedPngMasters = true
+  await publish(buffer, item)
+}
+
+async function sheetFromPng(cells, columns, cell, fileName, spec) {
   const rows = Math.ceil(cells.length / columns)
   const width = cell.width * columns
   const height = cell.height * rows
   const layers = []
   for (let index = 0; index < cells.length; index += 1) {
     layers.push({
-      input: await raster(cells[index], cell.width, cell.height),
+      input: await sharp(cells[index]).resize(cell.width, cell.height, { fit: 'fill' }).png().toBuffer(),
       left: (index % columns) * cell.width,
       top: Math.floor(index / columns) * cell.height,
     })
@@ -105,6 +139,7 @@ async function sheet(cells, columns, cell, fileName, spec) {
   const bytes = statSync(file).size
   const alpha = await clearRatio(buffer)
   if (bytes > spec.maxBytes) failures.push(`${fileName} is ${bytes} bytes, budget ${spec.maxBytes}`)
+  if (bytes > SINGLE_LIMIT) failures.push(`${fileName} exceeds the 250KB raster cap`)
   if (alpha < 0.2) failures.push(`${fileName} sprite sheet lost its alpha`)
   assets.push({
     id: spec.id,
@@ -118,28 +153,85 @@ async function sheet(cells, columns, cell, fileName, spec) {
     bytes,
     maxBytes: spec.maxBytes,
     alt: spec.alt,
+    source: spec.source,
   })
 }
 
-const pipCells = []
-for (const scarf of SCARVES) {
-  for (const pose of PIP_POSES) pipCells.push(pipCellSvg(pose, scarf))
+async function sheetFromSvg(cells, columns, cell, fileName, spec) {
+  const pngs = []
+  for (const svg of cells) pngs.push(await rasterSvg(svg, cell.width, cell.height))
+  await sheetFromPng(pngs, columns, cell, fileName, spec)
 }
-await sheet(pipCells, PIP_POSES.length, PIP_CELL, 'pip_poses.webp', {
-  id: 'pip_poses',
-  worldFlag: 'pip',
-  role: 'initial',
-  maxBytes: SINGLE_LIMIT,
-  alt: 'Pip the fox in working poses, with red, leaf, and stone scarves.',
-})
 
-await sheet(KIT_POSES.map((pose) => kitCellSvg(pose)), KIT_POSES.length, KIT_CELL, 'kit_poses.webp', {
-  id: 'kit_poses',
-  worldFlag: 'kit',
-  role: 'lazy',
-  maxBytes: SINGLE_LIMIT,
-  alt: 'Kit the cat standing, sitting, and aboard the workboat.',
-})
+async function illustratedCells(dir, names, master) {
+  const trimmed = []
+  for (const name of names) trimmed.push(await trimPng(await sharp(resolve(dir, `${name}.png`)).png().toBuffer()))
+  const metas = []
+  for (const png of trimmed) metas.push(await sharp(png).metadata())
+  const scale = sharedScale(metas, master)
+  const placed = []
+  for (const png of trimmed) placed.push(await placeOnGround(png, scale, master))
+  return placed
+}
+
+if (pipMastersReady()) {
+  usedPngMasters = true
+  const bodies = await illustratedCells(pipDir, PIP_POSES, { width: 400, height: 460, ground: 440, maxW: 370, maxH: 420 })
+  const bodyByPose = Object.fromEntries(PIP_POSES.map((pose, index) => [pose, bodies[index]]))
+  const scarves = {}
+  for (const scarf of SCARVES) scarves[scarf] = await trimPng(await sharp(resolve(pipDir, `scarf-${scarf}.png`)).png().toBuffer())
+  const cells = []
+  for (const scarf of SCARVES) {
+    for (const pose of PIP_POSES) {
+      const { cell, box } = bodyByPose[pose]
+      cells.push(await compositeScarf(cell, scarves[scarf], pose, box))
+    }
+  }
+  await sheetFromPng(cells, PIP_POSES.length, PIP_CELL, 'pip_poses.webp', {
+    id: 'pip_poses',
+    worldFlag: 'pip',
+    role: 'initial',
+    maxBytes: SINGLE_LIMIT,
+    source: 'png-masters',
+    alt: 'Pip the fox in working poses, with red, leaf, and stone scarves.',
+  })
+} else {
+  const pipCells = []
+  for (const scarf of SCARVES) {
+    for (const pose of PIP_POSES) pipCells.push(pipCellSvg(pose, scarf))
+  }
+  await sheetFromSvg(pipCells, PIP_POSES.length, PIP_CELL, 'pip_poses.webp', {
+    id: 'pip_poses',
+    worldFlag: 'pip',
+    role: 'initial',
+    maxBytes: SINGLE_LIMIT,
+    source: 'svg-fallback',
+    alt: 'Pip the fox in working poses, with red, leaf, and stone scarves.',
+  })
+}
+
+const kitReady = KIT_POSES.every((pose) => existsSync(resolve(kitDir, `${pose}.png`)))
+if (kitReady) {
+  usedPngMasters = true
+  const placed = await illustratedCells(kitDir, KIT_POSES, { width: 400, height: 440, ground: 420, maxW: 360, maxH: 400 })
+  await sheetFromPng(placed.map((item) => item.cell), KIT_POSES.length, KIT_CELL, 'kit_poses.webp', {
+    id: 'kit_poses',
+    worldFlag: 'kit',
+    role: 'lazy',
+    maxBytes: SINGLE_LIMIT,
+    source: 'png-masters',
+    alt: 'Kit the cat standing, sitting, and aboard the workboat.',
+  })
+} else {
+  await sheetFromSvg(KIT_POSES.map((pose) => kitCellSvg(pose)), KIT_POSES.length, KIT_CELL, 'kit_poses.webp', {
+    id: 'kit_poses',
+    worldFlag: 'kit',
+    role: 'lazy',
+    maxBytes: SINGLE_LIMIT,
+    source: 'svg-fallback',
+    alt: 'Kit the cat standing, sitting, and aboard the workboat.',
+  })
+}
 
 const initialBytes = assets.filter((asset) => asset.role === 'initial').reduce((sum, asset) => sum + asset.bytes, 0)
 if (initialBytes > 1.5 * 1024 * 1024) failures.push(`initial visual payload is ${initialBytes} bytes, budget 1.5MB`)
@@ -148,7 +240,10 @@ const manifest = {
   frame: FRAME,
   compression: 'webp quality 85, metadata stripped',
   license: 'CC0-1.0',
-  attribution: 'Original cut-paper artwork made for Pebble Crossing.',
+  attribution: 'Original illustrated artwork made for Pebble Crossing.',
+  generator: usedPngMasters
+    ? 'Illustrated PNG masters. Pip bodies and scarf overlays are composed by scripts/optimize-world-assets.mjs. WebP quality 85, metadata stripped.'
+    : 'Cut-paper SVG rasterized by scripts/optimize-world-assets.mjs.',
   assets,
 }
 writeFileSync(manifestPath, `${JSON.stringify(manifest, null, 2)}\n`)
@@ -160,10 +255,4 @@ if (failures.length) {
 
 for (const asset of assets) {
   console.log(`${asset.path} ${(asset.bytes / 1024).toFixed(1)}KB`)
-}
-
-const previous = readFileSync(manifestPath, 'utf8')
-if (!previous.includes('"creek_base_morning"')) {
-  console.error('manifest was not written')
-  process.exit(1)
 }

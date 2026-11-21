@@ -9,6 +9,7 @@ import { piecesRemaining, sessionReducer, shuffleWithSeed } from '../session/lev
 import { previewSession } from '../session/preview'
 import { buildParentReport, persistParentReport } from '../session/sessionStats'
 import type { SessionState } from '../session/types'
+import { scarfPreviewStyle } from '../assets/world/worldAssets'
 import { CreekStage } from '../world/CreekStage'
 import './GameSession.css'
 
@@ -159,7 +160,10 @@ export function GameSession({ onParent, suspended = false }: { onParent: () => v
                   <button key={color} type="button" className={`scarf scarf-${color}`} onClick={() => {
                     window.sessionStorage.setItem(SCARF_KEY, color)
                     dispatch({ type: 'PICK_SCARF', scarf: color })
-                  }}>{color}</button>
+                  }}>
+                    <span className="scarf-pip" style={scarfPreviewStyle(color)} aria-hidden="true" />
+                    {color}
+                  </button>
                 ))}
               </div>
             </>
