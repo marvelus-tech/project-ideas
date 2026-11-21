@@ -4,11 +4,12 @@ let context: AudioContext | null = null
 export function speak(text: string, timeoutMs = 4000): Promise<void> {
   return new Promise((resolve) => {
     let done = false
+    let kick: number | undefined
     const finish = () => {
       if (done) return
       done = true
       window.clearTimeout(timer)
-      window.clearInterval(kick)
+      if (kick !== undefined) window.clearInterval(kick)
       resolve()
     }
     const timer = window.setTimeout(() => {
@@ -25,7 +26,7 @@ export function speak(text: string, timeoutMs = 4000): Promise<void> {
     utterance.onend = finish
     utterance.onerror = finish
     try { window.speechSynthesis.speak(utterance) } catch { finish() }
-    const kick = window.setInterval(() => {
+    kick = window.setInterval(() => {
       try {
         if (window.speechSynthesis.paused) window.speechSynthesis.resume()
       } catch { /* ignore */ }
