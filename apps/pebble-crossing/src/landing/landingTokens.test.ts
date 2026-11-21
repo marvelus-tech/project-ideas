@@ -3,8 +3,15 @@ import { describe, expect, it } from 'vitest'
 import { LANDING_FLOATERS } from './landingTokens'
 
 describe('landing floaters', () => {
-  it('ships grade 1 literacy and within-10 math chips', () => {
+  it('uses six extracted sprites from the approved master', () => {
     const ids = LANDING_FLOATERS.map((t) => t.id).sort()
-    expect(ids).toEqual(['cat', 'sh', 'ship', 'sum7', 'sum8', 'ten', 'the'])
+    expect(ids).toEqual([
+      'floater_2',
+      'floater_8',
+      'floater_plus',
+      'floater_sentence',
+      'floater_sh',
+      'floater_ship',
+    ])
   })
 })

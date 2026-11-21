@@ -1,42 +1,35 @@
 .open-head-hero {
   position: relative;
-  width: min(100%, 420px);
+  width: min(100%, 520px);
   margin: 0 auto;
-  aspect-ratio: 3 / 4;
+  aspect-ratio: 4 / 3;
   user-select: none;
   touch-action: pan-y;
 }
 
 .open-head-hero__bust {
-  display: block;
-  width: 100%;
-  height: 100%;
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  z-index: 1;
+  pointer-events: none;
 }
+
 
 .open-head-hero__bust img {
-  width: 100%;
-  height: 100%;
+  width: 78%;
+  max-height: 88%;
+  height: auto;
   object-fit: contain;
   object-position: center bottom;
-  filter: contrast(1.05);
-}
-
-.open-head-hero__void {
-  position: absolute;
-  left: 50%;
-  top: 7.5%;
-  width: 34%;
-  height: 11%;
-  transform: translateX(-50%) skewX(-6deg);
-  background: #0a0a0a;
-  border-radius: 2px;
-  box-shadow: inset 0 2px 8px rgba(255, 255, 255, 0.06);
-  pointer-events: none;
 }
 
 .open-head-hero__chip {
   position: absolute;
   will-change: transform;
   pointer-events: none;
-  filter: drop-shadow(0 14px 22px rgba(20, 20, 20, 0.12));
+  filter: drop-shadow(0 12px 18px rgba(18, 18, 18, 0.14));
+  transition: filter 0.2s ease;
 }

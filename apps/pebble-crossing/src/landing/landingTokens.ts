@@ -1,22 +1,35 @@
 export type LandingFloater = {
   id: string
-  /** Rest position as fraction of hero box width/height */
+  /** Rest position as fraction of hero box width/height (anchor = center) */
   restX: number
   restY: number
   depth: number
-  size: number
+  width: number
+  height: number
   driftAmp: number
   driftHz: number
   phase: number
+  /** Subtle wobble in degrees */
+  tilt: number
 }
 
-/** Arc above the open head, grade 1 literacy and within-10 math */
+/** Positions aligned to approved master comp; sprites extracted separately. */
 export const LANDING_FLOATERS: LandingFloater[] = [
-  { id: 'cat', restX: 0.08, restY: 0.12, depth: 0.35, size: 92, driftAmp: 10, driftHz: 0.11, phase: 0.2 },
-  { id: 'sh', restX: 0.22, restY: 0.04, depth: 0.55, size: 100, driftAmp: 12, driftHz: 0.14, phase: 1.1 },
-  { id: 'ship', restX: 0.38, restY: 0.02, depth: 0.75, size: 108, driftAmp: 14, driftHz: 0.12, phase: 2.4 },
-  { id: 'sum8', restX: 0.54, restY: 0.04, depth: 0.85, size: 104, driftAmp: 11, driftHz: 0.1, phase: 0.8 },
-  { id: 'ten', restX: 0.68, restY: 0.1, depth: 0.6, size: 96, driftAmp: 13, driftHz: 0.15, phase: 3.2 },
-  { id: 'sum7', restX: 0.82, restY: 0.16, depth: 0.45, size: 98, driftAmp: 9, driftHz: 0.13, phase: 1.7 },
-  { id: 'the', restX: 0.92, restY: 0.28, depth: 0.3, size: 88, driftAmp: 8, driftHz: 0.09, phase: 2.9 },
+  { id: 'floater_sh', restX: 0.14, restY: 0.2, depth: 0.45, width: 86, height: 74, driftAmp: 12, driftHz: 0.13, phase: 0.4, tilt: 3 },
+  { id: 'floater_ship', restX: 0.28, restY: 0.18, depth: 0.62, width: 84, height: 86, driftAmp: 14, driftHz: 0.11, phase: 1.2, tilt: -2.5 },
+  { id: 'floater_8', restX: 0.4, restY: 0.17, depth: 0.78, width: 52, height: 68, driftAmp: 16, driftHz: 0.15, phase: 2.1, tilt: 4 },
+  { id: 'floater_plus', restX: 0.48, restY: 0.19, depth: 0.7, width: 42, height: 56, driftAmp: 11, driftHz: 0.17, phase: 0.9, tilt: -3 },
+  { id: 'floater_2', restX: 0.56, restY: 0.19, depth: 0.58, width: 52, height: 54, driftAmp: 13, driftHz: 0.12, phase: 2.8, tilt: 2 },
+  {
+    id: 'floater_sentence',
+    restX: 0.72,
+    restY: 0.21,
+    depth: 0.52,
+    width: 176,
+    height: 42,
+    driftAmp: 10,
+    driftHz: 0.1,
+    phase: 1.6,
+    tilt: -1.5,
+  },
 ]
