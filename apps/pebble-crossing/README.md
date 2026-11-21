@@ -2,9 +2,11 @@
 
 Week-1 **Level 6** web prototype: `sh` planks with reset-on-miss, four within-10 math posts, decodable sentence read-aloud, child done state, and parent one-sentence report.
 
-**Live site (monorepo Pages):** https://marvelus-tech.github.io/project-ideas/pebble-crossing/
+**Parent landing (monorepo Pages):** https://marvelus-tech.github.io/project-ideas/pebble-crossing/
 
-Grown-ups: https://marvelus-tech.github.io/project-ideas/pebble-crossing/?parent=1#parent
+**Level 6 playtest:** https://marvelus-tech.github.io/project-ideas/pebble-crossing/play
+
+Grown-ups: https://marvelus-tech.github.io/project-ideas/pebble-crossing/parent
 
 The child screen also has a Grown-ups button. Learning actions change the creek. The microphone can record a try, but it never scores pronunciation or fluency.
 
