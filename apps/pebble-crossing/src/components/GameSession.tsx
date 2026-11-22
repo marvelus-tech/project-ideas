@@ -2,7 +2,9 @@ import { useCallback, useEffect, useReducer, useRef, useState, type Dispatch, ty
 
 import { MATH_PROMPTS, MOUTH_LINE, PHONICS_PROMPTS, RETRIEVAL_WORDS, SCARF_KEY, SENTENCE, missCoach } from '../content/level6'
 import type { ScarfColor } from '../content/level6'
+import { PLAY_META_DESCRIPTION, PLAY_DOCUMENT_TITLE } from '../landing/landingCopy'
 import { playSh, speak } from '../lib/audio'
+import { usePageMeta } from '../lib/usePageMeta'
 import { readPlaytestParams } from '../lib/params'
 import { piecesRemaining, sessionReducer, shuffleWithSeed } from '../session/level6Machine'
 import { previewSession } from '../session/preview'
@@ -36,6 +38,8 @@ interface SentenceUi {
 }
 
 export function GameSession({ onParent, suspended = false }: { onParent: () => void; suspended?: boolean }) {
+  usePageMeta({ title: PLAY_DOCUMENT_TITLE, description: PLAY_META_DESCRIPTION })
+
   const params = new URLSearchParams(window.location.search)
   const { maxMinutes, micOff } = readPlaytestParams()
   const [state, dispatch] = useReducer(sessionReducer, params.get('scene'), previewSession)
