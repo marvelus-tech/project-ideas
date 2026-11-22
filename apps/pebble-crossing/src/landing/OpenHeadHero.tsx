@@ -11,7 +11,7 @@ export function OpenHeadHero() {
   const stageRef = useRef<HTMLDivElement>(null)
   const pointerRef = useRef({ x: -9999, y: -9999, active: false })
   const [offsets, setOffsets] = useState<Offset[]>(() => LANDING_FLOATERS.map(() => ({ x: 0, y: 0, rotate: 0 })))
-  const [floaterScale, setFloaterScale] = useState(0.82)
+  const [floaterScale, setFloaterScale] = useState(0.74)
   const rafRef = useRef(0)
 
   useLayoutEffect(() => {
@@ -115,7 +115,11 @@ export function OpenHeadHero() {
         return (
           <img
             key={token.id}
-            className="open-head-hero__chip"
+            className={
+              token.id === 'floater_sentence'
+                ? 'open-head-hero__chip open-head-hero__chip--sentence'
+                : 'open-head-hero__chip'
+            }
             src={`${base}landing/floaters/${token.id}.webp`}
             alt=""
             width={chipW}
