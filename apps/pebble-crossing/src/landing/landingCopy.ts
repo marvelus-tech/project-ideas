@@ -37,7 +37,7 @@ export const APART_BULLETS = [
 ] as const
 
 export const FOOTER_LINE =
-  'RevEDU is a kitchen-table playtest studio. Reading and math actions change the creek scene.'
+  'RevEDU builds learning games for about grade 1. Our first public try-out is Pebble Crossing: about ten minutes where your child uses reading and math to build a bridge across a creek, not a separate prize game afterward.'
 
 export const PLAY_DOCUMENT_TITLE = 'Pebble Crossing'
 

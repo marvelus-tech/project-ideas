@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest'
 
 import {
   APART_BULLETS,
+  FOOTER_LINE,
   HERO_SUBHEAD,
   LANDING_CANONICAL,
   LANDING_META_DESCRIPTION,
@@ -17,6 +18,7 @@ const USER_FACING = [
   PRODUCT_LINE,
   PRIMARY_CTA_LABEL,
   LANDING_META_DESCRIPTION,
+  FOOTER_LINE,
   ...APART_BULLETS,
 ]
 
