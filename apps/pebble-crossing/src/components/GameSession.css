@@ -43,7 +43,24 @@
 .dots i { width: 16px; height: 12px; border-radius: 50%; background: #6b5344; display: block; }
 .dots.faded i { opacity: 0.35; }
 .sweep { background-image: linear-gradient(90deg, transparent, #f2b84b, transparent); background-size: 30% 100%; background-repeat: no-repeat; animation: sweep 1.1s linear; }
-.mouth svg { width: 160px; }
+.pronunciation-tray {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+.pronunciation-tray-art {
+  max-height: 140px;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+  border-radius: 18px;
+  background: #fff8e8;
+  padding: 6px;
+  box-shadow: inset 0 0 0 3px rgba(36, 92, 87, 0.12);
+}
+.pronunciation-tray-caption { margin: 0; font-weight: 800; text-align: center; font-size: 1.05rem; }
 .speech-turn { margin-top: 12px; }
 .mic-ready {
   display: flex;
@@ -61,13 +78,23 @@
 }
 .mic-ready:focus-visible { outline: 4px solid #f2b84b; outline-offset: 3px; }
 .mic-label { text-align: center; max-width: 20ch; }
-.mic-ring {
+.mic-plate {
+  display: block;
   width: 88px;
   height: 88px;
   border-radius: 50%;
-  border: 5px solid #245c57;
-  background: radial-gradient(circle at 40% 35%, #fff8e8, #8ec7d4 72%);
-  box-shadow: inset 0 0 0 6px rgba(255, 248, 232, 0.85);
+  overflow: hidden;
+}
+.mic-plate img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+.mic-plate-listening {
+  width: 96px;
+  height: 96px;
+  animation: breathe 1.8s ease-in-out infinite;
 }
 .mic-listening {
   display: flex;
@@ -77,14 +104,6 @@
   padding: 12px 8px;
 }
 .mic-listening p { margin: 0; font-weight: 800; font-size: 1.15rem; text-align: center; }
-.mic-breathe {
-  width: 96px;
-  height: 96px;
-  border-radius: 50%;
-  border: 4px solid #245c57;
-  background: radial-gradient(circle, rgba(142, 199, 212, 0.35), rgba(36, 92, 87, 0.12));
-  animation: breathe 1.8s ease-in-out infinite;
-}
 .mic-off { margin-top: 12px; width: 100%; font-size: 1.1rem; }
 @keyframes breathe {
   0%, 100% { transform: scale(0.92); opacity: 0.85; }
@@ -97,5 +116,5 @@
 @keyframes wobble { 25% { transform: translateX(-6px); } 75% { transform: translateX(6px); } }
 @keyframes sweep { from { background-position: -20% 0; } to { background-position: 120% 0; } }
 @media (prefers-reduced-motion: reduce) {
-  .wobble, .sweep, .air, .mic-breathe { animation: none; }
+  .wobble, .sweep, .mic-plate-listening { animation: none; }
 }

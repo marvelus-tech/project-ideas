@@ -17,6 +17,8 @@ import {
   type SpeechTurnUi,
 } from '../session/speechTurn'
 import { scarfPreviewStyle } from '../assets/world/worldAssets'
+import { MicPlateArt } from './MicPlateArt'
+import { MouthTrayArt, PronunciationTrayArt } from './PronunciationTrayArt'
 import { CreekStage } from '../world/CreekStage'
 import './GameSession.css'
 
@@ -186,7 +188,7 @@ export function GameSession({ onParent, suspended = false }: { onParent: () => v
           )}
           {state.phase === 'mouth' && (
             <>
-              <MouthCue />
+              <MouthTrayArt mouthStep={state.mouthStep} />
               {state.mouthStep === 1 && <SpeechTurnPanel ui={productionUi} onMicTap={onMicReadyTap} />}
             </>
           )}
@@ -210,14 +212,24 @@ export function GameSession({ onParent, suspended = false }: { onParent: () => v
               <SpeechTurnPanel ui={productionUi} onMicTap={onMicReadyTap} />
             </>
           )}
-          {state.phase === 'phonics' && state.beatStep === 'hear' && <p>Listen first.</p>}
+          {state.phase === 'phonics' && state.beatStep === 'hear' && (
+            <>
+              <PronunciationTrayArt cue="listen_first" />
+              <p>Listen first.</p>
+            </>
+          )}
           {state.phase === 'retrieval' && state.beatStep === 'choose' && (
             <>
               <p>Which word has the quiet sound at the end?</p>
               <Tiles tiles={[...RETRIEVAL_WORDS]} disabled={!state.inputOpen} wobble={state.wobble} onPick={(tile) => dispatch({ type: 'RETRIEVAL_PICK', word: tile })} />
             </>
           )}
-          {state.phase === 'retrieval' && state.beatStep !== 'choose' && <p>Listen to the four words.</p>}
+          {state.phase === 'retrieval' && state.beatStep === 'model' && (
+            <PronunciationTrayArt cue="sh_model" className="retrieval-model" />
+          )}
+          {state.phase === 'retrieval' && state.beatStep !== 'choose' && state.beatStep !== 'model' && (
+            <p>Listen to the four words.</p>
+          )}
           {state.phase === 'whole_words' && (
             <button type="button" className="big" onClick={() => dispatch({ type: 'WHOLE_WORD_ADVANCE' })}>
               {state.wholeWordStep === 0 ? 'a' : 'the'}
@@ -244,6 +256,9 @@ export function GameSession({ onParent, suspended = false }: { onParent: () => v
             <>
               <p className="reveal">{SENTENCE}</p>
               <p>Read the sign if you want. I will not score your voice.</p>
+              {(sentenceUi.ui === 'idle' || sentenceUi.ui === 'ready') && (
+                <PronunciationTrayArt cue="read_invite" className="sentence-invite" />
+              )}
               <SentenceTurnPanel ui={sentenceUi} onMicTap={onMicReadyTap} />
               {(sentenceUi.showContinue || sentenceUi.ui === 'showContinue') && (
                 <button
@@ -448,13 +463,13 @@ function SpeechTurnPanel({ ui, onMicTap }: { ui: ProductionUi; onMicTap: () => v
     <div className="speech-turn">
       {ui.ui === 'ready' && (
         <button type="button" className="mic-ready" onClick={onMicTap}>
-          <span className="mic-ring" aria-hidden="true" />
+          <MicPlateArt listening={false} />
           <span className="mic-label">{PRODUCTION_READY}</span>
         </button>
       )}
       {(ui.ui === 'listening' || ui.ui === 'retry') && (
         <div className="mic-listening" role="status" aria-live="assertive">
-          <span className="mic-breathe" aria-hidden="true" />
+          <MicPlateArt listening />
           <p>{ui.status || 'Listening for your voice.'}</p>
         </div>
       )}
@@ -475,32 +490,16 @@ function SentenceTurnPanel({ ui, onMicTap }: { ui: SentenceUi; onMicTap: () => v
     <div className="speech-turn">
       {ui.ui === 'ready' && (
         <button type="button" className="mic-ready" onClick={onMicTap}>
-          <span className="mic-ring" aria-hidden="true" />
+          <MicPlateArt listening={false} />
           <span className="mic-label">{SENTENCE_READY}</span>
         </button>
       )}
       {(ui.ui === 'listening' || ui.ui === 'retry') && (
         <div className="mic-listening" role="status" aria-live="assertive">
-          <span className="mic-breathe" aria-hidden="true" />
+          <MicPlateArt listening />
           <p>{ui.status || 'Listening for your voice.'}</p>
         </div>
       )}
-    </div>
-  )
-}
-
-function MouthCue() {
-  return (
-    <div className="mouth">
-      <svg viewBox="0 0 160 120" aria-hidden="true">
-        <circle cx="80" cy="62" r="46" fill="#f3c7a6" />
-        <circle cx="62" cy="52" r="4" fill="#173b3a" />
-        <circle cx="98" cy="52" r="4" fill="#173b3a" />
-        <path d="M58 84 Q80 98 102 84" fill="none" stroke="#a7643e" strokeWidth="4" />
-        <path d="M64 78 h32" stroke="#fff8e8" strokeWidth="6" />
-        <path className="air" d="M112 86 q16 0 18 12" fill="none" stroke="#8ec7d4" strokeWidth="3" />
-      </svg>
-      <p>Quiet air. Throat stays quiet.</p>
     </div>
   )
 }

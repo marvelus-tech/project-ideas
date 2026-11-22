@@ -123,6 +123,84 @@
       "maxBytes": 256000,
       "alt": "Kit the cat standing, sitting, and aboard the workboat.",
       "source": "png-masters"
+    },
+    {
+      "id": "sh_model",
+      "path": "pronunciation/sh_model.webp",
+      "worldFlag": "tray:sh_model",
+      "role": "tray",
+      "width": 280,
+      "height": 210,
+      "bytes": 9092,
+      "maxBytes": 81920,
+      "alt": "Mouth close-up showing quiet sh air between the teeth.",
+      "source": "illustrated-png",
+      "loading": "eager"
+    },
+    {
+      "id": "sh_airflow",
+      "path": "pronunciation/sh_airflow.webp",
+      "worldFlag": "tray:sh_airflow",
+      "role": "tray",
+      "width": 280,
+      "height": 199,
+      "bytes": 10008,
+      "maxBytes": 81920,
+      "alt": "Mouth close-up with a stronger quiet airflow for sh.",
+      "source": "illustrated-png",
+      "loading": "lazy"
+    },
+    {
+      "id": "listen_first",
+      "path": "pronunciation/listen_first.webp",
+      "worldFlag": "tray:listen_first",
+      "role": "tray",
+      "width": 280,
+      "height": 210,
+      "bytes": 8532,
+      "maxBytes": 81920,
+      "alt": "Calm closed mouth for listen-first.",
+      "source": "illustrated-png",
+      "loading": "lazy"
+    },
+    {
+      "id": "mic_tap_ready",
+      "path": "pronunciation/mic_tap_ready.webp",
+      "worldFlag": "tray:mic_tap_ready",
+      "role": "tray",
+      "width": 280,
+      "height": 280,
+      "bytes": 9674,
+      "maxBytes": 81920,
+      "alt": "Tap the microphone when you are ready to speak.",
+      "source": "illustrated-png",
+      "loading": "lazy"
+    },
+    {
+      "id": "mic_listening",
+      "path": "pronunciation/mic_listening.webp",
+      "worldFlag": "tray:mic_listening",
+      "role": "tray",
+      "width": 280,
+      "height": 280,
+      "bytes": 9674,
+      "maxBytes": 81920,
+      "alt": "Microphone is listening for your voice.",
+      "source": "illustrated-png",
+      "loading": "lazy"
+    },
+    {
+      "id": "read_invite",
+      "path": "pronunciation/read_invite.webp",
+      "worldFlag": "tray:read_invite",
+      "role": "tray",
+      "width": 280,
+      "height": 183,
+      "bytes": 7580,
+      "maxBytes": 81920,
+      "alt": "Invite to read the sign aloud.",
+      "source": "illustrated-png",
+      "loading": "lazy"
     }
   ]
 }
