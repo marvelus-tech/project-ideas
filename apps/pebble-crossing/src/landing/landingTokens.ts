@@ -46,7 +46,7 @@ export const LANDING_FLOATERS: LandingFloater[] = [
   {
     id: 'floater_8',
     restX: 0.32,
-    restY: 0.11,
+    restY: 0.125,
     depth: 0.76,
     width: 50,
     height: 65,
@@ -59,7 +59,7 @@ export const LANDING_FLOATERS: LandingFloater[] = [
   {
     id: 'floater_plus',
     restX: 0.44,
-    restY: 0.1,
+    restY: 0.12,
     depth: 0.82,
     width: 41,
     height: 54,
@@ -72,7 +72,7 @@ export const LANDING_FLOATERS: LandingFloater[] = [
   {
     id: 'floater_2',
     restX: 0.56,
-    restY: 0.11,
+    restY: 0.125,
     depth: 0.7,
     width: 50,
     height: 51,
