@@ -37,43 +37,38 @@ export function LandingPage() {
         <div className="landing-hero__copy">
           <h1 id="landing-title">{LANDING_TITLE}</h1>
           <p className="landing-hero__lede">{HERO_SUBHEAD}</p>
-
-          <article className="landing-product" aria-labelledby="product-title">
-            <p className="landing-product__eyebrow">Grade 1 playtest</p>
-            <h2 id="product-title" className="landing-product__name">
-              {PRODUCT_NAME}
-            </h2>
-            <p className="landing-product__line">{PRODUCT_LINE}</p>
-            <div className="landing-hero__ctas">
-              <Link className="landing-btn landing-btn--primary" to="/pebble-crossing">
-                {PRIMARY_CTA_LABEL}
-              </Link>
-            </div>
-            <p className="landing-product__note">{SECONDARY_NOTE}</p>
-          </article>
+          <div className="landing-hero__ctas">
+            <Link className="landing-btn landing-btn--primary" to="/pebble-crossing">
+              {PRIMARY_CTA_LABEL}
+            </Link>
+          </div>
+          <p className="landing-hero__note">{SECONDARY_NOTE}</p>
         </div>
 
         <OpenHeadHero />
       </section>
 
-      <section className="landing-section" aria-labelledby="mission-heading">
-        <h2 id="mission-heading" className="landing-section__title">
-          {MISSION_HEADING}
+      <section className="landing-below" aria-labelledby="product-title">
+        <h2 id="product-title" className="landing-below__title">
+          {PRODUCT_NAME}
         </h2>
-        <p className="landing-section__body">{MISSION_BODY}</p>
-      </section>
+        <p className="landing-below__line">{PRODUCT_LINE}</p>
 
-      <section className="landing-section" aria-labelledby="apart-heading">
-        <h2 id="apart-heading" className="landing-section__title">
-          {APART_HEADING}
-        </h2>
-        <ol className="landing-bullets landing-bullets--numbered">
-          {APART_BULLETS.map((item, index) => (
-            <li key={item} value={index + 1}>
-              {item}
-            </li>
-          ))}
-        </ol>
+        <details className="landing-fold">
+          <summary>{MISSION_HEADING}</summary>
+          <p>{MISSION_BODY}</p>
+        </details>
+
+        <details className="landing-fold">
+          <summary>{APART_HEADING}</summary>
+          <ol className="landing-bullets landing-bullets--numbered">
+            {APART_BULLETS.map((item, index) => (
+              <li key={item} value={index + 1}>
+                {item}
+              </li>
+            ))}
+          </ol>
+        </details>
       </section>
 
       <footer className="landing-foot">
