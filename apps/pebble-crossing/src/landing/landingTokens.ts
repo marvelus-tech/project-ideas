@@ -20,7 +20,7 @@ export const LANDING_FLOATERS: LandingFloater[] = [
   {
     id: 'floater_sh',
     restX: 0.09,
-    restY: 0.26,
+    restY: 0.22,
     depth: 0.42,
     width: 92,
     height: 80,
@@ -33,7 +33,7 @@ export const LANDING_FLOATERS: LandingFloater[] = [
   {
     id: 'floater_ship',
     restX: 0.21,
-    restY: 0.2,
+    restY: 0.16,
     depth: 0.58,
     width: 90,
     height: 92,
@@ -46,7 +46,7 @@ export const LANDING_FLOATERS: LandingFloater[] = [
   {
     id: 'floater_8',
     restX: 0.34,
-    restY: 0.16,
+    restY: 0.12,
     depth: 0.76,
     width: 58,
     height: 76,
@@ -59,7 +59,7 @@ export const LANDING_FLOATERS: LandingFloater[] = [
   {
     id: 'floater_plus',
     restX: 0.46,
-    restY: 0.14,
+    restY: 0.1,
     depth: 0.82,
     width: 48,
     height: 64,
@@ -72,7 +72,7 @@ export const LANDING_FLOATERS: LandingFloater[] = [
   {
     id: 'floater_2',
     restX: 0.58,
-    restY: 0.16,
+    restY: 0.12,
     depth: 0.7,
     width: 58,
     height: 60,
@@ -85,7 +85,7 @@ export const LANDING_FLOATERS: LandingFloater[] = [
   {
     id: 'floater_cat',
     restX: 0.7,
-    restY: 0.2,
+    restY: 0.16,
     depth: 0.55,
     width: 72,
     height: 64,
@@ -98,7 +98,7 @@ export const LANDING_FLOATERS: LandingFloater[] = [
   {
     id: 'floater_sentence',
     restX: 0.86,
-    restY: 0.25,
+    restY: 0.21,
     depth: 0.48,
     width: 184,
     height: 44,

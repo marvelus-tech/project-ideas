@@ -27,6 +27,12 @@ describe('landing copy v2', () => {
     expect(LANDING_TITLE).toBe('RevEDU')
   })
 
+  it('keeps primary CTA short enough for mobile pill buttons', () => {
+    expect(PRIMARY_CTA_LABEL).toBe('Try Pebble Crossing')
+    expect(PRIMARY_CTA_LABEL.length).toBeLessThanOrEqual(24)
+    expect(PRIMARY_CTA_LABEL).not.toMatch(/playtest/i)
+  })
+
   it('has no em dashes in parent-facing strings', () => {
     for (const line of USER_FACING) {
       expect(line).not.toMatch(/\u2014/)

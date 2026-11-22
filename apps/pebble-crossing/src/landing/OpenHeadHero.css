@@ -3,8 +3,17 @@
   width: min(100%, 580px);
   margin: 0.5rem auto 0;
   aspect-ratio: 5 / 4;
+  /* Unitless fraction of hero height; lifts token arc above the bust crown */
+  --floater-y-lift: 0.015;
   user-select: none;
   touch-action: pan-y;
+}
+
+@media (max-width: 520px) {
+  .open-head-hero {
+    --floater-y-lift: 0.075;
+    margin-top: 0.15rem;
+  }
 }
 
 .open-head-hero__bust {
