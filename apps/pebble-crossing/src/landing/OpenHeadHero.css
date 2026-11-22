@@ -1,18 +1,19 @@
 .open-head-hero {
   position: relative;
   width: min(100%, 580px);
-  margin: 0.5rem auto 0;
+  margin: 0.35rem auto 0;
   aspect-ratio: 5 / 4;
+  --floater-scale: 0.85;
   /* Unitless fraction of hero height; lifts token arc above the bust crown */
-  --floater-y-lift: 0.015;
+  --floater-y-lift: 0.028;
   user-select: none;
   touch-action: pan-y;
 }
 
 @media (max-width: 520px) {
   .open-head-hero {
-    --floater-y-lift: 0.075;
-    margin-top: 0.15rem;
+    --floater-y-lift: 0.09;
+    margin-top: 0.25rem;
   }
 }
 
@@ -25,7 +26,6 @@
   z-index: 1;
   pointer-events: none;
 }
-
 
 .open-head-hero__bust img {
   width: 78%;
@@ -41,4 +41,5 @@
   pointer-events: none;
   filter: drop-shadow(0 12px 18px rgba(18, 18, 18, 0.14));
   transition: filter 0.2s ease;
+  transform-origin: center center;
 }
