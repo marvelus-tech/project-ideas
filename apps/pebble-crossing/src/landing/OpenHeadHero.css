@@ -1,8 +1,8 @@
 .open-head-hero {
   position: relative;
-  width: min(100%, 520px);
-  margin: 0 auto;
-  aspect-ratio: 4 / 3;
+  width: min(100%, 580px);
+  margin: 0.5rem auto 0;
+  aspect-ratio: 5 / 4;
   user-select: none;
   touch-action: pan-y;
 }

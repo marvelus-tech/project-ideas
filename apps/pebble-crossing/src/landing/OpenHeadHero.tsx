@@ -102,7 +102,7 @@ export function OpenHeadHero() {
               top: `calc(${token.restY * 100}% - ${token.height / 2}px)`,
               width: token.width,
               height: token.height,
-              transform: `translate3d(${offset.x}px, ${offset.y}px, 0) rotate(${offset.rotate}deg)`,
+              transform: `translate3d(${offset.x}px, ${offset.y}px, 0) rotate(${token.restRotate + offset.rotate}deg)`,
               zIndex: 10 + Math.round(token.depth * 20),
             }}
             draggable={false}
