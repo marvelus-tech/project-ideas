@@ -128,11 +128,13 @@ describe('speech claims', () => {
 
 describe('parent entry', () => {
   it('accepts the Pages-safe query, hash, and folder', () => {
-    expect(isParentEntry('https://marvelus-tech.github.io/project-ideas/pebble-crossing/?parent=1')).toBe(true)
-    expect(isParentEntry('https://marvelus-tech.github.io/project-ideas/pebble-crossing/#parent')).toBe(true)
-    expect(isParentEntry('https://marvelus-tech.github.io/project-ideas/pebble-crossing/parent/')).toBe(true)
-    expect(isParentEntry('https://marvelus-tech.github.io/project-ideas/pebble-crossing/')).toBe(false)
-    expect(parentHref('https://marvelus-tech.github.io/project-ideas/pebble-crossing/?mic=off')).toBe('/project-ideas/pebble-crossing/?mic=off&parent=1#parent')
+    expect(isParentEntry('https://marvelus-tech.github.io/project-ideas/revedu/?parent=1')).toBe(true)
+    expect(isParentEntry('https://marvelus-tech.github.io/project-ideas/revedu/#parent')).toBe(true)
+    expect(isParentEntry('https://marvelus-tech.github.io/project-ideas/revedu/parent/')).toBe(true)
+    expect(isParentEntry('https://marvelus-tech.github.io/project-ideas/revedu/')).toBe(false)
+    expect(parentHref('https://marvelus-tech.github.io/project-ideas/revedu/pebble-crossing/?mic=off')).toBe(
+      '/project-ideas/revedu/pebble-crossing/?mic=off&parent=1#parent',
+    )
   })
 })
 

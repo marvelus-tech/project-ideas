@@ -3,8 +3,10 @@ import { describe, expect, it } from 'vitest'
 import {
   APART_BULLETS,
   HERO_SUBHEAD,
+  LANDING_CANONICAL,
   LANDING_META_DESCRIPTION,
   LANDING_TITLE,
+  PLAY_CANONICAL,
   PRIMARY_CTA_LABEL,
   PRODUCT_LINE,
 } from './landingCopy'
@@ -31,5 +33,12 @@ describe('landing copy v2', () => {
 
   it('keeps meta description within a typical SEO snippet length', () => {
     expect(LANDING_META_DESCRIPTION.length).toBeLessThanOrEqual(160)
+  })
+
+  it('points canonical URLs at the revedu Pages slug', () => {
+    expect(LANDING_CANONICAL).toBe('https://marvelus-tech.github.io/project-ideas/revedu/')
+    expect(PLAY_CANONICAL).toBe(
+      'https://marvelus-tech.github.io/project-ideas/revedu/pebble-crossing/',
+    )
   })
 })

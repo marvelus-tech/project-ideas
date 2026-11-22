@@ -5,7 +5,10 @@ export const LANDING_TITLE = 'RevEDU'
 export const LANDING_META_DESCRIPTION =
   'RevEDU builds grade 1 learning products. Try Pebble Crossing, a free ten-minute playtest where sounds and sums build a creek bridge, not a separate prize game.'
 
-export const LANDING_CANONICAL = 'https://marvelus-tech.github.io/project-ideas/pebble-crossing/'
+export const LANDING_CANONICAL = 'https://marvelus-tech.github.io/project-ideas/revedu/'
+
+export const PLAY_CANONICAL =
+  'https://marvelus-tech.github.io/project-ideas/revedu/pebble-crossing/'
 
 export const HERO_SUBHEAD =
   'Educational products where the skill is the action, not a toll before the fun.'
