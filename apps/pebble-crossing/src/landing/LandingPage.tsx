@@ -42,7 +42,6 @@ export function LandingPage() {
               {PRIMARY_CTA_LABEL}
             </Link>
           </div>
-          <p className="landing-hero__note">{SECONDARY_NOTE}</p>
         </div>
 
         <OpenHeadHero />
@@ -53,6 +52,7 @@ export function LandingPage() {
           {PRODUCT_NAME}
         </h2>
         <p className="landing-below__line">{PRODUCT_LINE}</p>
+        <p className="landing-below__note">{SECONDARY_NOTE}</p>
 
         <details className="landing-fold">
           <summary>{MISSION_HEADING}</summary>
