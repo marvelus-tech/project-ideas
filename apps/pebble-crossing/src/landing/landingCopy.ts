@@ -18,7 +18,7 @@ export const PRODUCT_NAME = 'Pebble Crossing'
 export const PRODUCT_LINE =
   'Pebble Crossing is our grade 1 creek-building playtest: about ten minutes where the right sound and sum build the bridge.'
 
-export const PRIMARY_CTA_LABEL = 'Try Pebble Crossing (Level 6 playtest)'
+export const PRIMARY_CTA_LABEL = 'Try Pebble Crossing'
 
 export const SECONDARY_NOTE = 'Free. No login. No shop. Mic optional with honest reporting.'
 
