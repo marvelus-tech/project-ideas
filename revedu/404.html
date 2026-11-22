@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>RevEDU</title>
+    <script>
+      var parent = /parent/i.test(location.pathname) || location.hash === '#parent'
+      var path = location.pathname
+      var mono = path.indexOf('/project-ideas/') !== -1
+      var base = mono ? '/project-ideas/revedu/' : '/revedu/'
+      var search = location.search || ''
+      var hash = location.hash || ''
+
+      if (/\/play\/?$/.test(path)) {
+        location.replace(base + 'pebble-crossing/' + search + hash)
+      } else if (/\/pebble-crossing\/?$/.test(path)) {
+        location.replace(base + 'pebble-crossing/' + search + hash)
+      } else if (parent) {
+        location.replace(base + (path.indexOf('/parent') !== -1 ? 'parent/' : '') + '?parent=1#parent')
+      } else {
+        location.replace(base + search + hash)
+      }
+    </script>
+  </head>
+  <body></body>
+</html>

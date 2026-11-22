@@ -2,17 +2,15 @@
 
 Week-1 **Level 6** web prototype: `sh` planks with reset-on-miss, four within-10 math posts, decodable sentence read-aloud, child done state, and parent one-sentence report.
 
-**Parent landing (monorepo Pages):** https://marvelus-tech.github.io/project-ideas/pebble-crossing/
+**RevEDU landing (monorepo Pages):** https://marvelus-tech.github.io/project-ideas/revedu/
 
-**Level 6 playtest:** https://marvelus-tech.github.io/project-ideas/pebble-crossing/play
+**Pebble Crossing playtest:** https://marvelus-tech.github.io/project-ideas/revedu/pebble-crossing/
 
-Grown-ups: https://marvelus-tech.github.io/project-ideas/pebble-crossing/parent
+Grown-ups: https://marvelus-tech.github.io/project-ideas/revedu/parent
 
 The child screen also has a Grown-ups button. Learning actions change the creek. The microphone can record a try, but it never scores pronunciation or fluency.
 
-**Standalone repo (when created):** https://marvelus-tech.github.io/pebble-crossing/
-
-This is a RevEDU kitchen-table playtest, not the Edu Period parent-gate product.
+Legacy `/project-ideas/pebble-crossing/` URLs redirect to `revedu/`.
 
 ## Run locally
 
@@ -21,7 +19,7 @@ npm install
 npm run dev
 ```
 
-Open http://localhost:5173/pebble-crossing/ (Vite `base` matches GitHub Pages).
+Open http://localhost:5173/revedu/ (Vite `base` matches GitHub Pages).
 
 ## Playtest query params
 
@@ -30,17 +28,18 @@ Open http://localhost:5173/pebble-crossing/ (Vite `base` matches GitHub Pages).
 | `?maxMinutes=3` | Shorten the 10-minute session cap (default 10) |
 | `?mic=off` | Force practice-sign path and abstaining parent fluency line |
 
-Example: https://marvelus-tech.github.io/pebble-crossing/?maxMinutes=3&mic=off
+Example: https://marvelus-tech.github.io/project-ideas/revedu/pebble-crossing/?maxMinutes=3&mic=off
 
 ## Parent report
 
-Child screen: press and hold **Pebble Crossing** for ~1s, or visit [/parent](https://marvelus-tech.github.io/pebble-crossing/parent).
+Child screen: press and hold **Pebble Crossing** for ~1s, or visit [/parent](https://marvelus-tech.github.io/project-ideas/revedu/parent).
 
-**Mic check off** on the parent screen forces the spec’s “no fluency claim” sentence for scenario 4.
+**Mic check off** on the parent screen forces the spec's "no fluency claim" sentence for scenario 4.
 
 ## Scripts
 
 - `npm run build`: production build to `dist/`
+- `npm run build:project-ideas-pages`: same with `/project-ideas/revedu/` base
 - `npm run test`: vitest (includes anti-cycling miss rule on `ship`)
 - `npm run preview`: serve `dist/`
 

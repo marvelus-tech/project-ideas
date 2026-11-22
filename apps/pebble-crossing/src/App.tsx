@@ -1,11 +1,16 @@
 import { useState } from 'react'
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Navigate, Route, Routes, useLocation } from 'react-router-dom'
 
 import { GameSession } from './components/GameSession'
 import { ParentReportPage } from './components/ParentReport'
 import { LandingPage } from './landing/LandingPage'
 import { isParentEntry, parentHref } from './session/parentEntry'
 import './App.css'
+
+function LegacyPlayRedirect() {
+  const { search, hash } = useLocation()
+  return <Navigate to={`/pebble-crossing${search}${hash}`} replace />
+}
 
 export default function App() {
   const [parent, setParent] = useState(() => isParentEntry(window.location.href))
@@ -18,7 +23,7 @@ export default function App() {
 
   function closeParent() {
     if (/\/parent\/?$/.test(window.location.pathname)) {
-      window.location.assign(`${import.meta.env.BASE_URL}play`)
+      window.location.assign(`${import.meta.env.BASE_URL}pebble-crossing`)
       return
     }
     const url = new URL(window.location.href)
@@ -38,11 +43,12 @@ export default function App() {
     <BrowserRouter basename={import.meta.env.BASE_URL}>
       <Routes>
         <Route path="/" element={<LandingPage />} />
-        <Route path="/play" element={playShell} />
+        <Route path="/pebble-crossing" element={playShell} />
+        <Route path="/play" element={<LegacyPlayRedirect />} />
         <Route path="/parent" element={<ParentReportPage onBack={() => window.location.assign(import.meta.env.BASE_URL)} />} />
         <Route
           path="*"
-          element={<Navigate to={parent ? '/play?parent=1#parent' : '/'} replace />}
+          element={<Navigate to={parent ? '/pebble-crossing?parent=1#parent' : '/'} replace />}
         />
       </Routes>
     </BrowserRouter>

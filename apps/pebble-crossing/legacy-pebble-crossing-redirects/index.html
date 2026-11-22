@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>RevEDU</title>
+    <script>
+      var search = location.search || ''
+      var hash = location.hash || ''
+      var path = location.pathname
+      if (/\/play\/?$/.test(path)) {
+        location.replace('/project-ideas/revedu/pebble-crossing/' + search + hash)
+      } else if (/\/parent\/?$/.test(path) || /[?&]parent=1/.test(search) || hash === '#parent') {
+        location.replace('/project-ideas/revedu/parent/' + search + hash)
+      } else {
+        location.replace('/project-ideas/revedu/' + search + hash)
+      }
+    </script>
+  </head>
+  <body>
+    <p>Moved to <a href="/project-ideas/revedu/">RevEDU</a>.</p>
+  </body>
+</html>

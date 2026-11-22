@@ -23,7 +23,7 @@ if (!fs.existsSync(distIndex)) {
 }
 
 const port = 4173
-const base = process.env.VITE_PAGES_BASE ?? '/project-ideas/pebble-crossing/'
+const base = process.env.VITE_PAGES_BASE ?? '/project-ideas/revedu/'
 const preview = spawn('npx', ['vite', 'preview', '--host', '127.0.0.1', '--port', String(port)], {
   cwd: appRoot,
   stdio: 'ignore',

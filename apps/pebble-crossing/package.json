@@ -5,11 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "node scripts/optimize-world-assets.mjs && node scripts/landing-assets.mjs && tsc -b && vite build",
+    "build": "node scripts/optimize-world-assets.mjs && node scripts/landing-assets.mjs && tsc -b && vite build && node scripts/copy-spa-stubs.mjs",
     "landing:assets": "node scripts/landing-assets.mjs",
     "optimize:world": "node scripts/optimize-world-assets.mjs",
     "render:pronunciation": "node scripts/render-pronunciation-masters.mjs",
-    "build:project-ideas-pages": "VITE_PAGES_BASE=/project-ideas/pebble-crossing/ npm run build",
+    "build:project-ideas-pages": "VITE_PAGES_BASE=/project-ideas/revedu/ npm run build",
     "lint": "oxlint",
     "preview": "vite preview",
     "test": "vitest run --config vitest.config.ts"

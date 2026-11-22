@@ -45,7 +45,7 @@ export function LandingPage() {
             </h2>
             <p className="landing-product__line">{PRODUCT_LINE}</p>
             <div className="landing-hero__ctas">
-              <Link className="landing-btn landing-btn--primary" to="/play">
+              <Link className="landing-btn landing-btn--primary" to="/pebble-crossing">
                 {PRIMARY_CTA_LABEL}
               </Link>
             </div>
