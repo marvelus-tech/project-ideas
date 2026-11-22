@@ -1,18 +1,19 @@
 .open-head-hero {
   position: relative;
-  width: min(100%, 580px);
+  width: min(100%, 488px);
   margin: 0.35rem auto 0;
   aspect-ratio: 5 / 4;
-  --floater-scale: 0.85;
+  --floater-scale: 0.82;
   /* Unitless fraction of hero height; lifts token arc above the bust crown */
-  --floater-y-lift: 0.028;
+  --floater-y-lift: 0.034;
   user-select: none;
   touch-action: pan-y;
 }
 
 @media (max-width: 520px) {
   .open-head-hero {
-    --floater-y-lift: 0.09;
+    width: min(100%, 94vw);
+    --floater-y-lift: 0.102;
     margin-top: 0.25rem;
   }
 }
@@ -28,8 +29,8 @@
 }
 
 .open-head-hero__bust img {
-  width: 78%;
-  max-height: 88%;
+  width: 66%;
+  max-height: 75%;
   height: auto;
   object-fit: contain;
   object-position: center bottom;

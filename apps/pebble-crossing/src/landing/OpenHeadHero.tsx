@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 
 import { LANDING_FLOATERS } from './landingTokens'
 import './OpenHeadHero.css'
@@ -11,7 +11,28 @@ export function OpenHeadHero() {
   const stageRef = useRef<HTMLDivElement>(null)
   const pointerRef = useRef({ x: -9999, y: -9999, active: false })
   const [offsets, setOffsets] = useState<Offset[]>(() => LANDING_FLOATERS.map(() => ({ x: 0, y: 0, rotate: 0 })))
+  const [floaterScale, setFloaterScale] = useState(0.82)
   const rafRef = useRef(0)
+
+  useLayoutEffect(() => {
+    const stage = stageRef.current
+    if (!stage) return
+
+    const readScale = () => {
+      const raw = getComputedStyle(stage).getPropertyValue('--floater-scale').trim()
+      const parsed = Number.parseFloat(raw)
+      if (Number.isFinite(parsed) && parsed > 0) setFloaterScale(parsed)
+    }
+
+    readScale()
+    const mq = window.matchMedia('(max-width: 520px)')
+    mq.addEventListener('change', readScale)
+    window.addEventListener('resize', readScale)
+    return () => {
+      mq.removeEventListener('change', readScale)
+      window.removeEventListener('resize', readScale)
+    }
+  }, [])
 
   useEffect(() => {
     const stage = stageRef.current
@@ -89,19 +110,21 @@ export function OpenHeadHero() {
       </picture>
       {LANDING_FLOATERS.map((token, index) => {
         const offset = offsets[index] ?? { x: 0, y: 0, rotate: 0 }
+        const chipW = Math.round(token.width * floaterScale)
+        const chipH = Math.round(token.height * floaterScale)
         return (
           <img
             key={token.id}
             className="open-head-hero__chip"
             src={`${base}landing/floaters/${token.id}.webp`}
             alt=""
-            width={token.width}
-            height={token.height}
+            width={chipW}
+            height={chipH}
             style={{
-              left: `calc(${token.restX * 100}% - ${token.width / 2}px)`,
-              top: `calc((${token.restY} - var(--floater-y-lift, 0)) * 100% - ${token.height / 2}px)`,
-              width: token.width,
-              height: token.height,
+              left: `calc(${token.restX * 100}% - ${chipW / 2}px)`,
+              top: `calc((${token.restY} - var(--floater-y-lift, 0)) * 100% - ${chipH / 2}px)`,
+              width: chipW,
+              height: chipH,
               transform: `translate3d(${offset.x}px, ${offset.y}px, 0) rotate(${token.restRotate + offset.rotate}deg)`,
               zIndex: 10 + Math.round(token.depth * 20),
             }}
